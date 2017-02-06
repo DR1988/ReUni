@@ -1,0 +1,28 @@
+.btn_remade {
+  color: white;
+  border-color: #83ad5c;
+  background-color: #a3ec61;
+  outline: none;
+}
+
+.btn_remade:hover {
+  background-color: #78d226;
+  border-color: #007100;
+  color: white;
+  outline: none;
+}
+
+.btn_remade:active,
+.btn_remade:focus,
+.btn_remade:focus:active,
+.btn_remade:hover:active {
+  background-color: #78d226;
+  border-color: #007100;
+  color: white;
+  outline: none;
+}
+
+.error-message {
+  margin: 5px 0;
+  color: white;
+}

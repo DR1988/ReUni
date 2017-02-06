@@ -1,0 +1,13 @@
+.rows{
+  height: 35px;
+  width: 100%;
+  margin: 10px;
+}
+
+.rows:nth-child(even) {
+    background-color: #ededed;
+  }
+
+.rows:nth-child(odd){
+  background-color: #dedede;
+}

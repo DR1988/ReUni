@@ -1,0 +1,34 @@
+$slideIndent: 5%;
+$slideScale: 9;
+$sliderWidth: $slideIndent*$slideScale;
+$sliderHeight: 75%;
+.squaredOne {
+    position: relative;
+    background: #fcfff4;
+    border: 3px solid #d2d1d3;
+    label {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+        border: 1px solid #006200;
+        background-color: #006200;
+    }
+    input {
+        position: absolute;
+        display: none;
+        &:checked+.squareCheck {
+            background-color: limegreen;
+        }
+    }
+    .squareCheck {
+        width: 95%;
+        height: 95%;
+        background-color: #314130;
+    }
+    input:not(:checked)+.squareCheck:hover {
+        background: linear-gradient(180deg, green, limegreen);
+    }
+}

@@ -1,0 +1,11 @@
+.main-flex{
+  display: flex;
+}
+.picture-box{
+  flex-grow:1;
+  height: 300px;
+  border: 1px solid red;
+}
+.form-Manupalation{
+  flex-grow:3;
+}

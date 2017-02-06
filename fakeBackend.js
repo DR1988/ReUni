@@ -1,0 +1,107 @@
+module.exports.accounts = [{
+    id: '1',
+    name: 'John',
+    surname: 'Doe',
+    gender: 'male',
+    password: 'qwe',
+    avatar: '/uploads/house.jpg',
+    friendList: ['max'],
+    requestFrom: ['andru'],
+    requestTo: ['pam']
+}, {
+    id: '2',
+    name: 'Max',
+    surname: 'Rokatansky',
+    gender: 'male',
+    password: 'qwe',
+    avatar: '/uploads/house.jpg',
+    friendList: ['John'],
+    requestFrom: [],
+    requestTo: []
+}, {
+    id: '3',
+    name: 'Pam',
+    surname: 'Evil',
+    gender: 'female',
+    password: 'qwe',
+    avatar: '/uploads/house.jpg',
+    friendList: [],
+    requestFrom: ['john'],
+    requestTo: []
+}, {
+    id: '4',
+    name: 'Geib',
+    surname: 'Dallahant',
+    gender: 'male',
+    password: 'qwe',
+    avatar: '/uploads/house.jpg',
+    friendList: [
+        'Andru', 'Vasilii', 'Martha', 'David'
+    ],
+    requestFrom: [],
+    requestTo: []
+}, {
+    id: '5',
+    name: 'Andru',
+    surname: 'Stone',
+    gender: 'male',
+    password: 'qwe',
+    avatar: '/uploads/house.jpg',
+    friendList: ['Geib'],
+    requestFrom: [],
+    requestTo: ['john']
+}, {
+    id: '6',
+    name: 'Vasilii',
+    surname: 'Abramov',
+    gender: 'male',
+    password: 'qwe',
+    avatar: '/uploads/house.jpg',
+    friendList: ['Geib'],
+    requestFrom: [],
+    requestTo: []
+}, {
+    id: '7',
+    name: 'Martha',
+    surname: 'Kent',
+    gender: 'female',
+    password: 'qwe',
+    avatar: '/uploads/house.jpg',
+    friendList: ['Geib'],
+    requestFrom: [],
+    requestTo: []
+}, {
+    id: '8',
+    name: 'Albert',
+    surname: 'Einstein',
+    gender: 'male',
+    password: 'qwe',
+    avatar: '/uploads/house.jpg',
+    friendList: [
+        'Mary', 'David'
+    ],
+    requestFrom: [],
+    requestTo: []
+}, {
+    id: '9',
+    name: 'Mary',
+    surname: 'Kuri',
+    gender: 'female',
+    password: 'qwe',
+    avatar: '/uploads/house.jpg',
+    friendList: ['Albert'],
+    requestFrom: [],
+    requestTo: []
+}, {
+    id: '10',
+    name: 'David',
+    surname: 'Gilbert',
+    gender: 'male',
+    password: 'qwe',
+    avatar: '/uploads/house.jpg',
+    friendList: [
+        'Albert', 'Geib'
+    ],
+    requestFrom: [],
+    requestTo: []
+}]
