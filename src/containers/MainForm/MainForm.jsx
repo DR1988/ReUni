@@ -110,13 +110,21 @@ class MainForm extends Component {
     this.props.actions.showEditModal(id)
   }
 
+  decline = () => {
+    this.props.actions.hideEditModal()
+  }
+
   render() {
-    console.log(this.props.mainForm.showEditModal);    
+    const template = (<EditModal
+      decline={this.decline}
+    />)
     return (
       <div className="form-Manupalation">
-      {this.props.mainForm.showEditModal ? <EditModal /> : null}
         <form className="data-set">
-          {this.rows.map((elem, idx) => <ValveLine handle={this.handle} id={idx} key={idx} />
+          {this.rows.map((elem, idx) => <ValveLine
+            handle={this.handle}
+            id={idx} key={idx}
+          />
           )}
         </form>
       </div>

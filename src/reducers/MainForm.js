@@ -71,6 +71,13 @@ export default function mainForm(state = initialstate, action) {
         showEditModal: true,
         id: action.id,
       }
+
+    case 'HIDE_EDIT_MODAL':
+      return {
+        ...state,
+        showEditModal: false,
+      }
+
     default:
       return state
   }

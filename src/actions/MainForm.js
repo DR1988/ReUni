@@ -41,8 +41,14 @@ const changeValue = (value, id) => dispatch => {
 const showEditModal = (id) => dispatch => {
   console.log(id); //eslint-disable-line
   dispatch({
-    type: 'SHOW_EDIT_MODAL',
+    type: 'SHOW_MODAL',
     id,
+  })
+}
+
+const hideEditModal = () => dispatch => {
+  dispatch({
+    type: 'HIDE_MODAL',
   })
 }
 
@@ -53,6 +59,7 @@ const MainFormAction = {
   increaseByTen,
   decreaseByTen,
   showEditModal,
+  hideEditModal,
 }
 
 export default MainFormAction

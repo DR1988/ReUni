@@ -1,0 +1,55 @@
+.cover{
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  z-index: 100;
+  margin: auto;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  border: 3px solid red;
+  background-color: rgba(38, 33, 43, 0.7);;
+}
+.edit-modal{
+  position: absolute;
+    // height: 300px;
+  // z-index: 10;
+  width: 300px;
+  margin: auto;
+  top: 10%;
+  left: 0;
+  right: 0;
+  background-color: white;
+  border-radius: 10px;
+  text-align: center;
+  border:1px solid #cacaca;
+  box-shadow: 0px 5px 36px 10px rgba(0,0,0,0.75);
+    & .parts {
+      display: inline;
+      & input {
+        padding: 6px;
+        border-radius: 3px;
+        outline: none;
+        border: 1px solid #cacaca;
+        width: 45%;
+        margin: 2%;
+        margin-top: 5%;
+      }
+      & input:focus::-webkit-input-placeholder {
+        color: transparent;    
+      }
+      & input:focus::-moz-placeholder {
+        color: transparent;    
+      }
+      & button {
+        width: 45%;
+        margin: 2%;
+      }
+      & button:focus{
+        outline: none;
+      }
+  }
+}
+

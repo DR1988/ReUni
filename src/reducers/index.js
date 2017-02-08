@@ -4,7 +4,8 @@ import graph from './graph'
 import mainPage from './main'
 import InputFormer from './InputFormer'
 import mainForm from './MainForm'
+import modal from './Modal'
 
-const rootReducer = combineReducers({ home, graph, mainPage, InputFormer, mainForm })
+const rootReducer = combineReducers({ home, graph, mainPage, InputFormer, mainForm, modal })
 
 export default rootReducer

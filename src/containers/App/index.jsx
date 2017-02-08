@@ -1,9 +1,11 @@
 import React from 'react'
 import NavLink from './../../components/NavLink'
 
+import Modal from './../Modals/modal.jsx'
 import './style.scss'
 
 const App = (props) => <div className="container">
+  <Modal />
   <nav className="navbar navbar-default">
     <ul className="nav nav-tabs">
       <li className="">

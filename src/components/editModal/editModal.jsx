@@ -1,19 +1,23 @@
 import React from 'react'
-import './style.scss'
 
-const EditModal = (props) => <div className="edit-modal">
-    <div className="flex-item inputs">
-        <input type="text" placeholder="Start time"/>
+const EditModal = (props) => <div className="cover">
+  <div className="edit-modal">
+    <div className="parts inputs">
+      <input type="text" placeholder="Start time" />
     </div>
-    <div className="flex-item inputs">
-        <input type="text" placeholder="End time"/>
+    <div className="parts inputs">
+      <input type="text" placeholder="End time" />
     </div>
-    <div className="flex-item">
-        <button>Accept</button>
+    <div className="parts">
+      <button className="btn btn-success">Accept</button>
     </div>
-    <div className="flex-item">
-        <button>Decline</button>
+    <div className="parts">
+      <button
+        className="btn btn-warning"
+        onClick={props.decline}
+      >Decline</button>
     </div>
+  </div>
 </div>
 
 EditModal.propTypes = {
