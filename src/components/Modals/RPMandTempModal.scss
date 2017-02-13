@@ -1,0 +1,38 @@
+.parts {
+  display: inline;
+  & input {
+    padding: 6px;
+    border-radius: 3px;
+    outline: none;
+    border: 1px solid #cacaca;
+    width: 45%;
+    margin: 2%;
+    margin-top: 5%;
+  }
+  & input:focus::-webkit-input-placeholder {
+    color: transparent;    
+  }
+  & input:focus::-moz-placeholder {
+    color: transparent;    
+  }
+  & button {
+    width: 45%;
+    margin: 2%;
+  }
+  & button:focus{
+    outline: none;
+  }
+}
+.setter{
+      display: block;
+      & input {
+        padding: 6px;
+        border-radius: 3px;
+        outline: none;
+        border: 1px solid #cacaca;
+        width: 94%;
+        margin: 2%;
+        margin-top: 5%;
+      }
+    }
+

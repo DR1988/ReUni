@@ -1,13 +1,36 @@
-.rows{
+.rows {
   height: 35px;
   width: 100%;
+  display: inline-block;
   margin-bottom: 10px;
-}
-
-.rows:nth-child(even) {
-    background-color: #ededed;
-  }
-
-.rows:nth-child(odd){
   background-color: #dedede;
+  & .valve-number {
+    max-width: 20px;
+    position: relative;
+    height: 50%;
+    top: 25%;
+    display: inline-block;
+    border: red solid 1px;
+  }
+  & .time-box {
+    height: 100%;
+    width: 100%;
+    white-space: nowrap;
+    & .time-former {
+      position: relative;
+      top: 25%;
+      height: 50%;
+      display: inline-block;
+      & .time {
+        display: inline-block;
+        height: 100%;
+        background-color: green;
+      }
+      & .gap {
+        display: inline-block;
+        height: 100%;
+        background-color: transparent;
+      }
+    }
+  }
 }

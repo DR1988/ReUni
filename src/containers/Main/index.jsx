@@ -4,15 +4,11 @@ import { connect } from 'react-redux'
 
 // import Loading from '../../components/Loading'
 import mainActions from '../../actions/mainAction.js'
-import InputFormer from './../InputFormer'
 
 import MainForm from './../MainForm/MainForm.jsx'
 
-import InputFormerAction from './../../actions/InputFormerAction.js'
-
-
 import './style.scss'
-
+/*eslint-disable*/
 
 class Main extends Component {
 
@@ -23,7 +19,6 @@ class Main extends Component {
 
 
   inputf = (idVal) => {
-    console.log(idVal)
   }
 
   handle = (e) => {
@@ -33,7 +28,6 @@ class Main extends Component {
       reader.readAsBinaryString(file)
       reader.onloadend = (evt) => {
         if (evt.target.readyState === FileReader.DONE) { // DONE == 2
-          console.log('done')
           this.props.numActions.setValues(JSON.parse(evt.target.result))
         }
       }
@@ -42,7 +36,6 @@ class Main extends Component {
 
 
   render() {
-    // console.log(this.props.numActions)
     return (
       <div className="main-flex">
         <div className="picture-box">
@@ -72,7 +65,6 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators(mainActions, dispatch),
-    numActions: bindActionCreators(InputFormerAction, dispatch),
   }
 }
 

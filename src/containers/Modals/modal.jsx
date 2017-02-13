@@ -1,10 +1,10 @@
 import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
-// import { bindActionCreators } from 'redux'
+import { bindActionCreators } from 'redux'
+import ValveModal from './../../components/Modals/valveModal.jsx'
+import RPMandTempModal from './../../components/Modals/RPMandTempModal.jsx'
 
-import './style.scss'
-
-import modal from './../../actions/ModalActions.js'
+import modalActions from './../../actions/ModalActions.js'
 
 class Modal extends Component {
 
@@ -14,39 +14,50 @@ class Modal extends Component {
     }
   }
 
-  handleBackgroundClick = e => {
-    if (e.target === e.currentTarget) {
-      this.props.hideModal()
+  handelKeyPress = (e) => {
+    if (e.keyCode === 27) {
+      this.props.actions.hideModal()
     }
   }
 
+  reFocus = () => {
+    this.inpt.focus()
+  }
+
   render() {
-    const template = (<div
-      className="cover"
-      onClick={this.handleBackgroundClick}
-    >
-      <div className="edit-modal">
-        <div className="parts inputs">
-          <input type="text" placeholder="Start time" />
-        </div>
-        <div className="parts inputs">
-          <input type="text" placeholder="End time" />
-        </div>
-        <div className="parts">
-          <button className="btn btn-success">Accept</button>
-        </div>
-        <div className="parts">
-          <button
-            className="btn btn-warning"
-            ref={btn => { this.btn = btn }}
-            onClick={this.props.hideModal}
-          >Decline</button>
-        </div>
-      </div>
-    </div>
-    )
+    const { modalType, startTime, stopTime } = this.props.modal
+    let template
+    let name
+    if (modalType) {
+      name = modalType.name
+    }
+    switch (name) {
+      case 'ValveLine':
+        template = (<ValveModal
+          actions={this.props.actions}
+          id={modalType.id}
+          startTime={startTime}
+          stopTime={stopTime}
+        />
+        )
+        break
+      case 'RPMSetter':
+      case 'TempSetter':
+        template = (<RPMandTempModal
+          actions={this.props.actions}
+          id={modalType.id}
+        />
+        )
+        break
+
+      default:
+        template = null
+        break
+    }
     return (
-      this.props.modal.showModal ? template : null
+      <div>
+        { this.props.modal.showModal ? template : null }
+      </div>
     )
   }
 }
@@ -54,10 +65,14 @@ class Modal extends Component {
 Modal.propTypes = {
   modal: PropTypes.object,
   hideModal: PropTypes.func,
+  modalType: PropTypes.string,
+  actions: PropTypes.object,
 }
 
 const mapStateToProps = (state) => ({ modal: state.modal })
 
-export default connect(mapStateToProps, {
-  hideModal: modal.hideModal,
-})(Modal)
+const mapDispatchToProps = (dispatch) => ({
+  actions: bindActionCreators(modalActions, dispatch),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Modal)

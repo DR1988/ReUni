@@ -1,3 +1,4 @@
+/*eslint-disable*/
 const data = require('./../fakeBackend.js')
 let _ = require('lodash')
 // var url = require('url')

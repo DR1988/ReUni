@@ -1,9 +1,9 @@
-const increaseValue = (value, id, /* inputFormeId*/) => dispatch => {
+/*
+const increaseValue = (value, id,) => dispatch => {
   dispatch({
     type: 'INCREASE_VALUE_BY_ONE',
     value,
     id,
-    // inputFormerId,
   })
 }
 
@@ -38,28 +38,32 @@ const changeValue = (value, id) => dispatch => {
     id,
   })
 }
-const showEditModal = (id) => dispatch => {
-  console.log(id); //eslint-disable-line
+*/
+const showModal = (modalType) => dispatch => {
   dispatch({
     type: 'SHOW_MODAL',
-    id,
+    modalType,
   })
 }
 
-const hideEditModal = () => dispatch => {
+const hideModal = () => dispatch => {
   dispatch({
     type: 'HIDE_MODAL',
   })
 }
 
+const setValues = values => dispatch => {
+  // console.log(values)
+  dispatch({
+    type: 'SET_VALUES',
+    values,
+  })
+}
+
 const MainFormAction = {
-  changeValue,
-  increaseValue,
-  decreaseValue,
-  increaseByTen,
-  decreaseByTen,
-  showEditModal,
-  hideEditModal,
+  showModal,
+  hideModal,
+  setValues,
 }
 
 export default MainFormAction

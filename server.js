@@ -1,3 +1,4 @@
+/*eslint-disable*/
 import * as handlers from './serverHandlers/handlers.js'
 
 var bodyParser = require('body-parser')

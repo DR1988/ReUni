@@ -59,6 +59,7 @@
     "cors": "2.8.1",
     "form-serialize": "^0.7.1",
     "jquery": "^2.2.1",
+    "lodash": "^4.17.4",
     "multer": "^1.2.1",
     "react": "^15.0.1",
     "react-dom": "^15.0.1",

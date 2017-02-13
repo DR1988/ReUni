@@ -5,15 +5,9 @@ const initialState = [
 ]
 
 export default function mainState(state = initialState, action) {
-  // console.log(action)
   switch (action.type) {
     case mainTypes.ADD_INPUT_FOREMER:
-      // console.log(state)
-      return [
-        ...state,
-        { id: action.id },
-      ]
-
+      return state
 
     default:
       return state

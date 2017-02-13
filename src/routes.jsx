@@ -1,6 +1,6 @@
 import React from 'react'
 import { Route, IndexRoute } from 'react-router'
-
+/*eslint-disable*/
 import App from './containers/App'
 import Main from './containers/Main'
 import Graph from './containers/Graph'
