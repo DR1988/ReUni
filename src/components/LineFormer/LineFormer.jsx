@@ -4,6 +4,7 @@ import TempSetter from './../TempSetter/TempSetter.jsx'
 import ValveLine from './../valveLine/valveLine.jsx'
 
 const LineFormer = props => {
+  console.log(props)
   const template = []
   const elem = props.elem
   if (elem.name === 'ValveLine') {
@@ -11,7 +12,6 @@ const LineFormer = props => {
       <ValveLine
         key={elem.id}
         elem={elem}
-        handle={() => props.handle(elem)}
       />)
   }
   if (elem.name === 'RPMSetter') {
@@ -19,7 +19,6 @@ const LineFormer = props => {
       <RPMSetter
         key={elem.id}
         elem={elem}
-        handle={() => props.handle(elem)}
       />)
   }
   if (elem.name === 'TempSetter') {
@@ -27,13 +26,11 @@ const LineFormer = props => {
       <TempSetter
         key={elem.id}
         elem={elem}
-        handle={() => props.handle(elem)}
       />)
   }
-  return (
-    <div>
-      { template }
-    </div>
+  return (<div className="rows" onClick={() => props.handle(props.elem)}>
+    { template }
+  </div>
   )
 }
 LineFormer.propTypes = {
