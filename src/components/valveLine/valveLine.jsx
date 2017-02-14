@@ -65,8 +65,8 @@ class ValveLine extends Component {
   }
 
   render() {
-    return (<div className="rows" onClick={this.props.handle}>
-      <div className="valve-number col-xs-1">
+    return (<div className="line-wraper">
+      <div className="valve-number">
         <span>{this.props.elem.id + 1}</span>
       </div>
       <div className="time-box">

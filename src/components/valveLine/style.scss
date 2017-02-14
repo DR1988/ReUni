@@ -1,25 +1,26 @@
 .rows {
   height: 35px;
-  width: 100%;
-  display: inline-block;
   margin-bottom: 10px;
   background-color: #dedede;
-  & .valve-number {
-    max-width: 20px;
-    position: relative;
+  white-space: nowrap;
+  & .line-wraper{
+    width: 100%;
     height: 50%;
+    position: relative;
     top: 25%;
-    display: inline-block;
+  }
+  & .valve-number {
+    width: 20px;
+    height: 100%;
+    float: left;
     border: red solid 1px;
   }
   & .time-box {
     height: 100%;
-    width: 100%;
-    white-space: nowrap;
+    // white-space: nowrap;
     & .time-former {
       position: relative;
-      top: 25%;
-      height: 50%;
+      height: 100%;
       display: inline-block;
       & .time {
         display: inline-block;
@@ -28,7 +29,6 @@
       }
       & .gap {
         display: inline-block;
-        height: 100%;
         background-color: transparent;
       }
     }
