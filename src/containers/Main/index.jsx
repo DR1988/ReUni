@@ -38,7 +38,7 @@ class Main extends Component {
   render() {
     return (
       <div className="main-flex">
-        <div className="picture-box">
+        <div className="picture-box col-xs-4">
           <span>sd</span>
         </div>
 

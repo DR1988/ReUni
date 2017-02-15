@@ -4,22 +4,23 @@
   background-color: #dedede;
   white-space: nowrap;
   & .line-wraper{
-    width: 100%;
     height: 50%;
     position: relative;
     top: 25%;
+    display: inline-block;
   }
   & .valve-number {
+    vertical-align: top;
     width: 20px;
     height: 100%;
-    float: left;
+    display: inline-block;
     border: red solid 1px;
   }
   & .time-box {
+    vertical-align: top;
     height: 100%;
-    // white-space: nowrap;
+    display: inline-block;
     & .time-former {
-      position: relative;
       height: 100%;
       display: inline-block;
       & .time {
@@ -28,6 +29,7 @@
         background-color: green;
       }
       & .gap {
+        height: 100%;
         display: inline-block;
         background-color: transparent;
       }
