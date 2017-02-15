@@ -4,7 +4,6 @@ import TempSetter from './../TempSetter/TempSetter.jsx'
 import ValveLine from './../valveLine/valveLine.jsx'
 
 const LineFormer = props => {
-  console.log(props)
   const template = []
   const elem = props.elem
   if (elem.name === 'ValveLine') {
