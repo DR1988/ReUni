@@ -38,11 +38,17 @@ class Main extends Component {
   render() {
     return (
       <div className="main-flex">
-        <div className="picture-box col-xs-4">
-          <span>sd</span>
+        <div className="col-xs-12 col-sm-4">
+          <div className="note-box col-xs-12">
+            <span>node</span>
+          </div>
+          <div className="picture-box col-xs-12">
+            <span>picture</span>
+          </div>
         </div>
-
-        <MainForm />
+        <div className="col-xs-12 col-sm-8">
+          <MainForm />
+        </div>
 
         {/* <Loading /> */}
       </div>

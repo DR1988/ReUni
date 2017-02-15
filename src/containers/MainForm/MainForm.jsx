@@ -44,16 +44,18 @@ class MainForm extends Component {
     // console.log('mainForm', this.props.mainForm)
     const { lineFormer } = this.props.mainForm
     return (
-      <div className="col-xs-8 form-Manupalation">
-        <form className="data-set">
-          {lineFormer.map((elem, idx) => <LineFormer
-            handle={this.showModal}
-            key={idx}
-            elem={elem}
-          />
-          )}
-        </form>
-        <TimeLine />
+      <div className="form-Manupalation">
+        <div className="data-set">
+          <form>
+            {lineFormer.map((elem, idx) => <LineFormer
+              handle={this.showModal}
+              key={idx}
+              elem={elem}
+            />
+            )}
+          </form>
+          <TimeLine />
+        </div>
         <input type="file" onChange={this.loadFile} />
       </div>
     )
