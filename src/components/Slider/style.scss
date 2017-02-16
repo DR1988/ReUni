@@ -1,0 +1,34 @@
+$slider-height: 25px;
+
+.slider-container{
+  position: relative;
+  margin-top: 20px;
+  height: 1px;
+  background-color: red;
+  // border: red 1px solid;
+  & .slider {
+    position: absolute;
+    height: $slider-height;
+    top: -$slider-height/2;
+    width: 15px;
+    background-color: blue;
+    cursor:pointer;
+    left: 0.5%;
+  }
+  & .divider_container {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    height: $slider-height/2;
+    width: 98%;
+    left: 1%;
+    top: -$slider-height/4;
+    & .slider_divider {
+      // position: relative;
+      width: 3px;
+      background-color: green;
+      // display: inline-block;
+      // margin-left: 120px;
+    }
+  }
+}

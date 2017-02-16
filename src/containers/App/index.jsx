@@ -1,6 +1,7 @@
 import React from 'react'
 import NavLink from './../../components/NavLink'
 
+import Slider from './../../components/Slider/Slider.jsx'
 import Modal from './../Modals/modal.jsx'
 import './style.scss'
 
@@ -17,6 +18,7 @@ const App = (props) => <div className="container">
     </ul>
   </nav>
   {props.children}
+  <Slider />
 </div>
 
 App.propTypes = {

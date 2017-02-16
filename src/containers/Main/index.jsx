@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 
 // import Loading from '../../components/Loading'
 import mainActions from '../../actions/mainAction.js'
-
 import MainForm from './../MainForm/MainForm.jsx'
 
 import './style.scss'
@@ -49,7 +48,6 @@ class Main extends Component {
         <div className="col-xs-12 col-sm-8">
           <MainForm />
         </div>
-
         {/* <Loading /> */}
       </div>
     )
