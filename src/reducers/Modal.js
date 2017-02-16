@@ -2,6 +2,8 @@ const initialstate = {
   showModal: false,
   startTime: 0,
   stopTime: 0,
+  RPMvalue: 0,
+  TempValue: 15,
 }
 
 export default function modal(state = initialstate, action) {
@@ -31,6 +33,18 @@ export default function modal(state = initialstate, action) {
       return {
         ...state,
         stopTime: action.value,
+      }
+
+    case 'CHANGE_RPM_VALUE':
+      return {
+        ...state,
+        RPMvalue: action.value,
+      }
+
+    case 'CHANGE_TEMP_VALUE':
+      return {
+        ...state,
+        TempValue: action.value,
       }
 
     default:

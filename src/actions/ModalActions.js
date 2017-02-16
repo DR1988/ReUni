@@ -27,9 +27,25 @@ const changeStopValue = value => dispatch => {
   })
 }
 
+const changeRPMValue = value => dispatch => {
+  dispatch({
+    type: 'CHANGE_RPM_VALUE',
+    value,
+  })
+}
+
+const changeTempValue = value => dispatch => {
+  dispatch({
+    type: 'CHANGE_TEMP_VALUE',
+    value,
+  })
+}
+
 export default {
   hideModal,
   setTime,
   changeStartValue,
   changeStopValue,
+  changeRPMValue,
+  changeTempValue,
 }

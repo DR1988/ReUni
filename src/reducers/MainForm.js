@@ -28,8 +28,8 @@ const initialstate = {
     { name: 'ValveLine',
       id: 7,
       valves: [{ startTime: 0, endTime: 0, id: 0 }] },
-    { name: 'RPMSetter', ShortName: 'S', id: 8, startTime: 0, endTime: 0, value: 0 },
-    { name: 'TempSetter', ShortName: 'T', id: 9, startTime: 0, endTime: 0, value: 0 },
+    { name: 'RPMSetter', ShortName: 'S', id: 8, startTime: 0, endTime: 0, RPMvalue: 0 },
+    { name: 'TempSetter', ShortName: 'T', id: 9, startTime: 0, endTime: 0, TempValue: 0 },
   ],
 }
 

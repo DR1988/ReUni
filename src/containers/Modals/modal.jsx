@@ -25,7 +25,7 @@ class Modal extends Component {
   }
 
   render() {
-    const { modalType, startTime, stopTime } = this.props.modal
+    const { modalType, startTime, stopTime, RPMvalue, TempValue } = this.props.modal
     let template
     let name
     if (modalType) {
@@ -35,7 +35,7 @@ class Modal extends Component {
       case 'ValveLine':
         template = (<ValveModal
           actions={this.props.actions}
-          id={modalType.id}
+          name={name}
           startTime={startTime}
           stopTime={stopTime}
         />
@@ -45,7 +45,10 @@ class Modal extends Component {
       case 'TempSetter':
         template = (<RPMandTempModal
           actions={this.props.actions}
-          id={modalType.id}
+          name={name}
+          startTime={startTime}
+          stopTime={stopTime}
+          value={name === 'RPMSetter' ? RPMvalue : TempValue}
         />
         )
         break

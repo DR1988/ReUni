@@ -2,11 +2,9 @@ import React from 'react'
 import './style.scss'
 /*eslint-disable*/
 const TempSetter = (props) => {
-  return (<div className="rows" onClick={() => props.handle(props.id)}>
-    <div className="value">
+  return (<div className="value">
       <span>{props.elem.ShortName}</span>
     </div>
-  </div>
   )
 }
 
