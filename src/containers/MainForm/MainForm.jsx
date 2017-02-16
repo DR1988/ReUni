@@ -17,8 +17,17 @@ class MainForm extends Component {
     this.timerIdOuter = null
     this.hold = false
     this.action = null
+    this.timer = null
   }
 
+  getSource = () => {
+    const source = new EventSource('/stream')
+    source.onmessage = (e) => {
+      const data = JSON.parse(e.data)
+      this.timer = data.counts
+      this.forceUpdate()
+    }
+  }
   showModal = (elem) => {
     this.props.actions.showModal(elem)
   }
@@ -40,8 +49,10 @@ class MainForm extends Component {
     this.props.actions.hideModal()
   }
 
+
   render() {
     // console.log('mainForm', this.props.mainForm)
+    this.getSource()
     const { lineFormer } = this.props.mainForm
     return (
       <div className="form-Manupalation">
@@ -54,7 +65,7 @@ class MainForm extends Component {
             />
             )}
           </form>
-          <TimeLine />
+          <TimeLine timer={this.timer} />
         </div>
         <input type="file" onChange={this.loadFile} />
       </div>
