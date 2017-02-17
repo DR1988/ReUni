@@ -51,7 +51,7 @@ const RPMandTempModal = (props) => {
   return (
     <ModalWrapper
       {...props}
-      onOk={() => props.actions.setRPMorTemp(props.id, { start: _inpStart.value, stop: _inpEnd.value, value:_inpValue.value })}
+      onOk={() => props.actions.setLineValues(props.id, { start: _inpStart.value, stop: _inpEnd.value, value:_inpValue.value })}
       okText={'Accept'}
     >
       <div className="setter inputs">

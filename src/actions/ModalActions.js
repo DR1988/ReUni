@@ -5,17 +5,10 @@ const hideModal = (id) => dispatch => {
   })
 }
 
-const setTime = (id, seTtime) => dispatch => {
-  dispatch({
-    type: 'SET_TIME',
-    id,
-    seTtime,
-  })
-}
 
-const setRPMorTemp = (id, payload) => dispatch => {
+const setLineValues = (id, payload) => dispatch => {
   dispatch({
-    type: 'SET_RPM_OR_TEMP',
+    type: 'SET_LINE_VALUES',
     id,
     payload,
   })
@@ -51,10 +44,9 @@ const changeTempValue = value => dispatch => {
 
 export default {
   hideModal,
-  setTime,
   changeStartValue,
   changeStopValue,
   changeRPMValue,
   changeTempValue,
-  setRPMorTemp,
+  setLineValues,
 }

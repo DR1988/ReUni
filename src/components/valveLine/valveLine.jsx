@@ -9,13 +9,14 @@ class ValveLine extends Component {
   }
 
   componentWillMount() {
-    const { valves } = this.props.elem
-    this.getUniqTimeLines(valves)
+    // console.log(this.props.elem)
+    const { changes } = this.props.elem
+    this.getUniqTimeLines(changes)
     this.setValveTemplate(this.resultValves)
   }
 
   componentWillReceiveProps(nextProps) {
-    this.getUniqTimeLines(nextProps.elem.valves)
+    this.getUniqTimeLines(nextProps.elem.changes)
     this.setValveTemplate(this.resultValves)
   }
 
