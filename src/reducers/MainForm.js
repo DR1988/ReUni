@@ -120,6 +120,7 @@ export default function mainForm(state = initialstate, action) {
             if (changeElem.id !== action.id) {
               return changeElem
             }
+            console.log(changeElem)
             changeElem.valves.push(
               { endTime: +action.seTtime.stop,
                 startTime: +action.seTtime.start,

@@ -3,12 +3,15 @@ import './RPMandTempModal.scss'
 import ModalWrapper from './ModalWraper.jsx'
 /*eslint-disable*/
 const RPMandTempModal = (props) => {
-  console.log(props)
+  // console.log(props)
   // const handleBackgroundClick = e => {
   //   if (e.target === e.currentTarget) {
   //     props.actions.hideModal()
   //   }
   // }
+  let _inpStart
+  let _inpEnd
+
   const changeStartValue = (e) => {
     const value = +e.target.value
     if (Number.isInteger(value) && value >= 0) {
@@ -47,6 +50,7 @@ const RPMandTempModal = (props) => {
   return (
     <ModalWrapper
       {...props}
+      onOk={() => props.actions.setTime(props.id, { start: _inpStart.value, stop: _inpEnd.value })}
       okText={'Accept'}
     >
       <div className="setter inputs">
@@ -63,6 +67,7 @@ const RPMandTempModal = (props) => {
           placeholder="Start time"
           value={props.startTime}
           onChange={changeStartValue}
+          ref={inp => (_inpStart = inp)}
         />
       </div>
       <div className="parts inputs">
@@ -71,6 +76,7 @@ const RPMandTempModal = (props) => {
           placeholder="End time"
           value={props.stopTime}
           onChange={changeStopValue}
+          ref={inp => (_inpEnd = inp)}
         />
       </div>
     </ModalWrapper>

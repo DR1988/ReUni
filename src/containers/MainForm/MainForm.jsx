@@ -52,7 +52,7 @@ class MainForm extends Component {
 
   render() {
     // console.log('mainForm', this.props.mainForm)
-    this.getSource()
+    // this.getSource()
     const { lineFormer } = this.props.mainForm
     return (
       <div className="form-Manupalation">

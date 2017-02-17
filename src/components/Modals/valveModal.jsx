@@ -4,6 +4,7 @@ import ModalWrapper from './ModalWraper.jsx'
 import './valveModal.scss'
 /*eslint-disable*/
 const ValveModal = (props) => {
+  console.log(props)
   const changeStartValue = (e) => {
     const value = +e.target.value
     if (Number.isInteger(value) && value >= 0) {

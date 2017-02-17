@@ -35,6 +35,7 @@ class Modal extends Component {
       case 'ValveLine':
         template = (<ValveModal
           actions={this.props.actions}
+          id={modalType.id}
           name={name}
           startTime={startTime}
           stopTime={stopTime}
@@ -45,6 +46,7 @@ class Modal extends Component {
       case 'TempSetter':
         template = (<RPMandTempModal
           actions={this.props.actions}
+          id={modalType.id}
           name={name}
           startTime={startTime}
           stopTime={stopTime}
