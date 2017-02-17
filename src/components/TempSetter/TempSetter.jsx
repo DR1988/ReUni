@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
 import './style.scss'
+
+import getUniqTimeLines from './../../helpers/getUniqTimeLines.js'
+import setLineTemplate from './../../helpers/lineTemplate.jsx'
+
 /*eslint-disable*/
 class TempSetter extends Component {
   constructor(props) {
@@ -9,61 +13,14 @@ class TempSetter extends Component {
   }
   componentWillMount(){
     const { changes } = this.props.elem 
-    this.getUniqTimeLines(changes)
-    this.setValveTemplate(this.resultArrValue)
+    this.resultArrValue = getUniqTimeLines(changes)
+    this.arrValueTemplate = setLineTemplate(this.resultArrValue )
   }
 
   componentWillReceiveProps(nextProps){
     // console.log(nextProps) 
-    this.getUniqTimeLines(nextProps.elem.changes)
-    this.setValveTemplate(this.resultArrValue)
-  }
-
-  getUniqTimeLines(arrValue) {
-    // TODO: setting next start time less then previus endtime not overwrite previus one
-    this.resultArrValue = []
-    for (let i = 0; i < arrValue.length; i++) {
-      if (i + 1 < arrValue.length) {
-        if (arrValue[i].endTime > arrValue[i + 1].startTime) {
-          arrValue[i].endTime = arrValue[i + 1].endTime //eslint-disable-line
-          this.resultArrValue.push(arrValue[i])
-          i += 1
-        } else {
-          this.resultArrValue.push(arrValue[i])
-        }
-      } else {
-        this.resultArrValue.push(arrValue[i])
-      }
-    }
-  }
-
-  setValveTemplate(resultArrValue) {
-    // console.log('resultValves', resultValves)
-    this.arrValueTemplate = []
-    for (let i = 0; i < resultArrValue.length; i++) {
-      this.arrValueTemplate.push(
-        <div
-          className="time-former"
-          key={i}
-        >
-          <div
-            className="time" style={{
-              width: resultArrValue[i].endTime - resultArrValue[i].startTime,
-            }}
-          >
-          <span>{this.props.elem.changes[i].value}</span>
-          </div>
-          <div
-            className="gap"
-            style={{
-              width: resultArrValue[i + 1] ?
-              resultArrValue[i + 1].startTime - resultArrValue[i].endTime
-              : null,
-            }}
-          />
-        </div>
-      )
-    }
+    this.resultArrValue = getUniqTimeLines(nextProps.elem.changes)
+    this.arrValueTemplate = setLineTemplate(this.resultArrValue )
   }
 
   render() {

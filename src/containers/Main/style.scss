@@ -1,6 +1,11 @@
 .main-flex{
   // display: flex;
 }
+.hide-scroll {
+  // border: 3px solid green;
+  overflow: hidden;
+  height: 520px;
+}
 .picture-box{
   // width: 30%;
   // flex-grow:1;
@@ -15,8 +20,13 @@
   // width: 70%;
   // flex-grow:3;
   overflow-x: auto;
+  padding-bottom: 30px;
   & .data-set{
     min-width: 100%;
     display: inline-block;
   }
 }
+
+// .form-Manupalation::-webkit-scrollbar { 
+//     display: none; 
+// }

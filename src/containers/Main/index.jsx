@@ -11,29 +11,6 @@ import './style.scss'
 
 class Main extends Component {
 
-  handlePress = (e) => {
-    e.preventDefault()
-    this.props.actions.addInputFormer(this.props.mainPage.length)
-  }
-
-
-  inputf = (idVal) => {
-  }
-
-  handle = (e) => {
-    const file = e.target.files[0]
-    const reader = new FileReader()
-    if (file) {
-      reader.readAsBinaryString(file)
-      reader.onloadend = (evt) => {
-        if (evt.target.readyState === FileReader.DONE) { // DONE == 2
-          this.props.numActions.setValues(JSON.parse(evt.target.result))
-        }
-      }
-    }
-  }
-
-
   render() {
     return (
       <div className="main-flex row">
@@ -45,7 +22,7 @@ class Main extends Component {
             <span>picture</span>
           </div>
         </div>
-        <div className="col-xs-12 col-sm-8">
+        <div className="hide-scroll col-xs-12 col-sm-8">
           <MainForm />
         </div>
         {/* <Loading /> */}
