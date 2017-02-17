@@ -11,6 +11,7 @@ const RPMandTempModal = (props) => {
   // }
   let _inpStart
   let _inpEnd
+  let _inpValue
 
   const changeStartValue = (e) => {
     const value = +e.target.value
@@ -30,7 +31,7 @@ const RPMandTempModal = (props) => {
     }
   }
 
-  const changeRPMValue = (e) => {
+  const changeValue = (e) => {
     const value = +e.target.value
     switch (props.name) {
       case 'RPMSetter':
@@ -50,7 +51,7 @@ const RPMandTempModal = (props) => {
   return (
     <ModalWrapper
       {...props}
-      onOk={() => props.actions.setTime(props.id, { start: _inpStart.value, stop: _inpEnd.value })}
+      onOk={() => props.actions.setRPMorTemp(props.id, { start: _inpStart.value, stop: _inpEnd.value, value:_inpValue.value })}
       okText={'Accept'}
     >
       <div className="setter inputs">
@@ -58,7 +59,8 @@ const RPMandTempModal = (props) => {
           type="text"
           placeholder="Set Value"
           value={props.value}
-          onChange={changeRPMValue}
+          onChange={changeValue}
+          ref={inp => (_inpValue = inp)}
         />
       </div>
       <div className="parts inputs">

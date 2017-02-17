@@ -17,7 +17,6 @@ const Timeline = (props) => {
       <div className="line" />
       <div className="arrow-up" />
     </div>
-    <span>adadasd {props.timer}</span>
   </div>
   )
 }

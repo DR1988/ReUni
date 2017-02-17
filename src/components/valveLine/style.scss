@@ -3,6 +3,7 @@
   margin-bottom: 10px;
   background-color: #dedede;
   white-space: nowrap;
+  cursor:pointer;
   & .line-wraper{
     height: 50%;
     position: relative;
@@ -35,8 +36,4 @@
       }
     }
   }
-}
-
-.rows {
-  cursor:pointer;
 }

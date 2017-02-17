@@ -13,6 +13,14 @@ const setTime = (id, seTtime) => dispatch => {
   })
 }
 
+const setRPMorTemp = (id, payload) => dispatch => {
+  dispatch({
+    type: 'SET_RPM_OR_TEMP',
+    id,
+    payload,
+  })
+}
+
 const changeStartValue = value => dispatch => {
   dispatch({
     type: 'CHANGE_START_VALUE',
@@ -48,4 +56,5 @@ export default {
   changeStopValue,
   changeRPMValue,
   changeTempValue,
+  setRPMorTemp,
 }

@@ -20,6 +20,7 @@ class ValveLine extends Component {
   }
 
   getUniqTimeLines(valves) {
+    // TODO: setting next start time less then previus endtime not overwrite previus one
     this.resultValves = []
     for (let i = 0; i < valves.length; i++) {
       if (i + 1 < valves.length) {
@@ -34,7 +35,15 @@ class ValveLine extends Component {
         this.resultValves.push(valves[i])
       }
     }
-    // console.log('result', this.resultValves)
+    if (this.props.elem.id === 7) {
+      this.resultValves.forEach(elem => {
+        console.log(elem.id, '*******************************')
+        console.log(`start %c ${elem.startTime}`, 'color: green; font-weight: bold;')
+        console.log(`stop %c  ${elem.endTime}`, 'color: red; font-weight: bold;')
+      }
+    )
+      console.log('result', this.resultValves)
+    }
   }
 
   setValveTemplate(resultValves) {

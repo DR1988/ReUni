@@ -1,9 +1,40 @@
-.rows{
-  & .value {
-    position: relative;
+.rows {
+  height: 35px;
+  margin-bottom: 10px;
+  background-color: #dedede;
+  white-space: nowrap;
+  cursor:pointer;
+  & .line-wraper{
     height: 50%;
+    position: relative;
     top: 25%;
     display: inline-block;
+  }
+  & .line-definition {
+    vertical-align: top;
+    width: 20px;
+    height: 100%;
+    display: inline-block;
     border: red solid 1px;
+  }
+  & .time-box {
+    vertical-align: top;
+    height: 100%;
+    display: inline-block;
+    & .time-former {
+      height: 100%;
+      display: inline-block;
+      & .time {
+        vertical-align: top;
+        display: inline-block;
+        height: 100%;
+        background-color: green;
+      }
+      & .gap {
+        height: 100%;
+        display: inline-block;
+        background-color: transparent;
+      }
+    }
   }
 }
