@@ -2,7 +2,7 @@ $timePresenterHeight: 475px;
 .time-line_wraper{
   position: relative;
   height: 45px;
-  margin-left: 20px;
+  left: 20px;
   & .time-line{
     height: 25px;
     border: thin solid red;
@@ -32,8 +32,8 @@ $timePresenterHeight: 475px;
     position: absolute;
     height: $timePresenterHeight;
     top: -$timePresenterHeight + 25px;
-    left: 220px;
-    transition: left 10s linear;
+    left: 1px;
+    transition: left 3s linear;
   & .line {
       position: relative;
       left: 46%;

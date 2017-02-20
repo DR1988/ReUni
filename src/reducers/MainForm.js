@@ -144,6 +144,21 @@ export default function mainForm(state = initialstate, action) {
         showEditModal: false,
       }
 
+    case 'SET_SLIDER_WIDTH':
+      return {
+        ...state,
+        sliderWidth: action.width,
+      }
+
+    case 'SET_SLIDER_POSITION':
+      return {
+        ...state,
+        position: action.position,
+      }
+
+    case 'GET_SLIDER_POSITION':
+      return state
+
     default:
       return state
   }

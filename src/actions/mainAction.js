@@ -9,8 +9,17 @@ const addInputFormer = (id) => dispatch => {
   })
 }
 
+const setValues = values => dispatch => {
+  // console.log(values)
+  dispatch({
+    type: 'SET_VALUES',
+    values,
+  })
+}
+
 const mainActions = {
   addInputFormer,
+  setValues,
 }
 
 export default mainActions

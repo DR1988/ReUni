@@ -52,18 +52,41 @@ const hideModal = () => dispatch => {
   })
 }
 
-const setValues = values => dispatch => {
-  // console.log(values)
+const setSliderWidth = (width) => dispatch => {
   dispatch({
-    type: 'SET_VALUES',
-    values,
+    type: 'SET_SLIDER_WIDTH',
+    width,
   })
 }
+
+const setSliderPosition = position => dispatch => {
+  dispatch({
+    type: 'SET_SLIDER_POSITION',
+    position,
+  })
+}
+
+const getSliderPosition = () => dispatch => {
+  dispatch({
+    type: 'GET_SLIDER_POSITION',
+  })
+}
+
+// const setValues = values => dispatch => {
+//   // console.log(values)
+//   dispatch({
+//     type: 'SET_VALUES',
+//     values,
+//   })
+// }
 
 const MainFormAction = {
   showModal,
   hideModal,
-  setValues,
+  setSliderWidth,
+  getSliderPosition,
+  setSliderPosition,
+  // setValues,
 }
 
 export default MainFormAction

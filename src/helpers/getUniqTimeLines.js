@@ -28,11 +28,13 @@
            || elem.changes[i].endTime > elem.changes[j].endTime) {
             elem.changes.splice(j, 1)
           }
-          if (elem.changes[i].endTime < elem.changes[j].endTime
-           && elem.changes[i].endTime > elem.changes[j].startTime) {
-            elem.changes[i].endTime = elem.changes[j].endTime//eslint-disable-line
-            elem.changes[i].duration = elem.changes[i].endTime - elem.changes[i].startTime//eslint-disable-line
-            elem.changes.splice(j, 1)
+          if (elem.changes[j]) {
+            if (elem.changes[i].endTime < elem.changes[j].endTime
+            && elem.changes[i].endTime > elem.changes[j].startTime) {
+              elem.changes[i].endTime = elem.changes[j].endTime//eslint-disable-line
+              elem.changes[i].duration = elem.changes[i].endTime - elem.changes[i].startTime//eslint-disable-line
+              elem.changes.splice(j, 1)
+            }
           }
         }
       }
