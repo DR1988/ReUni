@@ -3,6 +3,8 @@ import RPMSetter from './../RPMSetter/RPMSetter.jsx'
 import TempSetter from './../TempSetter/TempSetter.jsx'
 import ValveLine from './../valveLine/valveLine.jsx'
 
+import './style.scss'
+
 const LineFormer = props => {
   const template = []
   const elem = props.elem

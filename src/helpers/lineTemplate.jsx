@@ -11,9 +11,11 @@ const setLineTemplate = (resultValves) => {
       >
         <div
           className="time" style={{
-            width: resultValves[i].endTime - resultValves[i].startTime,
+            width: resultValves[i].duration,
           }}
-        />
+        >
+          {resultValves[i].value ? <span>{resultValves[i].value}</span> : resultValves[i].duration }
+        </div>
         <div
           className="gap"
           style={{

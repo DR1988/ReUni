@@ -65,7 +65,7 @@ class MainForm extends Component {
             />
             )}
           </form>
-          <TimeLine timer={this.timer} />
+          <TimeLine timer={this.timer} allTime={this.props.mainForm.allTime} />
         </div>
         <input type="file" onChange={this.loadFile} />
       </div>

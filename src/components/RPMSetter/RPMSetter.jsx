@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import './style.scss'
+
+import getUniqTimeLines from './../../helpers/getUniqTimeLines.js'
+import setLineTemplate from './../../helpers/lineTemplate.jsx'
 /*eslint-disable*/
 class RPMSetter extends Component {
   constructor(props) {
@@ -8,64 +11,19 @@ class RPMSetter extends Component {
     this.resultArrValue = []
   }
   componentWillMount(){
-    const { changes } = this.props.elem 
+    // const { changes } = this.props.elem 
     // console.log(this.props.elem )
-    this.getUniqTimeLines(changes)
-    this.setValveTemplate(this.resultArrValue)
+    const { elem } = this.props
+
+    this.resultArrValue = getUniqTimeLines(elem)
+    this.arrValueTemplate = setLineTemplate(this.resultArrValue )
   }
 
   componentWillReceiveProps(nextProps){
     // console.log(nextProps)
-    this.getUniqTimeLines(nextProps.elem.changes)
-    this.setValveTemplate(this.resultArrValue)
-  }
-
-  getUniqTimeLines(arrValue) {
-    //TODO: setting next start time less then previus not overwrite previus one
-    this.resultArrValue = []
-    for (let i = 0; i < arrValue.length; i++) {
-      if (i + 1 < arrValue.length) {
-        if (arrValue[i].endTime > arrValue[i + 1].startTime) {
-          arrValue[i].endTime = arrValue[i + 1].endTime //eslint-disable-line
-          this.resultArrValue.push(arrValue[i])
-          i += 1
-        } else {
-          this.resultArrValue.push(arrValue[i])
-        }
-      } else {
-        this.resultArrValue.push(arrValue[i])
-      }
-    }
-  }
-
-  setValveTemplate(resultArrValue) {
-    // console.log('resultValves', resultValves)
-    this.arrValueTemplate = []
-    for (let i = 0; i < resultArrValue.length; i++) {
-      // console.log('resultArrValue', resultArrValue[i])
-      this.arrValueTemplate.push(
-        <div
-          className="time-former"
-          key={i}
-        >
-          <div
-            className="time" style={{
-              width: resultArrValue[i].endTime - resultArrValue[i].startTime,
-            }}
-          >
-          <span>{resultArrValue[i].value}</span>
-          </div>
-          <div
-            className="gap"
-            style={{
-              width: resultArrValue[i + 1] ?
-              resultArrValue[i + 1].startTime - resultArrValue[i].endTime
-              : null,
-            }}
-          />
-        </div>
-      )
-    }
+    // this.getUniqTimeLines(nextProps.elem.changes)
+    this.resultArrValue = getUniqTimeLines(nextProps.elem)
+    this.arrValueTemplate = setLineTemplate(this.resultArrValue )
   }
 
   render() {
@@ -73,8 +31,10 @@ class RPMSetter extends Component {
       <div className="line-definition">
         <span>{this.props.elem.ShortName}</span>
       </div>
-      <div className="time-box">
-        { this.arrValueTemplate }
+      <div className="time-box_keeper">
+        <div className="time-box">
+          { this.arrValueTemplate }
+        </div>
       </div>
     </div>
     )

@@ -12,23 +12,27 @@ class ValveLine extends Component {
   }
 
   componentWillMount() {
-    const { changes } = this.props.elem
-    this.resultLines = getUniqTimeLines(changes)
+    // const { changes } = this.props.elem
+    const { elem } = this.props
+    this.resultLines = getUniqTimeLines(elem)
     this.linesTemplate = setLineTemplate(this.resultLines)
   }
 
   componentWillReceiveProps(nextProps) {
-    this.resultLines = getUniqTimeLines(nextProps.elem.changes)
+    // this.resultLines = getUniqTimeLines(nextProps.elem.changes)
+    this.resultLines = getUniqTimeLines(nextProps.elem)
     this.linesTemplate = setLineTemplate(this.resultLines)
   }
 
   render() {
     return (<div className="line-wraper">
-      <div className="valve-number">
+      <div className="line-definition">
         <span>{this.props.elem.id + 1}</span>
       </div>
-      <div className="time-box">
-        { this.linesTemplate }
+      <div className="time-box_keeper">
+        <div className="time-box">
+          { this.linesTemplate }
+        </div>
       </div>
     </div>
     )

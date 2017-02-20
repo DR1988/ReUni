@@ -12,14 +12,16 @@ class TempSetter extends Component {
     this.resultArrValue = []
   }
   componentWillMount(){
-    const { changes } = this.props.elem 
-    this.resultArrValue = getUniqTimeLines(changes)
+    // const { changes } = this.props.elem 
+    const { elem } = this.props
+    this.resultArrValue = getUniqTimeLines(elem)
     this.arrValueTemplate = setLineTemplate(this.resultArrValue )
   }
 
   componentWillReceiveProps(nextProps){
     // console.log(nextProps) 
-    this.resultArrValue = getUniqTimeLines(nextProps.elem.changes)
+    // this.resultArrValue = getUniqTimeLines(nextProps.elem.changes)
+    this.resultArrValue = getUniqTimeLines(nextProps.elem)
     this.arrValueTemplate = setLineTemplate(this.resultArrValue )
   }
 
@@ -28,8 +30,10 @@ class TempSetter extends Component {
       <div className="line-definition">
         <span>{this.props.elem.ShortName}</span>
       </div>
-      <div className="time-box">
-        { this.arrValueTemplate }
+      <div className="time-box_keeper">
+        <div className="time-box">
+          { this.arrValueTemplate }
+        </div>
       </div>
     </div>
     )

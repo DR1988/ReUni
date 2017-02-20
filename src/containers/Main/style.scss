@@ -3,8 +3,10 @@
 }
 .hide-scroll {
   // border: 3px solid green;
-  overflow: hidden;
+  // overflow: hidden;
+  position: relative;
   height: 520px;
+  overflow: hidden;
 }
 .picture-box{
   // width: 30%;

@@ -1,38 +1,45 @@
-.rows {
-  height: 35px;
-  margin-bottom: 10px;
-  background-color: #dedede;
-  white-space: nowrap;
-  cursor:pointer;
-  & .line-wraper{
+.line-wraper{
+  height: 100%;
+  position: relative;
+  // top: 25%;
+  // display: inline-block;
+  & .line-definition {
+    // vertical-align: top;
+    width: 20px;
+    top: 25%;
     height: 50%;
     position: relative;
-    top: 25%;
     display: inline-block;
+    // border: red solid 1px;
   }
-  & .valve-number {
-    vertical-align: top;
-    width: 20px;
-    height: 100%;
-    display: inline-block;
-    border: red solid 1px;
-  }
+}
+.time-box_keeper{
+  position: relative;
+  height: 100%;
+  width: 100%;
+  // border: 1px solid red;
+  display: inline-block;
+  background-color: #dedede;
   & .time-box {
-    vertical-align: top;
-    height: 100%;
-    display: inline-block;
+    position: relative;
+    top: 25%;
+    height: 50%;
+    // display: inline-block;
     & .time-former {
+      vertical-align: top;
       height: 100%;
       display: inline-block;
       & .time {
+      vertical-align: top;
         display: inline-block;
         height: 100%;
         background-color: green;
       }
       & .gap {
+        vertical-align: top;
         height: 100%;
         display: inline-block;
-        background-color: transparent;
+        // background-color: transparent;
       }
     }
   }
