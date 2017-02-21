@@ -26,8 +26,8 @@ class MainForm extends Component {
   componentDidMount() {
     this.sliderW = this.getSliderWidth()// width of container
     this.props.actions.setSliderWidth(this.sliderW)
-    setCoord(null, parseInt(this.props.mainForm.position, 10), document.querySelector('.form-Manupalation'))
-    document.querySelector('.mover').style.left = this.props.mainForm.position
+    setCoord(null, parseInt(this.props.mainForm.sliderPosition, 10), document.querySelector('.form-Manupalation'))
+    document.querySelector('.mover').style.left = this.props.mainForm.sliderPosition
   }
 
   componentDidUpdate() {
@@ -43,8 +43,8 @@ class MainForm extends Component {
     * document.querySelector('.form-Manupalation').clientWidth
 
   setSliderPosition = () => {
-    const position = document.querySelector('.mover').style.left
-    this.props.actions.setSliderPosition(position)
+    const sliderPosition = document.querySelector('.mover').style.left
+    this.props.actions.setSliderPosition(sliderPosition)
   }
   getSource = () => {
     const source = new EventSource('/stream')
@@ -80,32 +80,44 @@ class MainForm extends Component {
 
   handle = (e) => {
     e.persist()
+    if (e.button === 2) {
+      e.preventDefault()
+    }
     if (e.button === 1) {
-      const containerCoor = e.currentTarget.getBoundingClientRect().left
+      let { mainFromPostion } = this.props.mainForm
       const container = e.currentTarget
-      console.log(container.scrollLeft)
+      if (!mainFromPostion) {
+        mainFromPostion = 0
+      }
+      console.log(e.currentTarget)
+      e.currentTarget.style.cursor = 'move'
+      container.scrollLeft = mainFromPostion
+      // console.log(container.scrollLeft)
       document.onmousemove = (evt) => {
-        container.scrollLeft = (evt.pageX - e.pageX)
+        // console.log('evt.pageX - e.pageX', evt.pageX - e.pageX)
+        container.scrollLeft = (mainFromPostion + evt.pageX - e.pageX)
       }
       document.onmouseup = () => {
         document.onmousemove = document.onmouseup = null
+        this.props.actions.setMainFormPosition(container.scrollLeft)
+        e.target.style.cursor = null
       }
     }
   }
 
   render() {
     // console.log(this.props.mainForm)
-    // console.log('mainForm', this.props.mainForm)
+    // console.log('mainForm', this.props.actions)
     // this.getSource()
     // console.log(this.props.mainForm)
     const { lineFormer } = this.props.mainForm
     return (
       <div
         className="form-Manupalation"
-        onMouseDown={(e) => this.handle(e)}
+        // onMouseDown={(e) => this.handle(e)}
       >
         <div className="data-set">
-          <form>
+          <form id="mainForm">
             {lineFormer.map((elem, idx) => <LineFormer
               handle={this.showModal}
               key={idx}
@@ -119,8 +131,8 @@ class MainForm extends Component {
           <div
             className="mover"
             style={{ width: `${this.props.mainForm.sliderWidth}px` }}
-            onMouseDown={scrolling}
-            onMouseUp={this.setSliderPosition}
+            // onMouseDown={scrolling}
+            // onMouseUp={this.setSliderPosition}
           />
         </div>
         {/*<input type="file" onChange={this.loadFile} />*/}

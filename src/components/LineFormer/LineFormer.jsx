@@ -29,7 +29,9 @@ const LineFormer = props => {
         elem={elem}
       />)
   }
-  return (<div className="rows" onClick={() => props.handle(props.elem)}>
+  return (<div className="rows" data-elemId={elem.id} onClick={() => props.handle(props.elem)}>
+    {/* <input type="hidden" name={'lineId'} value={elem.id} /> */}
+    <input type="hidden" name="name" defaultValue={elem.name} />
     { template }
   </div>
   )

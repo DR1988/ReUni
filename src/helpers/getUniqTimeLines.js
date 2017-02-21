@@ -40,6 +40,10 @@
       }
       resultchanges = elem.changes
     }
-
-    return resultchanges
+    // return resultchanges
+    return {
+      resultchanges,
+      elementId: elem.id,
+      name: elem.name,
+    }
   }

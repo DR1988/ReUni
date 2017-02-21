@@ -59,16 +59,23 @@ const setSliderWidth = (width) => dispatch => {
   })
 }
 
-const setSliderPosition = position => dispatch => {
+const setSliderPosition = sliderPosition => dispatch => {
   dispatch({
     type: 'SET_SLIDER_POSITION',
-    position,
+    sliderPosition,
   })
 }
 
 const getSliderPosition = () => dispatch => {
   dispatch({
     type: 'GET_SLIDER_POSITION',
+  })
+}
+
+const setMainFormPosition = (mainFromPostion) => dispatch => {
+  dispatch({
+    type: 'SET_MAINFORM_POSITION',
+    mainFromPostion,
   })
 }
 
@@ -86,6 +93,7 @@ const MainFormAction = {
   setSliderWidth,
   getSliderPosition,
   setSliderPosition,
+  setMainFormPosition,
   // setValues,
 }
 

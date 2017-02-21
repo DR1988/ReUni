@@ -1,9 +1,3 @@
-.hide-scroll {
-  position: relative;
-  // height: 520px;
-  margin-bottom: 30px;
-  // overflow: hidden;
-}
 .picture-box{
   height: 300px;
   border: 1px solid red;
@@ -12,9 +6,16 @@
   height: 200px;
   border: 1px solid green;
 }
+.hide-scroll {
+  position: relative;
+  border: thick solid cadetblue;
+  // height: 520px;
+  margin-bottom: 30px;
+  // overflow: hidden;
+}
 .form-Manupalation{
   overflow: hidden;
-  // overflow-x: auto;
+  overflow-x: auto;
   padding-bottom: 30px;
   & .data-set{
     min-width: 100%;
@@ -34,6 +35,9 @@
       bottom: 0;
       left: 0;
       border-radius: 10px;
-      cursor: grab; 
+      cursor: move; 
     }
+  .mover:hover {
+      background-color: #7f7f7f;
+  } 
 }

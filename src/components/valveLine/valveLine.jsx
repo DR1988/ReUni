@@ -2,13 +2,13 @@ import React, { Component } from 'react'
 import './style.scss'
 
 import getUniqTimeLines from './../../helpers/getUniqTimeLines.js'
-import setLineTemplate from './../../helpers/lineTemplate.jsx'
+import setLineTemplate from './../../helpers/templates/lineTemplate.jsx'
 
 class ValveLine extends Component {
   constructor(props) {
     super(props)
     this.linesTemplate = []
-    this.resultLines = []
+    this.resultLines = {}
   }
 
   componentWillMount() {

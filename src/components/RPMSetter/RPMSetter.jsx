@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import './style.scss'
 
 import getUniqTimeLines from './../../helpers/getUniqTimeLines.js'
-import setLineTemplate from './../../helpers/lineTemplate.jsx'
+import setLineTemplate from './../../helpers/templates/lineTemplate.jsx'
 /*eslint-disable*/
 class RPMSetter extends Component {
   constructor(props) {
