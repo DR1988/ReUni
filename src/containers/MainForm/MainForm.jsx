@@ -78,6 +78,20 @@ class MainForm extends Component {
     this.props.actions.hideModal()
   }
 
+  handle = (e) => {
+    e.persist()
+    if (e.button === 1) {
+      const containerCoor = e.currentTarget.getBoundingClientRect().left
+      const container = e.currentTarget
+      console.log(container.scrollLeft)
+      document.onmousemove = (evt) => {
+        container.scrollLeft = (evt.pageX - e.pageX)
+      }
+      document.onmouseup = () => {
+        document.onmousemove = document.onmouseup = null
+      }
+    }
+  }
 
   render() {
     // console.log(this.props.mainForm)
@@ -86,7 +100,10 @@ class MainForm extends Component {
     // console.log(this.props.mainForm)
     const { lineFormer } = this.props.mainForm
     return (
-      <div className="form-Manupalation">
+      <div
+        className="form-Manupalation"
+        onMouseDown={(e) => this.handle(e)}
+      >
         <div className="data-set">
           <form>
             {lineFormer.map((elem, idx) => <LineFormer

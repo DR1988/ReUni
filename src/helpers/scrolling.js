@@ -35,7 +35,7 @@ export const setCoord = (e, coord, container) => {
 export default (e) => { // u have to use callback function getRelativeCoords instead of call it inside the method
   e.persist()
   const container = e.target.parentElement.parentElement
-  // console.log(elem22)
+  // console.log(container)
   const thumbCoords = getRelativeCoords(e.target, container)
   let shiftX
   if (e.touches) {
