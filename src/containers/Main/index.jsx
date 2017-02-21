@@ -43,7 +43,7 @@ class Main extends Component {
         // console.log(inputs)
         timeFormer = {}
         for (const input of [...inputs]) {
-          timeFormer[input.name] = input.value // need to convert to numbers
+          timeFormer[input.name] = +input.value // need to convert to numbers
         }
         changes.push(timeFormer)
       }
@@ -73,7 +73,7 @@ class Main extends Component {
     lineFormer[1].changes[0].endTime = 300
     lineFormer[1].changes[0].startTime = 0
     this.props.actions.setValues({ lineFormer, allTime: 780 })
-    console.log(lineFormer)
+    // console.log(lineFormer)
   }
 
   render() {
