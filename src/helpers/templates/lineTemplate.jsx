@@ -32,11 +32,11 @@ const setLineTemplate = (resultValves) => {
             </div>
           )
          }
-          <input type="hidden" name="duration" value={resultValves.resultchanges[i].duration} />
-          <input type="hidden" name="value" value={resultValves.resultchanges[i].value} />
-          <input type="hidden" name="startTime" value={resultValves.resultchanges[i].startTime} />
-          <input type="hidden" name="endTime" value={resultValves.resultchanges[i].endTime} />
-          <input type="hidden" name="id" value={i} />
+          <input type="hidden" name="duration" defaultValue={resultValves.resultchanges[i].duration} />
+          <input type="hidden" name="value" defaultValue={resultValves.resultchanges[i].value} />
+          <input type="hidden" name="startTime" defaultValue={resultValves.resultchanges[i].startTime} />
+          <input type="hidden" name="endTime" defaultValue={resultValves.resultchanges[i].endTime} />
+          <input type="hidden" name="id" defaultValue={i} />
         </div>
         <div
           className="gap"

@@ -47,22 +47,6 @@ class Main extends Component {
         }
         changes.push(timeFormer)
       }
-
-      // for (let i = 0; i < inputs.length; i++) {
-      //   console.log(inputs[i])
-      //   if (inputs[i].name !== 'id') {
-      //     // console.log('equals')
-      //   }
-      //   // timeFormer[inputs[i].name] = +inputs[i].value
-      //     // timeFormer[child.querySelectorAll('input')[i].name] = +inputs[i].value
-      // }
-      // for (const input of [...child.querySelectorAll('input')]) {
-      //   console.log(input.name, +input.value)
-      //   timeFormer[input.name] = +input.value
-      //   changes.push({
-      //     [input.name]: +input.value,
-      //   })
-      // }
       lineFormer.push(
         { id: +child.dataset.elemid,
           changes,
@@ -74,6 +58,10 @@ class Main extends Component {
     lineFormer[1].changes[0].startTime = 0
     this.props.actions.setValues({ lineFormer, allTime: 780 })
     // console.log(lineFormer)
+  }
+
+  clearForm = () => {
+    this.props.actions.resetForm()
   }
 
   render() {
@@ -99,9 +87,16 @@ class Main extends Component {
             </div>
             <div className="col-xs-6">
               <div className="proptocol-manipulation">
-                <button
-                  onClick={this.serialize}
-                >START</button>
+                <div>
+                  <button
+                    onClick={this.serialize}
+                  >START</button>
+                </div>
+                <duv>
+                  <button
+                    onClick={this.clearForm}
+                  >CLEAR</button>
+                </duv>
               </div>
             </div>
           </div>

@@ -17,9 +17,16 @@ const setValues = values => dispatch => {
   })
 }
 
+const resetForm = () => dispatch => {
+  dispatch({
+    type: 'RESET_FORM',
+  })
+}
+
 const mainActions = {
   addInputFormer,
   setValues,
+  resetForm,
 }
 
 export default mainActions

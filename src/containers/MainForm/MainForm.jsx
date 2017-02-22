@@ -89,7 +89,6 @@ class MainForm extends Component {
       if (!mainFromPostion) {
         mainFromPostion = 0
       }
-      console.log(e.currentTarget)
       e.currentTarget.style.cursor = 'move'
       container.scrollLeft = mainFromPostion
       // console.log(container.scrollLeft)

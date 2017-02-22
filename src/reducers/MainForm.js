@@ -1,5 +1,44 @@
 import setLineFormer from './../helpers/setLineFormer.js'
 
+const resetState = {
+  showEditModal: false,
+  allTime: 0,
+  lineFormer: [
+    { name: 'ValveLine',
+      id: 0,
+      changes: [{ startTime: 0, endTime: 0, id: 0, duration: 0 }] },
+    { name: 'ValveLine',
+      id: 1,
+      changes: [{ startTime: 0, endTime: 0, id: 0, duration: 0 }] },
+    { name: 'ValveLine',
+      id: 2,
+      changes: [{ startTime: 0, endTime: 0, id: 0, duration: 0 }] },
+    { name: 'ValveLine',
+      id: 3,
+      changes: [{ startTime: 0, endTime: 0, id: 0, duration: 0 }] },
+    { name: 'ValveLine',
+      id: 4,
+      changes: [{ startTime: 0, endTime: 0, id: 0, duration: 0 }] },
+    { name: 'ValveLine',
+      id: 5,
+      changes: [{ startTime: 0, endTime: 0, id: 0, duration: 0 }] },
+    { name: 'ValveLine',
+      id: 6,
+      changes: [{ startTime: 0, endTime: 0, id: 0, duration: 0 }] },
+    { name: 'ValveLine',
+      id: 7,
+      changes: [{ startTime: 0, endTime: 0, id: 0, duration: 0 }] },
+    { name: 'RPMSetter',
+      ShortName: 'S',
+      id: 8,
+      changes: [{ startTime: 0, endTime: 0, value: 0, id: 0, duration: 0 }] },
+    { name: 'TempSetter',
+      ShortName: 'T',
+      id: 9,
+      changes: [{ startTime: 0, endTime: 0, value: 0, id: 0, duration: 0 }] },
+  ],
+}
+
 const initialstate = {
   showEditModal: false,
   allTime: 930,
@@ -165,6 +204,9 @@ export default function mainForm(state = initialstate, action) {
         ...state,
         mainFromPostion: action.mainFromPostion,
       }
+
+    case 'RESET_FORM':
+      return resetState
 
     default:
       return state
