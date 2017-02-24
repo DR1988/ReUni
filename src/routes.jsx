@@ -1,10 +1,9 @@
 import React from 'react'
 import { Route, IndexRoute } from 'react-router'
-/*eslint-disable*/
 import App from './containers/App'
 import Main from './containers/Main'
 import Graph from './containers/Graph'
-import UserPage from './components/UserPage'
+// import UserPage from './components/UserPage'
 
 const routes = (
   <div>
