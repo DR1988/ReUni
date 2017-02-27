@@ -58,30 +58,47 @@ class Main extends Component {
       }
     })
     // let send
-    this.file = JSON.stringify({ lineFormer, allTime })
-    const blob = new Blob([this.file], {type: "application/json;charset=utf-8"})
-    FileSaver.saveAs(blob, "saveAs.json")
+    // this.file = JSON.stringify({ lineFormer, allTime })
 
-    // function SaveDatFileBro(localstorage) {
-    //   console.dir(localstorage);
-    //   console.log(localstorage.root.getDirectory)
-    //   var v =  localstorage.root.getDirectory("Documents", {create: true}, function(directoryEntry) {
-    //     // DatFile.createWriter(function(DatContent) {
-    //     //   var blob = new Blob(["Lorem Ipsum"], {type: "text/plain"});
-    //     //   DatContent.write(blob);
-    //     // });
-    //   });
-    //   console.log(v)
-    // }
-    // if (window.File && window.FileReader && window.FileList && window.Blob) {
-    //   // console.log(send)
-    //   window.webkitRequestFileSystem(window.PERSISTENT, 5*1024*1024 /*5MB*/, SaveDatFileBro, null)
-    // }
+    return { lineFormer, allTime }
+  }
+
+  save = () => {
+    const fileToSave = JSON.stringify(this.serialize())
+    const blob = new Blob([fileToSave], { type: 'application/json;charset=utf-8' })
+    FileSaver.saveAs(blob, 'saveAs.json')
   }
 
   clearForm = () => {
     document.getElementById('file').value = ''
     this.props.actions.resetForm()
+  }
+
+  // start = () => {
+  //   const protocol = this.serialize()
+  //   let queryString = ''
+  //   protocol.lineFormer.forEach(line => {
+  //     queryString += (line.id + line.changes + line.name)
+  //   })
+  //   console.log(queryString)
+  //   fetch('http://192.168.1.33:3333/start', {
+  //     method: 'post',
+  //     headers: {
+  //       'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
+  //     },
+  //     body: `protocol=${queryString}`,
+  //   }).then(res => console.log(res))
+  // }
+
+  start = () => {
+    const protocol = this.serialize()
+    fetch('http://192.168.1.33:3333/start', {
+      method: 'post',
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+      body: JSON.stringify(protocol),
+    }).then(res => console.log(res))
   }
 
   render() {
@@ -108,8 +125,8 @@ class Main extends Component {
               </div>
               <div>
                 <button
-                  onClick={this.serialize}
-                >START</button>
+                  onClick={this.save}
+                >SAVE</button>
               </div>
             </div>
             <div className="col-xs-6">
@@ -118,6 +135,11 @@ class Main extends Component {
                   <button
                     onClick={this.clearForm}
                   >CLEAR</button>
+                </div>
+                <div>
+                  <button
+                    onClick={this.start}
+                  >START</button>
                 </div>
               </div>
             </div>
