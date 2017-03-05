@@ -7,17 +7,21 @@ const Timeline = (props) => {
     dividersTemplate.push(
       <div key={i} className="time-former">
         <div className="divider" />
-        <div className="time-count">{Math.floor((props.allTime * i) / 9)}</div>
+        <div className="time-count">{Math.floor((props.allTime * i) / 8)}</div>
       </div>
     )
   }
+  console.log('distance', props.distance, 'time', props.time)
   return (<div className="time-line_wraper">
     <div className="time-line" style={{ width: props.width }} >
       <div className="time-show">
         {dividersTemplate}
       </div>
     </div>
-    <div className="time-presenter" style={{ left: props.timer }}>
+    <div
+      className="time-presenter"
+      style={{ left: props.distance, transition: `left ${props.time}s linear` }}
+    >
       <div className="line" />
       <div className="arrow-up" />
     </div>

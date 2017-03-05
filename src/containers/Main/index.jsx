@@ -12,6 +12,18 @@ import './style.scss'
 
 class Main extends Component {
 
+  getSource = () => {
+    const source = new EventSource('http://192.168.1.33:3333/stream')
+    source.onmessage = (e) => {
+      const data = JSON.parse(e.data)
+      this.distance = data.counts
+      this.time = data.val
+      // console.log(this.distance)
+      // console.log('data.val', this.time)
+      this.forceUpdate()
+    }
+  }
+
   loadFile = (e) => {
     const file = e.target.files[0]
     const reader = new FileReader()
@@ -74,22 +86,6 @@ class Main extends Component {
     this.props.actions.resetForm()
   }
 
-  // start = () => {
-  //   const protocol = this.serialize()
-  //   let queryString = ''
-  //   protocol.lineFormer.forEach(line => {
-  //     queryString += (line.id + line.changes + line.name)
-  //   })
-  //   console.log(queryString)
-  //   fetch('http://192.168.1.33:3333/start', {
-  //     method: 'post',
-  //     headers: {
-  //       'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
-  //     },
-  //     body: `protocol=${queryString}`,
-  //   }).then(res => console.log(res))
-  // }
-
   start = () => {
     const protocol = this.serialize()
     fetch('http://192.168.1.33:3333/start', {
@@ -101,7 +97,14 @@ class Main extends Component {
     }).then(res => console.log(res))
   }
 
+  connect = () => {
+    fetch('http://192.168.1.33:3333/connect')
+    .then(res => res.json()
+            .then(messagee => console.log(messagee)))
+  }
+
   render() {
+    this.getSource()
     return (
       <div className="main-flex row">
         <div className="col-xs-12 col-sm-4">
@@ -115,7 +118,7 @@ class Main extends Component {
         <div id="container" className="col-xs-12 col-sm-8">
           <NavLink to="protocol2">Another </NavLink>
           <div className="hide-scroll">
-            <MainForm />
+            <MainForm distance={this.distance} time={this.time} />
           </div>
           <div className="user-actions">
             <div className="col-xs-6">
@@ -140,6 +143,11 @@ class Main extends Component {
                   <button
                     onClick={this.start}
                   >START</button>
+                </div>
+                <div>
+                  <button
+                    onClick={this.connect}
+                  >Connect</button>
                 </div>
               </div>
             </div>

@@ -53,26 +53,26 @@ let upload = multer({ storage: storage });
     app.use(express.static(__dirname + '/'))
 })()
 
-app.use(sse)
+// app.use(sse)
 
-let connections =[]
-let counter = { counts: -200 };
+// let connections =[]
+// let counter = { counts: -200 };
 
-app.get('/stream', function(req, res) {
-  console.log('connected')
-  res.sseSetup()
-  res.sseSend(counter)
-  connections.push(res)
-})
+// app.get('/stream', function(req, res) {
+//   console.log('connected')
+//   res.sseSetup()
+//   res.sseSend(counter)
+//   connections.push(res)
+// })
 
-setInterval( () => {
-    counter.counts += 100
-    if(connections.length !== 0) {
-        for(let i = 0; i < connections.length; i++) {
-        connections[i].sseSend(counter)
-        }
-    }
-}, 10000)
+// setInterval( () => {
+//     counter.counts += 100
+//     if(connections.length !== 0) {
+//         for(let i = 0; i < connections.length; i++) {
+//         connections[i].sseSend(counter)
+//         }
+//     }
+// }, 10000)
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))

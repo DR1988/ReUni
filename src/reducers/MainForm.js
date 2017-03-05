@@ -41,13 +41,13 @@ const resetState = {
 
 const initialstate = {
   showEditModal: false,
-  allTime: 930,
+  allTime: 400,
   lineFormer: [
     { name: 'ValveLine',
       id: 0,
       changes: [{ startTime: 0, endTime: 10, id: 0, duration: 10 },
                { startTime: 20, endTime: 130, id: 1, duration: 110 },
-               { startTime: 220, endTime: 930, id: 2, duration: 710 }] },
+               { startTime: 220, endTime: 400, id: 2, duration: 180 }] },
     { name: 'ValveLine',
       id: 1,
       changes: [{ startTime: 0, endTime: 0, id: 0, duration: 0 }] },
@@ -55,7 +55,7 @@ const initialstate = {
       id: 2,
       changes: [{ startTime: 0, endTime: 10, id: 0, duration: 10 },
                { startTime: 120, endTime: 130, id: 1, duration: 10 },
-               { startTime: 420, endTime: 930, id: 2, duration: 510 }] },
+               { startTime: 320, endTime: 400, id: 2, duration: 80 }] },
     { name: 'ValveLine',
       id: 3,
       changes: [{ startTime: 0, endTime: 0, id: 0, duration: 0 }] },
@@ -78,7 +78,12 @@ const initialstate = {
     { name: 'RPMSetter',
       ShortName: 'S',
       id: 8,
-      changes: [{ startTime: 0, endTime: 150, value: 1000, id: 0, duration: 150 }] },
+      changes: [
+        { startTime: 0, endTime: 50, value: 500, id: 0, duration: 50 },
+        { startTime: 100, endTime: 150, value: 1000, id: 0, duration: 50 },
+        { startTime: 200, endTime: 250, value: 4000, id: 0, duration: 50 },
+        { startTime: 300, endTime: 350, value: 1000, id: 0, duration: 50 },
+      ] },
     { name: 'TempSetter',
       ShortName: 'T',
       id: 9,

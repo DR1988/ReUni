@@ -13,7 +13,7 @@ $timePresenterHeight: 475px;
       & .time-former{
         position: relative;
         & .divider{
-          width: 2px;
+          width: 1px;
           height: 100%;
           background-color: green;
         }
@@ -32,8 +32,8 @@ $timePresenterHeight: 475px;
     position: absolute;
     height: $timePresenterHeight;
     top: -$timePresenterHeight + 25px;
-    left: 1px;
-    transition: left 3s linear;
+    left: -12px;
+    // transition: left 10s linear;
   & .line {
       position: relative;
       left: 46%;

@@ -1,69 +1,150 @@
 const http = require('http')
 const express = require('express')
+const cors = require('cors')
+const bodyParser = require('body-parser')
+const SerialPort = require('serialport')
+
 const app = express()
-let cors = require('cors')
-var bodyParser = require('body-parser')
-var SerialPort = require("serialport");
 
+let serialPort
+/*SerialPort.list((err, ports) => {
+  ports.forEach(port => {
+    if (port.manufacturer.includes('Arduino')) {
+      serialPort = new SerialPort(port.comName, {
+        baudRate: 9600,
+        // bufferSize: 131072,
+        parser: SerialPort.parsers.readline('\n'),
+      })
+      serialPort.on('open', () => {
+        console.log('opened')
+      })
 
+      // let counterForLog = 0
+      serialPort.on('data', (data) => {
+        console.log(`data ${data}`)
+      })
+    }
+  })
+})*/
 
-var serialPort = new SerialPort("COM5", {
-  baudRate: 9600,
-  // bufferSize: 131072,
-  parser: SerialPort.parsers.readline('\n')
-});
+// var serialPort = new SerialPort("COM5", {
+//   baudRate: 9600,
+//   // bufferSize: 131072,
+//   parser: SerialPort.parsers.readline('\n')
+// });
 
-const sse = require('./helpers/sse.js')
+const sse = require('./serverHandlers/sse.js')
 
 const corsOptions = {
-    origin: true,
-    methods: [
-        'GET',
-        'POST',
-        'OPTIONS',
-        'PUT',
-        'PATCH',
-        'DELETE'
-    ],
-    allowedHeaders: ['X-Requested-With', 'Content-Type', 'X-CSRF-TOKEN']
+  origin: true,
+  methods: [
+    'GET',
+    'POST',
+    'OPTIONS',
+    'PUT',
+    'PATCH',
+    'DELETE',
+  ],
+  allowedHeaders: ['X-Requested-With', 'Content-Type', 'X-CSRF-TOKEN']
 }
+
+
+app.options('*', cors(corsOptions))
+app.use(cors(corsOptions))
 
 app.use(sse)
 
-app.get('/stream', function(req, res) {
-  console.log('connected')
+const counter = { counts: 0, val: 0 }
+const connections = []
+
+app.get('/stream', (req, res) => {
   res.sseSetup()
-  res.sseSend(counter)
+  // res.sseSend(counter)
   connections.push(res)
 })
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
-app.options('*', cors(corsOptions))
-app.use(cors(corsOptions))
 
-app.post('/start', function(req, res) {
-  console.log(req.body.lineFormer[8])
-  const RPMsetter=req.body.lineFormer[8]
-  const value = RPMsetter.changes[0].value
-  // console.log(value.toString())
-  serialPort.write(value.toString()+'\n')
-  // setInterval(serialPort.write(value), 100)
+const setValuesTimer = (actions) => { // move to helpers
+  const action = actions.next()
+
+  // console.log(action)
+  // if (connections.length !== 0) {
+  //   for (let i = 0; i < connections.length; i++) {
+  //     connections[i].sseSend(counter)
+  //   }
+  // }
+
+  if (!action.done) {
+    counter.counts += action.value.duration
+    counter.val = action.value.duration
+    // console.log(action.value.value)
+    serialPort.write(`${action.value.value}\n`)
+    setTimeout(() => {
+      setValuesTimer(actions)
+      if (connections.length !== 0) {
+        for (let i = 0; i < connections.length; i++) {
+          connections[i].sseSend(counter)
+        }
+      }
+    }, action.value.duration * 10)
+  } else {
+    serialPort.write(`${0}\n`)
+    // console.log('done')
+  }
+}
+
+app.post('/start', (req, res) => {
+  const arrOfActions = req.body.lineFormer[8].changes
+  const DTO = []
+  const lastActions = arrOfActions.reduce((acc, curr) => {
+    const gaps = { value: 0, duration: curr.startTime - acc.endTime }
+    DTO.push(acc, gaps)
+    return curr
+  })
+  DTO.push(lastActions)
+  const actions = DTO[Symbol.iterator]()
+
+
+  // setInterval(() => {
+  //   counter.counts += 100
+  //   if (connections.length !== 0) {
+  //     for (let i = 0; i < connections.length; i++) {
+  //       connections[i].sseSend(counter)
+  //     }
+  //   }
+  // }, 10000)
+
+  setValuesTimer(actions)
+
   res.status(200).end()
 })
 
-serialPort.on("open", function () {
-  console.log('opened')
-});
+app.get('/connect', (req, res) => {
+  SerialPort.list((err, ports) => {
+    ports.forEach(port => {
+      if (port.manufacturer.includes('Arduino')) {
+        serialPort = new SerialPort(port.comName, {
+          baudRate: 9600,
+          // bufferSize: 131072,
+          parser: SerialPort.parsers.readline('\n'),
+        })
+        serialPort.on('open', () => {
+          res.send({
+            message: 'opened',
+          }).end()
+          console.log('opened')
+        })
 
-let counterForLog = 0
-serialPort.on('data', function(data){
-    spData = data
-    // if(++counterForLog > 4) {
-      console.log('data ' + data)
-      // counterForLog = 0
-    // }
+        // let counterForLog = 0
+        serialPort.on('data', (data) => {
+          console.log(`data ${data}`)
+        })
+      }
+    })
+  })
 })
 
 const server = http.createServer(app)

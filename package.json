@@ -7,7 +7,8 @@
     "start": "node bin/server.js",
     "test": "jest",
     "lint": "npm run eslint",
-    "eslint": "eslint --ext .js,.jsx ."
+    "eslint": "eslint --ext .js,.jsx .",
+    "server": "node server2.js"
   },
   "author": "Maxim Patsianskiy",
   "license": "MIT",
@@ -67,6 +68,7 @@
     "react-redux": "^4.4.4",
     "react-router": "^2.0.1",
     "redux": "^3.4.0",
+    "serialport": "^4.0.7",
     "whatwg-fetch": "^2.0.1"
   }
 }

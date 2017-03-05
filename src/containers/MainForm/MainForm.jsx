@@ -46,14 +46,14 @@ class MainForm extends Component {
     const sliderPosition = document.querySelector('.mover').style.left
     this.props.actions.setSliderPosition(sliderPosition)
   }
-  getSource = () => {
-    const source = new EventSource('/stream')
-    source.onmessage = (e) => {
-      const data = JSON.parse(e.data)
-      this.timer = data.counts
-      this.forceUpdate()
-    }
-  }
+  // getSource = () => {
+  //   const source = new EventSource('/stream')
+  //   source.onmessage = (e) => {
+  //     const data = JSON.parse(e.data)
+  //     this.timer = data.counts
+  //     this.forceUpdate()
+  //   }
+  // }
 
   showModal = (elem) => {
     this.props.actions.showModal(elem)
@@ -124,7 +124,11 @@ class MainForm extends Component {
             />
             )}
           </form>
-          <TimeLine timer={this.timer} allTime={this.props.mainForm.allTime} />
+          <TimeLine
+            distance={this.props.distance}
+            time={this.props.time}
+            allTime={this.props.mainForm.allTime}
+          />
         </div>
         <div className="slider-bar">
           <div
