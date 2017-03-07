@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import { get as _get } from 'lodash'
 
 import MainFormAction from './../../actions/MainForm.js'
 import LineFormer from './../../components/LineFormer/LineFormer.jsx'
@@ -36,7 +37,6 @@ class MainForm extends Component {
       this.props.actions.setSliderWidth(this.sliderW)
     }
   }
-
 
   getSliderWidth = () => (document.querySelector('.form-Manupalation').clientWidth
     / document.querySelector('.data-set').clientWidth)
@@ -109,7 +109,8 @@ class MainForm extends Component {
     // console.log('mainForm', this.props.actions)
     // this.getSource()
     // console.log(this.props.mainForm)
-    const { lineFormer } = this.props.mainForm
+
+    const { lineFormer, allTime } = this.props.mainForm
     return (
       <div
         className="form-Manupalation"
@@ -121,13 +122,14 @@ class MainForm extends Component {
               handle={this.showModal}
               key={idx}
               elem={elem}
+              allTime={allTime}
             />
             )}
           </form>
           <TimeLine
             distance={this.props.distance}
             time={this.props.time}
-            allTime={this.props.mainForm.allTime}
+            allTime={allTime}
           />
         </div>
         <div className="slider-bar">

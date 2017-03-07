@@ -13,6 +13,7 @@ const LineFormer = props => {
       <ValveLine
         key={elem.id}
         elem={elem}
+        allTime={props.allTime}
       />)
   }
   if (elem.name === 'RPMSetter') {
@@ -20,6 +21,7 @@ const LineFormer = props => {
       <RPMSetter
         key={elem.id}
         elem={elem}
+        allTime={props.allTime}
       />)
   }
   if (elem.name === 'TempSetter') {
@@ -27,6 +29,7 @@ const LineFormer = props => {
       <TempSetter
         key={elem.id}
         elem={elem}
+        allTime={props.allTime}
       />)
   }
   return (<div className="rows" data-elemId={elem.id} onClick={() => props.handle(props.elem)}>

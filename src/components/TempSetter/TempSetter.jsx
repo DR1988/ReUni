@@ -22,7 +22,7 @@ class TempSetter extends Component {
     // console.log(nextProps) 
     // this.resultArrValue = getUniqTimeLines(nextProps.elem.changes)
     this.resultArrValue = getUniqTimeLines(nextProps.elem)
-    this.arrValueTemplate = setLineTemplate(this.resultArrValue )
+    this.arrValueTemplate = setLineTemplate(this.resultArrValue, this.props.allTime)
   }
 
   render() {
