@@ -54,7 +54,7 @@ app.use(cors(corsOptions))
 
 app.use(sse)
 
-const counter = { counts: 0, val: 0 }
+const counter = { distance: 0, time: 0 }
 const connections = []
 
 app.get('/stream', (req, res) => {
@@ -78,10 +78,16 @@ const setValuesTimer = (actions) => { // move to helpers
   // }
 
   if (!action.done) {
-    counter.counts += action.value.duration
-    counter.val = action.value.duration
-    // console.log(action.value.value)
-    serialPort.write(`${action.value.value}\n`)
+    counter.distance += action.value.duration
+    counter.time = action.value.duration
+    console.log(action.value.value)
+    // serialPort.write(`${action.value.value}\n`)
+    if (connections.length !== 0) {
+      for (let i = 0; i < connections.length; i++) {
+        connections[i].sseSend(counter)
+      }
+    }
+
     setTimeout(() => {
       setValuesTimer(actions)
       if (connections.length !== 0) {
@@ -89,9 +95,9 @@ const setValuesTimer = (actions) => { // move to helpers
           connections[i].sseSend(counter)
         }
       }
-    }, action.value.duration * 10)
+    }, action.value.duration * 1000)
   } else {
-    serialPort.write(`${0}\n`)
+    // serialPort.write(`${0}\n`)
     // console.log('done')
   }
 }

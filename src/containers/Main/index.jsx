@@ -10,14 +10,18 @@ import NavLink from './../../components/NavLink/index.jsx'
 
 import './style.scss'
 
+const newIp = location.origin.replace(/(?:\d+)/, 3333)
+
 class Main extends Component {
 
   getSource = () => {
-    const source = new EventSource('http://192.168.1.33:3333/stream')
+    // 10.99.44.106
+    // const newIp = location.origin.replace(/(?:\d+)/, 3333)
+    const source = new EventSource(`${newIp}/stream`)
     source.onmessage = (e) => {
       const data = JSON.parse(e.data)
-      this.distance = data.counts
-      this.time = data.val
+      this.distance = data.distance
+      this.time = data.time
       // console.log(this.distance)
       // console.log('data.val', this.time)
       this.forceUpdate()
@@ -88,7 +92,7 @@ class Main extends Component {
 
   start = () => {
     const protocol = this.serialize()
-    fetch('http://192.168.1.33:3333/start', {
+    fetch(`${newIp}/start`, {
       method: 'post',
       headers: {
         'Content-type': 'application/json; charset=UTF-8',
@@ -98,7 +102,7 @@ class Main extends Component {
   }
 
   connect = () => {
-    fetch('http://192.168.1.33:3333/connect')
+    fetch(`${newIp}/connect`)
     .then(res => res.json()
             .then(messagee => console.log(messagee)))
   }

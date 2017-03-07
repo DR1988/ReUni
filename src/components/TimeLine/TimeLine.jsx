@@ -3,14 +3,25 @@ import './style.scss'
 
 const Timeline = (props) => {
   const dividersTemplate = []
-  for (let i = 0; i < 10; i++) {
+  const maxI = props.allTime / 50
+  for (let i = 0; i <= maxI; i++) {
     dividersTemplate.push(
       <div key={i} className="time-former">
         <div className="divider" />
-        <div className="time-count">{Math.floor((props.allTime * i) / 8)}</div>
+        <div className="time-count">{Math.floor((props.allTime * i) / maxI)}</div>
       </div>
     )
   }
+
+  let formWidth = 0
+  let scale = 1
+  if (document.querySelector('.form-Manupalation')) {
+    formWidth = document.querySelector('.form-Manupalation').offsetWidth
+    if (formWidth / props.allTime > 1) {
+      scale = formWidth / props.allTime
+    }
+  }
+  console.log(scale)
   console.log('distance', props.distance, 'time', props.time)
   return (<div className="time-line_wraper">
     <div className="time-line" style={{ width: props.width }} >
@@ -20,7 +31,7 @@ const Timeline = (props) => {
     </div>
     <div
       className="time-presenter"
-      style={{ left: props.distance, transition: `left ${props.time}s linear` }}
+      style={{ left: props.distance * scale - 12, transition: `left ${props.time}s linear` }}
     >
       <div className="line" />
       <div className="arrow-up" />
@@ -37,6 +48,7 @@ Timeline.propTypes = {
 
 Timeline.defaultProps = {
   width: '100%',
+  distance: 0,
   currentTime: 10,
 }
 

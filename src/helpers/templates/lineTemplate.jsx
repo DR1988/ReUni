@@ -3,7 +3,8 @@ import './lineTemplate.scss'
 
 const ActiveTime = (props) =>
   <div
-    className="time"
+    // className="time"
+    className={`time timer${props.id}`}
     style={{
       width: props.changes.duration * props.scale,
     }}
@@ -24,13 +25,12 @@ ActiveTime.propTypes = {
   id: PropTypes.number,
 }
 
-const GapTime = (props) =>
-  <div
-    className="gap"
-    style={{
-      width: props.width,
-    }}
-  />
+const GapTime = (props) => <div
+  className="gap"
+  style={{
+    width: props.width * props.scale,
+  }}
+/>
 
 GapTime.propTypes = {
   width: PropTypes.number,
@@ -47,13 +47,14 @@ const setLineTemplate = (resultValves, allTime) => {
   // console.log(resultValves.name)
   let formWidth = 0
   let scale = 1
-  if (document.querySelector('.time-box')) {
-    formWidth = document.querySelector('.time-box').offsetWidth
-    console.log(formWidth)
-    if (formWidth/allTime > 1) {
-      scale = formWidth/allTime
+  if (document.querySelector('.form-Manupalation')) {
+    formWidth = document.querySelector('.form-Manupalation').offsetWidth
+    if (formWidth / allTime > 1) {
+      scale = formWidth / allTime
     }
   }
+  // console.log('formWidth', formWidth)
+  // console.log(scale)
   const lineTemplate = []
   for (let i = 0; i < resultValves.resultchanges.length; i++) {
     // console.log(resultValves.resultchanges[i])
@@ -62,8 +63,10 @@ const setLineTemplate = (resultValves, allTime) => {
         <ActiveTime changes={resultValves.resultchanges[i]} scale={scale} id={i} />
         <GapTime
           width={resultValves.resultchanges[i + 1] ?
-                 ( resultValves.resultchanges[i + 1].startTime -
+                 (resultValves.resultchanges[i + 1].startTime -
                  resultValves.resultchanges[i].endTime) : null}
+          scale={scale}
+          id={i}
         />
       </LineFormer>
     )
