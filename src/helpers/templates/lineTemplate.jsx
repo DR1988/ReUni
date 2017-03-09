@@ -4,7 +4,7 @@ import './lineTemplate.scss'
 const ActiveTime = (props) =>
   <div
     // className="time"
-    className={`time timer${props.id}`}
+    className="time"
     style={{
       width: props.changes.duration * props.scale,
     }}
@@ -49,6 +49,7 @@ const setLineTemplate = (resultValves, allTime) => {
   let scale = 1
   if (document.querySelector('.form-Manupalation')) {
     formWidth = document.querySelector('.form-Manupalation').offsetWidth
+    console.log('formWidth', formWidth)
     if (formWidth / allTime > 1) {
       scale = formWidth / allTime
     }

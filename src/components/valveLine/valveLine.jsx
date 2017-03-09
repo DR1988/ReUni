@@ -15,7 +15,7 @@ class ValveLine extends Component {
     // const { changes } = this.props.elem
     const { elem } = this.props
     this.resultLines = getUniqTimeLines(elem)
-    this.linesTemplate = setLineTemplate(this.resultLines)
+    this.linesTemplate = setLineTemplate(this.resultLines, this.props.allTime)
   }
 
   componentWillReceiveProps(nextProps) {

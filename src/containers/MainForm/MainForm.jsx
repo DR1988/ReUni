@@ -25,10 +25,11 @@ class MainForm extends Component {
   }
 
   componentDidMount() {
-    this.sliderW = this.getSliderWidth()// width of container
-    this.props.actions.setSliderWidth(this.sliderW)
-    setCoord(null, parseInt(this.props.mainForm.sliderPosition, 10), document.querySelector('.form-Manupalation'))
-    document.querySelector('.mover').style.left = this.props.mainForm.sliderPosition
+    this.forceUpdate() // need it once to calculate all documents elemnts by js
+    // this.sliderW = this.getSliderWidth()// width of container
+    // this.props.actions.setSliderWidth(this.sliderW)
+    // setCoord(null, parseInt(this.props.mainForm.sliderPosition, 10), document.querySelector('.form-Manupalation'))
+    // document.querySelector('.mover').style.left = this.props.mainForm.sliderPosition
   }
 
   componentDidUpdate() {
@@ -132,15 +133,15 @@ class MainForm extends Component {
             allTime={allTime}
           />
         </div>
-        <div className="slider-bar">
+      {/*   <div className="slider-bar">
           <div
             className="mover"
             style={{ width: `${this.props.mainForm.sliderWidth}px` }}
             // onMouseDown={scrolling}
             // onMouseUp={this.setSliderPosition}
           />
-        </div>
-        {/*<input type="file" onChange={this.loadFile} />*/}
+        </div*/}
+        {/* <input type="file" onChange={this.loadFile} />*/}
       </div>
     )
   }
