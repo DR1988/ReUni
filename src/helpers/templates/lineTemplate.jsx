@@ -49,7 +49,6 @@ const setLineTemplate = (resultValves, allTime) => {
   let scale = 1
   if (document.querySelector('.form-Manupalation')) {
     formWidth = document.querySelector('.form-Manupalation').offsetWidth
-    console.log('formWidth', formWidth)
     if (formWidth / allTime > 1) {
       scale = formWidth / allTime
     }
