@@ -6,6 +6,8 @@ const SerialPort = require('serialport')
 
 const app = express()
 
+const velocity = require('./serverHandlers/constants').velocity
+
 let serialPort
 /*SerialPort.list((err, ports) => {
   ports.forEach(port => {
@@ -70,40 +72,30 @@ app.use(bodyParser.urlencoded({ extended: true }))
 const setValuesTimer = (actions) => { // move to helpers
   const action = actions.next()
 
-  // console.log(action)
-  // if (connections.length !== 0) {
-  //   for (let i = 0; i < connections.length; i++) {
-  //     connections[i].sseSend(counter)
-  //   }
-  // }
-
   if (!action.done) {
-    counter.distance += action.value.duration
-    counter.time = action.value.duration
     console.log(action.value.value)
     // serialPort.write(`${action.value.value}\n`)
-    if (connections.length !== 0) {
-      for (let i = 0; i < connections.length; i++) {
-        connections[i].sseSend(counter)
-      }
-    }
-
     setTimeout(() => {
       setValuesTimer(actions)
-      if (connections.length !== 0) {
-        for (let i = 0; i < connections.length; i++) {
-          connections[i].sseSend(counter)
-        }
-      }
-    }, action.value.duration * 1000)
+    }, action.value.duration * 1000 / velocity)
   } else {
     // serialPort.write(`${0}\n`)
-    // console.log('done')
+    console.log('done')
   }
 }
 
 app.post('/start', (req, res) => {
+  // console.log(req.body.lineFormer)
+  const arrOfDoing = []
   const arrOfActions = req.body.lineFormer[8].changes
+  req.body.lineFormer.forEach(elem => {
+    if (elem.id === 9) {
+      elem.changes.id = elem.id
+      arrOfDoing.push(...elem.changes)
+      console.log('arrOfDoing', arrOfDoing)
+    }
+  })
+  // console.log('arrOfActions', arrOfActions)
   const DTO = []
   const lastActions = arrOfActions.reduce((acc, curr) => {
     const gaps = { value: 0, duration: curr.startTime - acc.endTime }
@@ -111,20 +103,21 @@ app.post('/start', (req, res) => {
     return curr
   })
   DTO.push(lastActions)
+  // console.log('DTO', DTO)
+  const arrOfDoing2 = arrOfDoing[Symbol.iterator]()
   const actions = DTO[Symbol.iterator]()
-
-
-  // setInterval(() => {
-  //   counter.counts += 100
-  //   if (connections.length !== 0) {
-  //     for (let i = 0; i < connections.length; i++) {
-  //       connections[i].sseSend(counter)
-  //     }
-  //   }
-  // }, 10000)
-
+  console.log('arrOfDoing2', arrOfDoing2.next())
+  console.log('arrOfDoing3', arrOfDoing2.next())
+  console.log('arrOfDoing4', arrOfDoing2.next())
+  // console.log(DTO)
   setValuesTimer(actions)
-
+  counter.distance = req.body.allTime
+  counter.time = req.body.allTime / velocity
+  if (connections.length !== 0) {
+    for (let i = 0; i < connections.length; i++) {
+      connections[i].sseSend(counter)
+    }
+  }
   res.status(200).end()
 })
 

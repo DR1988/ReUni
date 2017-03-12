@@ -171,8 +171,7 @@ Main.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    mainPage: state.mainPage,
-    inputFormer: state }
+    mainPage: state.mainPage }
 }
 
 function mapDispatchToProps(dispatch) {

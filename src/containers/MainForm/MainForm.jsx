@@ -23,6 +23,7 @@ class MainForm extends Component {
     this.action = null
     this.timer = null
     this.sliderW = 0
+    this.formWidth = 1000
   }
 
   componentDidMount() {
@@ -32,13 +33,29 @@ class MainForm extends Component {
     // setCoord(null, parseInt(this.props.mainForm.sliderPosition, 10), document.querySelector('.form-Manupalation'))
     // document.querySelector('.mover').style.left = this.props.mainForm.sliderPosition
   }
+  
+  // componentWillReceiveProps(nextProps) {
+  //   if (nextProps.mainForm.allTime !== this.props.mainForm.allTime) {
+  //     this.forceUpdate()
+  //   }
+  // }
 
   componentDidUpdate() {
+    window.addEventListener('resize', () => {
+      if (document.querySelector('.form-Manupalation').clientWidth < this.formWidth) {
+        this.formWidth = document.querySelector('.form-Manupalation').clientWidth
+        this.forceUpdate()
+      } else if (document.querySelector('.form-Manupalation').clientWidth > this.formWidth) {
+        this.formWidth = document.querySelector('.form-Manupalation').clientWidth
+        this.forceUpdate()
+      }
+    })
     // this.sliderW = this.getSliderWidth()
     // if (Math.floor(this.sliderW) !== Math.floor(this.props.mainForm.sliderWidth)) {
     //   this.props.actions.setSliderWidth(this.sliderW)
     // }
   }
+
 
   // getSliderWidth = () => (document.querySelector('.form-Manupalation').clientWidth
   //     document.querySelector('.data-set').clientWidth)
