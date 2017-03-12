@@ -16,14 +16,14 @@ class RPMSetter extends Component {
     const { elem } = this.props
 
     this.resultArrValue = getUniqTimeLines(elem)
-    this.arrValueTemplate = setLineTemplate(this.resultArrValue )
+    this.arrValueTemplate = setLineTemplate(this.resultArrValue, this.props.allTime)
   }
 
   componentWillReceiveProps(nextProps){
     // console.log(nextProps)
     // this.getUniqTimeLines(nextProps.elem.changes)
     this.resultArrValue = getUniqTimeLines(nextProps.elem)
-    this.arrValueTemplate = setLineTemplate(this.resultArrValue, this.props.allTime)
+    this.arrValueTemplate = setLineTemplate(this.resultArrValue, nextProps.allTime)
   }
 
   render() {

@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -33,28 +34,20 @@ class MainForm extends Component {
   }
 
   componentDidUpdate() {
-    this.sliderW = this.getSliderWidth()
-    if (Math.floor(this.sliderW) !== Math.floor(this.props.mainForm.sliderWidth)) {
-      this.props.actions.setSliderWidth(this.sliderW)
-    }
+    // this.sliderW = this.getSliderWidth()
+    // if (Math.floor(this.sliderW) !== Math.floor(this.props.mainForm.sliderWidth)) {
+    //   this.props.actions.setSliderWidth(this.sliderW)
+    // }
   }
 
-  getSliderWidth = () => (document.querySelector('.form-Manupalation').clientWidth
-    / document.querySelector('.data-set').clientWidth)
-    * document.querySelector('.form-Manupalation').clientWidth
+  // getSliderWidth = () => (document.querySelector('.form-Manupalation').clientWidth
+  //     document.querySelector('.data-set').clientWidth)
+  //     document.querySelector('.form-Manupalation').clientWidth
 
   setSliderPosition = () => {
     const sliderPosition = document.querySelector('.mover').style.left
     this.props.actions.setSliderPosition(sliderPosition)
   }
-  // getSource = () => {
-  //   const source = new EventSource('/stream')
-  //   source.onmessage = (e) => {
-  //     const data = JSON.parse(e.data)
-  //     this.timer = data.counts
-  //     this.forceUpdate()
-  //   }
-  // }
 
   showModal = (elem) => {
     this.props.actions.showModal(elem)
@@ -85,17 +78,17 @@ class MainForm extends Component {
       e.preventDefault()
     }
     if (e.button === 1) {
-      let { mainFromPostion } = this.props.mainForm
+      let { mainFromPosition } = this.props.mainForm
       const container = e.currentTarget
-      if (!mainFromPostion) {
-        mainFromPostion = 0
+      if (!mainFromPosition) {
+        mainFromPosition = 0
       }
       e.currentTarget.style.cursor = 'move'
-      container.scrollLeft = mainFromPostion
+      container.scrollLeft = mainFromPosition
       // console.log(container.scrollLeft)
       document.onmousemove = (evt) => {
         // console.log('evt.pageX - e.pageX', evt.pageX - e.pageX)
-        container.scrollLeft = (mainFromPostion + evt.pageX - e.pageX)
+        container.scrollLeft = (mainFromPosition + evt.pageX - e.pageX)
       }
       document.onmouseup = () => {
         document.onmousemove = document.onmouseup = null
@@ -110,8 +103,8 @@ class MainForm extends Component {
     // console.log('mainForm', this.props.actions)
     // this.getSource()
     // console.log(this.props.mainForm)
-
     const { lineFormer, allTime } = this.props.mainForm
+    // console.log('this.props.mainForm', this.props.mainForm.lineFormer)
     return (
       <div
         className="form-Manupalation"

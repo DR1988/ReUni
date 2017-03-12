@@ -94,67 +94,6 @@ const initialstate = {
 
 export default function mainForm(state = initialstate, action) {
   switch (action.type) {
-   /*
-    case 'INCREASE_VALUE_BY_ONE':
-      return state.map(inputNum => {
-        if (inputNum.id !== action.id) {
-          return inputNum
-        }
-
-        return {
-          ...inputNum,
-          value: action.value + 0,
-        }
-      })
-
-    case 'DECREASE_VALUE_BY_ONE':
-      return state.map(inputNum => {
-        if (inputNum.id !== action.id) {
-          return inputNum
-        }
-        return {
-          ...inputNum,
-          value: action.value - 0,
-        }
-      })
-
-    case 'INCREASE_VALUE_BY_TEN':
-      return state.map(inputNum => {
-        if (inputNum.id !== action.id) {
-          return inputNum
-        }
-
-        return {
-          ...inputNum,
-          value: action.value + 0,
-        }
-      })
-
-    case 'DECREASE_VALUE_BY_TEN':
-      return state.map(inputNum => {
-        if (inputNum.id !== action.id) {
-          return inputNum
-        }
-
-        return {
-          ...inputNum,
-          value: action.value - 0,
-        }
-      })
-
-    case 'CHANGE_VALUE':
-      return state.map(changingNum => {
-        if (changingNum.id !== action.id) {
-          return changingNum
-        }
-
-        return {
-          ...changingNum,
-          value: action.value,
-        }
-      })
- */
-
     case 'SHOW_EDIT_MODAL':
       return {
         ...state,
@@ -207,11 +146,14 @@ export default function mainForm(state = initialstate, action) {
     case 'SET_MAINFORM_POSITION':
       return {
         ...state,
-        mainFromPostion: action.mainFromPostion,
+        mainFromPosition: action.mainFromPosition,
       }
 
     case 'RESET_FORM':
-      return resetState
+      return {
+        ...state,
+        ...resetState,
+      }
 
     default:
       return state

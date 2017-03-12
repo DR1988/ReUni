@@ -72,10 +72,10 @@ const getSliderPosition = () => dispatch => {
   })
 }
 
-const setMainFormPosition = (mainFromPostion) => dispatch => {
+const setMainFormPosition = (mainFromPosition) => dispatch => {
   dispatch({
     type: 'SET_MAINFORM_POSITION',
-    mainFromPostion,
+    mainFromPosition,
   })
 }
 

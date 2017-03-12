@@ -1,3 +1,9 @@
-span {
-  color: red;
+.time{
+  border: 3px black solid;
+  text-align: center;
+  span {
+    position: relative;
+    bottom: 3px;
+    color: red;
+  }
 }

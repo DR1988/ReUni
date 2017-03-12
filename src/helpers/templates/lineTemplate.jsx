@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react'
 import './lineTemplate.scss'
+/* eslint-disable */
 
 const ActiveTime = (props) =>
   <div
@@ -47,10 +48,14 @@ const setLineTemplate = (resultValves, allTime) => {
   // console.log(resultValves.name)
   let formWidth = 0
   let scale = 1
-  if (document.querySelector('.form-Manupalation')) {
-    formWidth = document.querySelector('.form-Manupalation').offsetWidth
-    if (formWidth / allTime > 1) {
-      scale = formWidth / allTime
+  const ttllefRightPadding = 40
+  if (allTime > 0) {
+    if (document.querySelector('.form-Manupalation')) {
+      formWidth = document.querySelector('.form-Manupalation').offsetWidth
+      // console.log(formWidth, allTime)
+      if ((formWidth - ttllefRightPadding) / allTime > 1) {
+        scale = (formWidth - ttllefRightPadding) / allTime
+      }
     }
   }
   // console.log('formWidth', formWidth)
