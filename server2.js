@@ -88,13 +88,17 @@ app.post('/start', (req, res) => {
   // console.log(req.body.lineFormer)
   const arrOfDoing = []
   const arrOfActions = req.body.lineFormer[8].changes
-  req.body.lineFormer.forEach(elem => {
-    if (elem.id === 9) {
-      elem.changes.id = elem.id
-      arrOfDoing.push(...elem.changes)
-      console.log('arrOfDoing', arrOfDoing)
+  for (let j = 0; j < req.body.lineFormer.length; j++) {
+    if (req.body.lineFormer[j].id === 9) {
+      // console.log('1111111',req.body.lineFormer)
+      let test = {}
+      for (let i = 0; i < req.body.lineFormer[j].changes.length; i++) {
+        req.body.lineFormer[j].changes[i].idname = req.body.lineFormer[j].name[0] + req.body.lineFormer[j].id
+        test[i] = req.body.lineFormer[j].changes[i]
+      }
+      console.log('arrOfDoing', test)
     }
-  })
+  }
   // console.log('arrOfActions', arrOfActions)
   const DTO = []
   const lastActions = arrOfActions.reduce((acc, curr) => {
@@ -106,9 +110,9 @@ app.post('/start', (req, res) => {
   // console.log('DTO', DTO)
   const arrOfDoing2 = arrOfDoing[Symbol.iterator]()
   const actions = DTO[Symbol.iterator]()
-  console.log('arrOfDoing2', arrOfDoing2.next())
-  console.log('arrOfDoing3', arrOfDoing2.next())
-  console.log('arrOfDoing4', arrOfDoing2.next())
+  // console.log('arrOfDoing2', arrOfDoing2.next())
+  // console.log('arrOfDoing3', arrOfDoing2.next())
+  // console.log('arrOfDoing4', arrOfDoing2.next())
   // console.log(DTO)
   setValuesTimer(actions)
   counter.distance = req.body.allTime
