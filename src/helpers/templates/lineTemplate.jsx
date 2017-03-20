@@ -2,7 +2,11 @@ import React, { PropTypes } from 'react'
 import './lineTemplate.scss'
 /* eslint-disable */
 
-const ActiveTime = (props) =>
+const ActiveTime = (props) =>{
+  if (!props.changes.duration) {
+    return null
+  }
+  return (
   <div
     // className="time"
     className="time"
@@ -20,6 +24,8 @@ const ActiveTime = (props) =>
     <input type="hidden" name="endTime" defaultValue={props.changes.endTime} />
     <input type="hidden" name="id" defaultValue={props.id} />
   </div>
+  )
+}
 
 ActiveTime.propTypes = {
   changes: PropTypes.object,

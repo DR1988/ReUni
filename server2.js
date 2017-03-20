@@ -9,31 +9,6 @@ const app = express()
 const velocity = require('./serverHandlers/constants').velocity
 
 let serialPort
-/*SerialPort.list((err, ports) => {
-  ports.forEach(port => {
-    if (port.manufacturer.includes('Arduino')) {
-      serialPort = new SerialPort(port.comName, {
-        baudRate: 9600,
-        // bufferSize: 131072,
-        parser: SerialPort.parsers.readline('\n'),
-      })
-      serialPort.on('open', () => {
-        console.log('opened')
-      })
-
-      // let counterForLog = 0
-      serialPort.on('data', (data) => {
-        console.log(`data ${data}`)
-      })
-    }
-  })
-})*/
-
-// var serialPort = new SerialPort("COM5", {
-//   baudRate: 9600,
-//   // bufferSize: 131072,
-//   parser: SerialPort.parsers.readline('\n')
-// });
 
 const sse = require('./serverHandlers/sse.js')
 
@@ -68,53 +43,87 @@ app.get('/stream', (req, res) => {
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
-
-const setValuesTimer = (actions) => { // move to helpers
-  const action = actions.next()
-
-  if (!action.done) {
-    console.log(action.value.value)
-    // serialPort.write(`${action.value.value}\n`)
-    setTimeout(() => {
-      setValuesTimer(actions)
-    }, action.value.duration * 1000 / velocity)
-  } else {
-    // serialPort.write(`${0}\n`)
-    console.log('done')
-  }
-}
-
 app.post('/start', (req, res) => {
   // console.log(req.body.lineFormer)
-  const arrOfDoing = []
-  const arrOfActions = req.body.lineFormer[8].changes
-  for (let j = 0; j < req.body.lineFormer.length; j++) {
-    if (req.body.lineFormer[j].id === 9) {
-      // console.log('1111111',req.body.lineFormer)
-      let test = {}
-      for (let i = 0; i < req.body.lineFormer[j].changes.length; i++) {
-        req.body.lineFormer[j].changes[i].idname = req.body.lineFormer[j].name[0] + req.body.lineFormer[j].id
-        test[i] = req.body.lineFormer[j].changes[i]
+  const lines = []
+  const linesOfActions = req.body.lineFormer
+  console.log('req.bodyreq.body', req.body)
+  // console.log(linesOfActions)
+  for (let j = 0; j < linesOfActions.length; j++) {
+    if (linesOfActions[j].changes.length) {
+      for (let i = 0; i < linesOfActions[j].changes.length; i++) {
+        linesOfActions[j].changes[i].idname = linesOfActions[j].name[0] + linesOfActions[j].id
+        lines.push(linesOfActions[j].changes[i])
       }
-      console.log('arrOfDoing', test)
     }
   }
-  // console.log('arrOfActions', arrOfActions)
-  const DTO = []
-  const lastActions = arrOfActions.reduce((acc, curr) => {
-    const gaps = { value: 0, duration: curr.startTime - acc.endTime }
-    DTO.push(acc, gaps)
-    return curr
-  })
-  DTO.push(lastActions)
-  // console.log('DTO', DTO)
-  const arrOfDoing2 = arrOfDoing[Symbol.iterator]()
-  const actions = DTO[Symbol.iterator]()
-  // console.log('arrOfDoing2', arrOfDoing2.next())
-  // console.log('arrOfDoing3', arrOfDoing2.next())
-  // console.log('arrOfDoing4', arrOfDoing2.next())
-  // console.log(DTO)
-  setValuesTimer(actions)
+
+  let currentTime = 0
+  let sendingCommands = ''
+  const intervalId = setInterval(() => {
+    lines.forEach(line => {
+      if (line.startTime === currentTime) {
+        // console.log(line.idname)
+        if (line.idname === 'V0') {
+          sendingCommands = sendingCommands.concat(`${line.idname}Y|`)
+        }
+        if (line.idname === 'V1') {
+          sendingCommands = sendingCommands.concat(`${line.idname}Y|`)
+        }
+        if (line.idname === 'V2') {
+          sendingCommands = sendingCommands.concat(`${line.idname}Y|`)
+        }
+        if (line.idname === 'V3') {
+          sendingCommands = sendingCommands.concat(`${line.idname}Y|`)
+        }
+        if (line.idname === 'V4') {
+          sendingCommands = sendingCommands.concat(`${line.idname}Y|`)
+        }
+        if (line.idname === 'V5') {
+          sendingCommands = sendingCommands.concat(`${line.idname}Y|`)
+        }
+        if (line.idname === 'V6') {
+          sendingCommands = sendingCommands.concat(`${line.idname}Y|`)
+        }
+        if (line.idname === 'V7') {
+          sendingCommands = sendingCommands.concat(`${line.idname}Y|`)
+        }
+        if (line.idname === 'R8') {
+          // console.log('RPM line sendind', line.idname, line.value)
+          sendingCommands = sendingCommands.concat(`${line.idname}${line.value}|`)
+        }
+        if (line.idname === 'T9') {
+          sendingCommands = sendingCommands.concat(`${line.idname}${line.value}|`)
+          // console.log('temperature line sending', line.idname, line.value)
+        }
+      } else if (line.endTime === currentTime) {
+        if (line.idname === 'R8') {
+          sendingCommands = sendingCommands.concat(`${line.idname}0|`)
+          // console.log(line.idname, 0)
+        }
+        if (line.idname === 'T9') {
+          sendingCommands = sendingCommands.concat(`${line.idname}0|`)
+          // console.log(line.idname, 0)
+        }
+        if (/V\d+/.test(line.idname)) {
+          console.log('asdasdadasadasd')
+          sendingCommands = sendingCommands.concat(`${line.idname}N|`)
+        }
+      }
+    })
+    if (sendingCommands) {
+      console.log('sendingCommands = ', sendingCommands)
+      serialPort.write(`${sendingCommands}\n`)
+      sendingCommands = ''
+    }
+    if (currentTime >= req.body.allTime) {
+      clearInterval(intervalId)
+    }
+    ++currentTime
+    if (currentTime % 10 === 0) {
+      // console.log('currentTime', currentTime)
+    }
+  }, 1000 / velocity)
   counter.distance = req.body.allTime
   counter.time = req.body.allTime / velocity
   if (connections.length !== 0) {
@@ -126,33 +135,37 @@ app.post('/start', (req, res) => {
 })
 
 app.get('/connect', (req, res) => {
-  SerialPort.list((err, ports) => {
-    ports.forEach(port => {
-      if (port.manufacturer.includes('Arduino')) {
-        serialPort = new SerialPort(port.comName, {
-          baudRate: 9600,
-          // bufferSize: 131072,
-          parser: SerialPort.parsers.readline('\n'),
-        })
-        serialPort.on('open', () => {
-          res.send({
-            message: 'opened',
-          }).end()
-          console.log('opened')
-        })
-
-        // let counterForLog = 0
-        serialPort.on('data', (data) => {
-          console.log(`data ${data}`)
-        })
-      }
+  if (!serialPort){
+    SerialPort.list((err, ports) => {
+      ports.forEach(port => {
+        if (port.manufacturer.includes('Arduino')) { // have to change it because we can use not only Arduino
+          serialPort = new SerialPort(port.comName, {
+            baudRate: 9600,
+            parser: SerialPort.parsers.readline('\n'),
+          })
+          serialPort.on('open', () => {
+            res.send({
+              message: 'opened',
+            }).end()
+            console.log('opened')
+          })
+          serialPort.on('data', (data) => {
+            console.log(`data ${data}`)
+          })
+        }
+      })
     })
-  })
+  } else {
+    console.log('already opened!')
+    res.send({
+      message: 'already opened',
+    }).end()
+  }
 })
 
 const server = http.createServer(app)
 server.listen(process.env.PORT || 3333, function onListen() {
-    const address = server.address()
-    console.log('Listening on: %j', address)
-    console.log(' -> that probably means: http://localhost:%d', address.port)
+  const address = server.address()
+  console.log('Listening on: %j', address)
+  console.log(' -> that probably means: http://localhost:%d', address.port)
 })

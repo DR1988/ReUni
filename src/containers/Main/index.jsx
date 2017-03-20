@@ -53,17 +53,21 @@ class Main extends Component {
       const timeFormers = child.querySelectorAll('div.time-former')
       for (const timeForm of [...timeFormers]) {
         const inputs = timeForm.querySelectorAll('input')
-        timeFormer = {}
-        for (const input of [...inputs]) {
-          timeFormer[input.name] = +input.value
+        if (inputs.length) {
+          timeFormer = {}
+          for (const input of [...inputs]) {
+            timeFormer[input.name] = +input.value
+          }
+          changes.push(timeFormer)
         }
-        changes.push(timeFormer)
       }
-      lineFormer.push(
-        { id: +child.dataset.elemid,
-          changes,
-          name: lineFormerName.value,
-        })
+      if (changes.length) {
+        lineFormer.push(
+          { id: +child.dataset.elemid,
+            changes,
+            name: lineFormerName.value,
+          })
+      }
     }
 
     let allTime = 0
@@ -80,7 +84,12 @@ class Main extends Component {
   }
 
   save = () => {
-    const fileToSave = JSON.stringify(this.serialize())
+    const { allTime, lineFormer } = this.props.mainForm
+    // const fileToSave = JSON.stringify(this.serialize())
+    let fileToSave = {}
+    fileToSave.allTime = allTime
+    fileToSave.ineFormer = lineFormer
+    fileToSave = JSON.stringify(fileToSave)
     const blob = new Blob([fileToSave], { type: 'application/json;charset=utf-8' })
     FileSaver.saveAs(blob, 'saveAs.json')
   }
@@ -109,6 +118,7 @@ class Main extends Component {
 
   render() {
     this.getSource()
+    console.log(this.props.mainForm)
     return (
       <div className="main-flex row">
         <div className="col-xs-12 col-sm-4">
@@ -171,7 +181,8 @@ Main.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    mainPage: state.mainPage }
+    mainPage: state.mainPage,
+    mainForm: state.mainForm }
 }
 
 function mapDispatchToProps(dispatch) {

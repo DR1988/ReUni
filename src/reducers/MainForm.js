@@ -79,19 +79,22 @@ const initialstate = {
       ShortName: 'S',
       id: 8,
       changes: [
-        { startTime: 0, endTime: 50, value: 500, id: 0, duration: 50 },
-        { startTime: 100, endTime: 150, value: 1000, id: 0, duration: 50 },
-        { startTime: 200, endTime: 250, value: 4000, id: 0, duration: 50 },
-        { startTime: 300, endTime: 350, value: 1000, id: 0, duration: 50 },
+        { startTime: 0, endTime: 50, value: 1500, id: 0, duration: 50 },
+        { startTime: 75, endTime: 150, value: 1000, id: 1, duration: 75 },
+        { startTime: 200, endTime: 250, value: 4000, id: 2, duration: 50 },
+        { startTime: 300, endTime: 350, value: 1000, id: 3, duration: 50 },
       ] },
     { name: 'TempSetter',
       ShortName: 'T',
       id: 9,
-      changes: [{ startTime: 0, endTime: 120, value: 15, id: 0, duration: 120 },
-                { startTime: 130, endTime: 220, value: 25, id: 1, duration: 90 }] },
+      changes: [{ startTime: 0, endTime: 50, value: 15, id: 0, duration: 50 },
+                { startTime: 100, endTime: 150, value: 25, id: 1, duration: 50 },
+                { startTime: 175, endTime: 275, value: 35, id: 2, duration: 100 },
+                { startTime: 300, endTime: 350, value: 45, id: 3, duration: 50 },
+      ] },
   ],
 }
-
+// end and start time of changes should have different values (i.e. endtime[1] !== startTime[2]) - resolve programmly
 export default function mainForm(state = initialstate, action) {
   switch (action.type) {
     case 'SHOW_EDIT_MODAL':
