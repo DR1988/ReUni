@@ -37,8 +37,8 @@ class Modal extends Component {
           actions={this.props.actions}
           id={modalType.id}
           name={name}
-          startTime={startTime}
-          stopTime={stopTime}
+         // startTime={startTime}
+         // stopTime={stopTime}
         />
         )
         break

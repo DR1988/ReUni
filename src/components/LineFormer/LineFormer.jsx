@@ -42,6 +42,7 @@ const LineFormer = props => {
 LineFormer.propTypes = {
   elem: PropTypes.object,
   handle: PropTypes.func,
+  allTime: PropTypes.number,
 }
 
 export default LineFormer

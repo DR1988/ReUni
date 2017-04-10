@@ -21,7 +21,7 @@ const ModalWrapper = props => {
     ? (
     <button className="ok-btn btn btn-success"
       onClick={onOk}
-      disabled={props.startTime >= props.stopTime}
+      disabled={props.isAcceptable}
     >
       {props.okText}
     </button>

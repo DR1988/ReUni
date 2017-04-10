@@ -23,6 +23,12 @@
     outline: none;
   }
 }
+.ckeck-value{
+  border: 1px solid red;
+  display: flex;
+  justify-content: space-around;
+  padding: 5px;
+}
 .setter{
       display: block;
       & input {

@@ -50,7 +50,7 @@ LineFormer.propTypes = {
 }
 
 const setLineTemplate = (resultValves, allTime) => {
-    // console.log('resultValves.resultchanges', resultValves.resultchanges)
+    // console.log('resultValves.resultchanges', resultValves)
   // console.log(resultValves.name)
   let formWidth = 0
   let scale = 1
@@ -69,9 +69,13 @@ const setLineTemplate = (resultValves, allTime) => {
   const lineTemplate = []
   for (let i = 0; i < resultValves.resultchanges.length; i++) {
     // console.log(resultValves.resultchanges[i])
+    // if(resultValves.elementId === 8) {
+    //   console.log(lineTemplate)
+    // }
     lineTemplate.push(
       <LineFormer key={i}>
         <ActiveTime changes={resultValves.resultchanges[i]} scale={scale} id={i} />
+        <div display={resultValves.resultchanges[i].waitForValue ? block : 'none'}>123</div>
         <GapTime
           width={resultValves.resultchanges[i + 1] ?
                  (resultValves.resultchanges[i + 1].startTime -

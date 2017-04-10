@@ -58,7 +58,7 @@ app.post('/start', (req, res) => {
     }
   }
 
-  let currentTime = 0
+  // let currentTime = 0
   let sendingCommands = ''
   const intervalId = setInterval(() => {
     lines.forEach(line => {
@@ -113,7 +113,7 @@ app.post('/start', (req, res) => {
     })
     if (sendingCommands) {
       console.log('sendingCommands = ', sendingCommands)
-      serialPort.write(`${sendingCommands}\n`)
+      // serialPort.write(`${sendingCommands}\n`)
       sendingCommands = ''
     }
     if (currentTime >= req.body.allTime) {

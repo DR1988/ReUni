@@ -3,9 +3,10 @@ import thunkMiddleware from 'redux-thunk'
 import rootReducer from '../reducers'
 
 // const nextRootReducer = require('../reducers').default
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
 export default function configureStore() {
-  const store = compose(
+  const store = composeEnhancers(
     applyMiddleware(thunkMiddleware)
   )(createStore)(rootReducer)
   // if (module.hot) {

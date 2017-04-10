@@ -12,6 +12,7 @@ export default(state, action) => state.lineFormer.map(changeElem => {
       value: +action.payload.value,
       duration: (+action.payload.stop) - (+action.payload.start),
       id: changeElem.changes.length,
+      waitForValue: action.payload.waitForValue,
     }],
   }
   return {

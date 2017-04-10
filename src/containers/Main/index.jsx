@@ -118,7 +118,7 @@ class Main extends Component {
 
   render() {
     this.getSource()
-    console.log(this.props.mainForm)
+    // console.log(this.props.mainForm)
     return (
       <div className="main-flex row">
         <div className="col-xs-12 col-sm-4">
