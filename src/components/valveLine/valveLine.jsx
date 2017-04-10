@@ -21,7 +21,7 @@ class ValveLine extends Component {
   componentWillReceiveProps(nextProps) {
     // this.resultLines = getUniqTimeLines(nextProps.elem.changes)
     this.resultLines = getUniqTimeLines(nextProps.elem)
-    this.linesTemplate = setLineTemplate(this.resultLines, this.props.allTime)
+    this.linesTemplate = setLineTemplate(this.resultLines, nextProps.allTime)
   }
 
   render() {

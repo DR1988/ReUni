@@ -9,7 +9,7 @@ const app = express()
 const velocity = require('./serverHandlers/constants').velocity
 
 let serialPort
-
+let intervalId
 const sse = require('./serverHandlers/sse.js')
 
 const corsOptions = {
@@ -43,11 +43,12 @@ app.get('/stream', (req, res) => {
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
+
 app.post('/start', (req, res) => {
   // console.log(req.body.lineFormer)
   const lines = []
   const linesOfActions = req.body.lineFormer
-  console.log('req.bodyreq.body', req.body)
+  // console.log('req.body', linesOfActions[8].changes)
   // console.log(linesOfActions)
   for (let j = 0; j < linesOfActions.length; j++) {
     if (linesOfActions[j].changes.length) {
@@ -58,9 +59,10 @@ app.post('/start', (req, res) => {
     }
   }
 
-  // let currentTime = 0
+  // console.log('lines', lines)
+  let currentTime = 0
   let sendingCommands = ''
-  const intervalId = setInterval(() => {
+  intervalId = setInterval(() => {
     lines.forEach(line => {
       if (line.startTime === currentTime) {
         // console.log(line.idname)
@@ -90,6 +92,27 @@ app.post('/start', (req, res) => {
         }
         if (line.idname === 'R8') {
           // console.log('RPM line sendind', line.idname, line.value)
+          if (line.waitForValue) {
+            // console.log('counter.time', counter.time)
+            let curDistance
+            for (let i = 0; i < connections.length; i++) {
+              curDistance = currentTime
+              connections[i].sseSend({
+                action: 'STOP',
+                curDistance,
+              })
+            }
+            setTimeout(() => {
+              counter.distance = req.body.allTime
+              counter.time = (req.body.allTime - curDistance) / velocity
+              for (let i = 0; i < connections.length; i++) {
+                connections[i].sseSend({
+                  action: 'START',
+                  ...counter,
+                })
+              }
+            }, 3000)
+          }
           sendingCommands = sendingCommands.concat(`${line.idname}${line.value}|`)
         }
         if (line.idname === 'T9') {
@@ -105,14 +128,14 @@ app.post('/start', (req, res) => {
           sendingCommands = sendingCommands.concat(`${line.idname}0|`)
           // console.log(line.idname, 0)
         }
-        if (/V\d+/.test(line.idname)) {
-          console.log('asdasdadasadasd')
-          sendingCommands = sendingCommands.concat(`${line.idname}N|`)
-        }
+        // if (/V\d+/.test(line.idname)) {
+        //   console.log('asdasdadasadasd')
+        //   sendingCommands = sendingCommands.concat(`${line.idname}N|`)
+        // }
       }
     })
     if (sendingCommands) {
-      console.log('sendingCommands = ', sendingCommands)
+      // console.log('sendingCommands = ', sendingCommands)
       // serialPort.write(`${sendingCommands}\n`)
       sendingCommands = ''
     }
@@ -120,15 +143,20 @@ app.post('/start', (req, res) => {
       clearInterval(intervalId)
     }
     ++currentTime
-    if (currentTime % 10 === 0) {
-      // console.log('currentTime', currentTime)
-    }
+    console.log(currentTime)
+    // if (currentTime % 10 === 0) {
+    //   // console.log('currentTime', currentTime)
+    // }
   }, 1000 / velocity)
   counter.distance = req.body.allTime
   counter.time = req.body.allTime / velocity
+  console.log('counter', counter.distance, counter.time)
   if (connections.length !== 0) {
     for (let i = 0; i < connections.length; i++) {
-      connections[i].sseSend(counter)
+      connections[i].sseSend({
+        action: 'START',
+        ...counter,
+      })
     }
   }
   res.status(200).end()
@@ -161,6 +189,17 @@ app.get('/connect', (req, res) => {
       message: 'already opened',
     }).end()
   }
+})
+
+app.get('/reset', (req, res) => {
+  console.log(111111)
+  clearInterval(intervalId)
+  for (let i = 0; i < connections.length; i++) {
+    connections[i].sseSend({
+      action: 'RESET',
+    })
+  }
+  res.status(200).end()
 })
 
 const server = http.createServer(app)

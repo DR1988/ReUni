@@ -10,21 +10,41 @@ import NavLink from './../../components/NavLink/index.jsx'
 
 import './style.scss'
 
-const newIp = location.origin.replace(/(?:\d+)/, 3333)
+const newIp = location.origin.replace(/(?:\d+$)/, 3333)
 
 class Main extends Component {
 
   getSource = () => {
     // 10.99.44.106
     // const newIp = location.origin.replace(/(?:\d+)/, 3333)
+    // console.log(`${newIp}`);
     const source = new EventSource(`${newIp}/stream`)
     source.onmessage = (e) => {
       const data = JSON.parse(e.data)
-      this.distance = data.distance
-      this.time = data.time
-      // console.log(this.distance)
+      switch (data.action) {
+        case 'START':
+          this.distance = data.distance
+          this.time = data.time
+          this.forceUpdate()
+          break
+        case 'STOP':
+          this.distance = data.curDistance
+          this.forceUpdate()
+          break
+        case 'RESET':
+          console.log(data)
+          this.distance = 0
+          this.time = 1
+          this.forceUpdate()
+          break
+        default:
+          break
+      }
+      // if (data.action === 'START') {
+        // this.forceUpdate()
+      // }
+      console.log('data', data)
       // console.log('data.val', this.time)
-      this.forceUpdate()
     }
   }
 
@@ -41,54 +61,10 @@ class Main extends Component {
     }
   }
 
-  serialize = () => {
-    const form = document.getElementById('mainForm')
-    const lineFormer = []
-    let changes = []
-    let timeFormer = {}
-    let lineFormerName
-    for (const child of [...form.children]) {
-      lineFormerName = child.querySelector(['input'])
-      changes = []
-      const timeFormers = child.querySelectorAll('div.time-former')
-      for (const timeForm of [...timeFormers]) {
-        const inputs = timeForm.querySelectorAll('input')
-        if (inputs.length) {
-          timeFormer = {}
-          for (const input of [...inputs]) {
-            timeFormer[input.name] = +input.value
-          }
-          changes.push(timeFormer)
-        }
-      }
-      if (changes.length) {
-        lineFormer.push(
-          { id: +child.dataset.elemid,
-            changes,
-            name: lineFormerName.value,
-          })
-      }
-    }
-
-    let allTime = 0
-    lineFormer.forEach(line => {
-      const currentMax = Math.max.apply(null, line.changes.map(elem => elem.endTime))
-      if (currentMax > allTime) {
-        allTime = currentMax
-      }
-    })
-    // let send
-    // this.file = JSON.stringify({ lineFormer, allTime })
-
-    return { lineFormer, allTime }
-  }
-
   save = () => {
-    const { allTime, lineFormer } = this.props.mainForm
-    // const fileToSave = JSON.stringify(this.serialize())
     let fileToSave = {}
-    fileToSave.allTime = allTime
-    fileToSave.ineFormer = lineFormer
+    fileToSave.allTime = this.props.mainForm.allTime
+    fileToSave.lineFormer = this.props.mainForm.lineFormer
     fileToSave = JSON.stringify(fileToSave)
     const blob = new Blob([fileToSave], { type: 'application/json;charset=utf-8' })
     FileSaver.saveAs(blob, 'saveAs.json')
@@ -100,14 +76,25 @@ class Main extends Component {
   }
 
   start = () => {
-    const protocol = this.serialize()
-    fetch(`${newIp}/start`, {
-      method: 'post',
-      headers: {
-        'Content-type': 'application/json; charset=UTF-8',
-      },
-      body: JSON.stringify(protocol),
-    }).then(res => console.log(res))
+    const protocol = {}
+    protocol.allTime = this.props.mainForm.allTime
+    protocol.lineFormer = this.props.mainForm.lineFormer
+    // console.log('protocol', protocol)
+    if (fetch) {
+      fetch(`${newIp}/start`, {
+        method: 'post',
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+        body: JSON.stringify(protocol),
+      }).then(res => res)
+    } else {
+      const xhr = new XMLHttpRequest()
+      const body = JSON.stringify(protocol)
+      xhr.open('POST', `${newIp}/start`, true)
+      xhr.setRequestHeader('Content-type', 'application/json; charset=UTF-8')
+      xhr.send(body)
+    }
   }
 
   connect = () => {
@@ -116,6 +103,10 @@ class Main extends Component {
             .then(messagee => console.log(messagee)))
   }
 
+  reset = () => {
+    fetch(`${newIp}/reset`)
+      .then(res => res)
+  }
   render() {
     this.getSource()
     // console.log(this.props.mainForm)
@@ -156,12 +147,18 @@ class Main extends Component {
                 <div>
                   <button
                     onClick={this.start}
+                    onTouchStart={this.start}
                   >START</button>
                 </div>
                 <div>
                   <button
                     onClick={this.connect}
                   >Connect</button>
+                </div>
+                <div>
+                  <button
+                    onClick={this.reset}
+                  >Reset</button>
                 </div>
               </div>
             </div>
@@ -177,6 +174,7 @@ Main.propTypes = {
   mainPage: React.PropTypes.array,
   actions: React.PropTypes.object,
   numActions: React.PropTypes.object,
+  mainForm: React.PropTypes.object,
 }
 
 function mapStateToProps(state) {

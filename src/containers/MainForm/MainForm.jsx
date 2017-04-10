@@ -116,12 +116,9 @@ class MainForm extends Component {
   }
 
   render() {
-    // console.log(this.props.mainForm)
-    // console.log('mainForm', this.props.actions)
     // this.getSource()
-    // console.log(this.props.mainForm)
     const { lineFormer, allTime } = this.props.mainForm
-    // console.log('this.props.mainForm', this.props.mainForm.lineFormer)
+    // console.log('this.props.mainForm', this.props.mainForm)
     return (
       <div
         className="form-Manupalation"

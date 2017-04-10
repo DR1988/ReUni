@@ -43,6 +43,13 @@ GapTime.propTypes = {
   width: PropTypes.number,
 }
 
+const WaitShow = props => <div
+  className = "waitShow"
+  style = {{
+    display: props.display
+  }}>
+</div>
+
 const LineFormer = props => <div className="time-former">{props.children} </div>
 
 LineFormer.propTypes = {
@@ -70,12 +77,15 @@ const setLineTemplate = (resultValves, allTime) => {
   for (let i = 0; i < resultValves.resultchanges.length; i++) {
     // console.log(resultValves.resultchanges[i])
     // if(resultValves.elementId === 8) {
-    //   console.log(lineTemplate)
+    //   console.log(resultValves)
     // }
     lineTemplate.push(
       <LineFormer key={i}>
         <ActiveTime changes={resultValves.resultchanges[i]} scale={scale} id={i} />
-        <div display={resultValves.resultchanges[i].waitForValue ? block : 'none'}>123</div>
+        <WaitShow
+          display = {resultValves.resultchanges[i].waitForValue ? 'block' : 'none'}
+          id={i}
+        />
         <GapTime
           width={resultValves.resultchanges[i + 1] ?
                  (resultValves.resultchanges[i + 1].startTime -
