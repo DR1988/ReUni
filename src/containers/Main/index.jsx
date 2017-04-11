@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import FileSaver from 'file-saver'
+import io from 'socket.io-client'
 
 // import Loading from '../../components/Loading'
 import mainActions from '../../actions/mainAction.js'
@@ -10,42 +11,39 @@ import NavLink from './../../components/NavLink/index.jsx'
 
 import './style.scss'
 
+// const oldip = '10.99.44.106:3001'
 const newIp = location.origin.replace(/(?:\d+$)/, 3333)
 
-class Main extends Component {
+const socket = io(`${newIp}`)
 
-  getSource = () => {
-    // 10.99.44.106
-    // const newIp = location.origin.replace(/(?:\d+)/, 3333)
-    // console.log(`${newIp}`);
-    const source = new EventSource(`${newIp}/stream`)
-    source.onmessage = (e) => {
-      const data = JSON.parse(e.data)
-      switch (data.action) {
-        case 'START':
-          this.distance = data.distance
-          this.time = data.time
-          this.forceUpdate()
-          break
-        case 'STOP':
-          this.distance = data.curDistance
-          this.forceUpdate()
-          break
-        case 'RESET':
-          console.log(data)
-          this.distance = 0
-          this.time = 1
-          this.forceUpdate()
-          break
-        default:
-          break
-      }
-      // if (data.action === 'START') {
-        // this.forceUpdate()
-      // }
-      console.log('data', data)
-      // console.log('data.val', this.time)
+class Main extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      test: 123,
     }
+  }
+  componentDidMount() {
+    socket.on('START', data => {
+      this.distance = data.distance
+      this.time = data.time
+      console.log(data)
+      this.forceUpdate()
+    })
+    socket.on('STOP', data => {
+      this.distance = data.curDistance
+      console.log(data)
+      this.setState({
+        test: 333,
+      })
+      this.forceUpdate()
+    })
+    socket.on('RESET', () => {
+      this.distance = 0
+      this.time = 1
+      console.log('reseted')
+      this.forceUpdate()
+    })
   }
 
   loadFile = (e) => {
@@ -87,7 +85,7 @@ class Main extends Component {
           'Content-type': 'application/json; charset=UTF-8',
         },
         body: JSON.stringify(protocol),
-      }).then(res => res)
+      }).then(res => console.log(res))
     } else {
       const xhr = new XMLHttpRequest()
       const body = JSON.stringify(protocol)
@@ -108,10 +106,11 @@ class Main extends Component {
       .then(res => res)
   }
   render() {
-    this.getSource()
+    // this.getSource()
     // console.log(this.props.mainForm)
     return (
       <div className="main-flex row">
+        <div>{this.state.test}</div>
         <div className="col-xs-12 col-sm-4">
           <div className="note-box col-xs-12">
             <span>node</span>

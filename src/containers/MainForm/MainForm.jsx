@@ -2,7 +2,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { get as _get } from 'lodash'
+// import { get as _get } from 'lodash'
 
 import MainFormAction from './../../actions/MainForm.js'
 import LineFormer from './../../components/LineFormer/LineFormer.jsx'

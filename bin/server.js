@@ -12,4 +12,4 @@ try {
 }
 
 require('babel-core/register')(config);
-require('../server');
+require('./../server/index.js');

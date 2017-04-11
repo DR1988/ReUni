@@ -1,1 +1,1 @@
-start cmd /k npm start && start cmd /k node server2.js
+start cmd /k npm start && start cmd /k npm run server
