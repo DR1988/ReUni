@@ -93,23 +93,23 @@ app.post('/start', (req, res) => {
           }
           if (line.idname === 'R8') {
             // console.log('RPM line sendind', line.idname, line.value)
-            if (line.waitForValue) {
-              const curDistance = currentTime
-              io.emit('STOP', {
-                curDistance,
-              })
-              intervalId2 = setTimeout(() => {
-                console.log('gavno gopa !!!!!!!!!!!!!!!!!!!')
-                start()
-                counter.distance = req.body.allTime
-                counter.time = (req.body.allTime - curDistance) / velocity
-                io.emit('START', {
-                  ...counter,
-                })
-              }, 3000)
-              console.log('intervalId2', intervalId2)
-              clearInterval(intervalId)
-            }
+            // if (line.waitForValue) {
+            //   const curDistance = currentTime
+            //   io.emit('STOP', {
+            //     curDistance,
+            //   })
+            //   intervalId2 = setTimeout(() => {
+            //     console.log('gavno gopa !!!!!!!!!!!!!!!!!!!')
+            //     start()
+            //     counter.distance = req.body.allTime
+            //     counter.time = (req.body.allTime - curDistance) / velocity
+            //     io.emit('START', {
+            //       ...counter,
+            //     })
+            //   }, 3000)
+              // console.log('intervalId2', intervalId2)
+              // clearInterval(intervalId)
+            // }
             sendingCommands = sendingCommands.concat(`${line.idname}${line.value}|`)
           }
           if (line.idname === 'T9') {
@@ -133,7 +133,7 @@ app.post('/start', (req, res) => {
       })
       if (sendingCommands) {
         // console.log('sendingCommands = ', sendingCommands)
-        // serialPort.write(`${sendingCommands}\n`)
+        serialPort.write(`${sendingCommands}\n`)
         sendingCommands = ''
       }
       if (currentTime >= req.body.allTime) {

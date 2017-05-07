@@ -1,3 +1,3 @@
 module.exports = {
-  velocity: 150,
+  velocity: 1,
 }
