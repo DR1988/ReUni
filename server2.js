@@ -26,7 +26,7 @@ const corsOptions = {
     'PATCH',
     'DELETE',
   ],
-  allowedHeaders: ['X-Requested-With', 'Content-Type', 'X-CSRF-TOKEN']
+  allowedHeaders: ['X-Requested-With', 'Content-Type', 'X-CSRF-TOKEN'],
 }
 
 app.options('*', cors(corsOptions))
@@ -44,10 +44,41 @@ io.on('connection', sock => {
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
+app.post('/check', (req, res) => {
+  const linesOfActions = req.body
+  console.log('linesOfActions', linesOfActions)
+  //console.log(11111)
+  /* V6Y|V7Y| */
+  // V6Y|V7Y|R80|T90|
+  // const sendingCommands = 'R84000|\n'
+  const sendingCommands = `${linesOfActions.values}\n`
+  serialPort.write(sendingCommands)
+
+  // var i = 0
+  // const inter = setInterval(() => {
+  //   if (i++ < sendingCommands.length) {
+  //     console.log(sendingCommands[i])
+  //     serialPort.write(sendingCommands[i].toString())
+  //   } else {
+  //     clearInterval(inter)
+  //   }
+  // },
+  // 400)
+
+  // serialPort.write(sendingCommands)
+  // setInterval(() => serialPort.write(sendingCommands), 300)
+  // setTimeout(function() {
+    // serialPort.write('\n')
+  // }, 300)
+  // serialPort.write('F')
+  res.status(200).end()
+})
+
 app.post('/start', (req, res) => {
   // console.log(req.body.lineFormer)
   const lines = []
   const linesOfActions = req.body.lineFormer
+  console.log('linesOfActions', linesOfActions)
   // console.log('req.body', linesOfActions[8].changes)
   // console.log(linesOfActions)
   for (let j = 0; j < linesOfActions.length; j++) {
@@ -125,22 +156,22 @@ app.post('/start', (req, res) => {
             sendingCommands = sendingCommands.concat(`${line.idname}0|`)
             // console.log(line.idname, 0)
           }
-          // if (/V\d+/.test(line.idname)) {
-          //   console.log('asdasdadasadasd')
-          //   sendingCommands = sendingCommands.concat(`${line.idname}N|`)
-          // }
+          if (/V\d+/.test(line.idname)) {
+            // console.log('asdasdadasadasd')
+            sendingCommands = sendingCommands.concat(`${line.idname}N|`)
+          }
         }
       })
       if (sendingCommands) {
-        // console.log('sendingCommands = ', sendingCommands)
-        serialPort.write(`${sendingCommands}\n`)
+        console.log('sendingCommands = ', sendingCommands)
+        // serialPort.write(`${sendingCommands}\n`)
         sendingCommands = ''
       }
       if (currentTime >= req.body.allTime) {
         clearInterval(intervalId)
       }
       ++currentTime
-      console.log(currentTime)
+      // console.log(currentTime)
       // if (currentTime % 10 === 0) {
       //   // console.log('currentTime', currentTime)
       // }
@@ -158,12 +189,14 @@ app.post('/start', (req, res) => {
 })
 
 app.get('/connect', (req, res) => {
-  if (!serialPort) {
+  if (!serialPort || !serialPort.isOpen()) {
     SerialPort.list((err, ports) => {
       ports.forEach(port => {
         if (port.manufacturer.includes('Arduino')) { // have to change it because we can use not only Arduino
           serialPort = new SerialPort(port.comName, {
-            baudRate: 9600,
+            // baudRate: 9600,
+            baudRate: 250000,
+            parity: 'none',
             parser: SerialPort.parsers.readline('\n'),
           })
           serialPort.on('open', () => {
@@ -173,7 +206,7 @@ app.get('/connect', (req, res) => {
             console.log('opened')
           })
           serialPort.on('data', (data) => {
-            console.log(`data ${data}`)
+            console.log(`${data}`, ' - data')
           })
         }
       })

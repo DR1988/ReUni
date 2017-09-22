@@ -1,16 +1,16 @@
-const getRelativeCoords = (elem, elem2) => {
-  return elem.getBoundingClientRect().left - elem2.getBoundingClientRect().left
-}
+const getRelativeCoords = (elem, elem2) =>
+  elem.getBoundingClientRect().left - elem2.getBoundingClientRect().left
 
-const stopdrag = (e) => {
-  e.persist()
-  e.ondragstart = () => false
-}
+// const stopdrag = (e) => {
+//   e.persist()
+//   e.ondragstart = () => false
+// }
 
 export const setCoord = (e, coord, container) => {
   const containerrWidth = container.clientWidth
   const sliderB = e
   const contentWidth = container.children[0].clientWidth
+  const selfContainer = container
   // console.log('this.sliderW', this.sliderW)
   let pos
   if (e) {
@@ -26,9 +26,10 @@ export const setCoord = (e, coord, container) => {
   }
   const scrollPx = (scrollPercent / 100) * contentWidth
   // console.log('scrollPx', scrollPx)
-  container.scrollLeft = scrollPx
+  selfContainer.scrollLeft = scrollPx
   if (e) {
-    e.style.left = `${coord}px`
+    const event = e
+    event.style.left = `${coord}px`
   }// console.log(' container.scrollLeft', container.scrollLeft)
 }
 

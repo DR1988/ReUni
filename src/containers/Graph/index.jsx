@@ -13,7 +13,7 @@ class Graph extends Component {
   constructor(props) {
     super(props)
     this.sliderW = null
-    this.count=0
+    this.count = 0
   }
   componentDidMount() {
     // console.log(document.querySelector('.picture-cont').clientWidth)

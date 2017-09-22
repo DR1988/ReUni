@@ -19,9 +19,10 @@ const socket = io(`${newIp}`)
 class Main extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      test: 123,
-    }
+  }
+  state = {
+    test: 123,
+    values: 'V0Y|V1Y|V2Y|V3Y|V4Y|V5Y|V6Y|V7Y|R81500|T915|',
   }
   componentDidMount() {
     socket.on('START', data => {
@@ -95,6 +96,31 @@ class Main extends Component {
     }
   }
 
+  check = () => {
+    console.log(2222)
+    const values = document.getElementById('message').value
+
+    const protocol = {}
+    protocol.allTime = this.props.mainForm.allTime
+    protocol.lineFormer = this.props.mainForm.lineFormer
+    // console.log('protocol', protocol)
+    if (fetch) {
+      fetch(`${newIp}/check`, {
+        method: 'post',
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+        body: JSON.stringify({ values }),
+      }).then(res => res)
+    } else {
+      const xhr = new XMLHttpRequest()
+      const body = JSON.stringify(values)
+      xhr.open('POST', `${newIp}/check`, true)
+      xhr.setRequestHeader('Content-type', 'application/json; charset=UTF-8')
+      xhr.send(body)
+    }
+  }
+
   connect = () => {
     fetch(`${newIp}/connect`)
     .then(res => res.json()
@@ -104,6 +130,12 @@ class Main extends Component {
   reset = () => {
     fetch(`${newIp}/reset`)
       .then(res => res)
+  }
+
+  changeValues = (value) => {
+    this.setState({
+      values: value,
+    })
   }
   render() {
     // this.getSource()
@@ -142,6 +174,17 @@ class Main extends Component {
                   <button
                     onClick={this.clearForm}
                   >CLEAR</button>
+                </div>
+                <div>
+                  <input
+                    type="text"
+                    id="message"
+                    value={this.state.values}
+                    onChange={(e) => this.changeValues(e.target.value)}
+                  />
+                  <button
+                    onClick={this.check}
+                  >Check</button>
                 </div>
                 <div>
                   <button

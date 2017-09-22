@@ -1,6 +1,0 @@
-https://www.youtube.com/watch?v=ucd5x3Ka3gw&index=3&list=PLoYCgNOIyGADILc3iUJzygCqC8Tt3bRXt
-
-
-make add friends - add to response friend
-
-TODO - user can add him self to friends - fix
