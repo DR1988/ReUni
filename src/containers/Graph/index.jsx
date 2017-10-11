@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 // import { connect } from 'react-redux'
 
 // import * as graphAction from '../../actions/graphAction.js'
-
+import { Grid, Linear } from './../../components/d3js/index.jsx'
 import './style.scss'
 
 import scrolling from './../../helpers/scrolling.js'
@@ -18,9 +18,9 @@ class Graph extends Component {
   componentDidMount() {
     // console.log(document.querySelector('.picture-cont').clientWidth)
     // console.log(document.querySelector('.content').clientWidth)
-    this.sliderW = (document.querySelector('.picture-cont').clientWidth
-    / document.querySelector('.content').clientWidth) * document.querySelector('.picture-cont').clientWidth // width of container
-    this.forceUpdate()
+    // this.sliderW = (document.querySelector('.picture-cont').clientWidth
+    // / document.querySelector('.content').clientWidth) * document.querySelector('.picture-cont').clientWidth // width of container
+    // this.forceUpdate()
   }
 
   stopdrag = (e) => {
@@ -34,21 +34,23 @@ class Graph extends Component {
   }
 
   render() {
+    const dataY = [350, 120, 80, 75, 96, 322, 250, 13]
+    const dataY2 = [120, 20, 80, 15, 196, 422, 150, 213]
     return (
       <div className="picture-cont">
-        <div className="content" />
-        <div className="slider-bar">
-          <div
-            className="mover"
-            style={{ width: this.sliderW }}
-            onMouseDown={scrolling}
-            onDragStart={this.stopdrag}
-            onTouchStart={scrolling}
-          />
-        </div>
-        <div className="cont">adasdsa
-        </div>
-        {this.count}
+      <Grid
+        width={900}
+        height={400}
+        dataYMax={450}
+      >
+        <Linear
+          dataY={dataY}
+        />
+        <Linear
+          dataY={dataY2}
+        />
+      </Grid>
+      {/* asdasd*/}
       </div>
     )
   }

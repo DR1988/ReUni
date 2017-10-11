@@ -21,7 +21,6 @@ class Main extends Component {
     super(props)
   }
   state = {
-    test: 123,
     values: 'V0Y|V1Y|V2Y|V3Y|V4Y|V5Y|V6Y|V7Y|R81500|T915|',
   }
   componentDidMount() {
@@ -143,16 +142,7 @@ class Main extends Component {
     return (
       <div className="main-flex row">
         <div>{this.state.test}</div>
-        <div className="col-xs-12 col-sm-4">
-          <div className="note-box col-xs-12">
-            <span>node</span>
-          </div>
-          <div className="picture-box col-xs-12">
-            <span>picture</span>
-          </div>
-        </div>
-        <div id="container" className="col-xs-12 col-sm-8">
-          <NavLink to="protocol2">Another </NavLink>
+        <div id="container" className="col-xs-12">
           <div className="hide-scroll">
             <MainForm distance={this.distance} time={this.time} />
           </div>
@@ -175,7 +165,7 @@ class Main extends Component {
                     onClick={this.clearForm}
                   >CLEAR</button>
                 </div>
-                <div>
+               {/* <div>
                   <input
                     type="text"
                     id="message"
@@ -185,7 +175,7 @@ class Main extends Component {
                   <button
                     onClick={this.check}
                   >Check</button>
-                </div>
+                </div>*/}
                 <div>
                   <button
                     onClick={this.start}

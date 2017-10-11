@@ -82,7 +82,7 @@ const initialstate = {
         { startTime: 0, endTime: 50, value: 1500, id: 0, duration: 50 },
         { startTime: 75, endTime: 150, value: 1000, id: 1, duration: 75 },
         { startTime: 200, endTime: 250, value: 4000, id: 2, duration: 50 },
-        { startTime: 300, endTime: 350, value: 1000, id: 3, duration: 50, waitForValue: true },
+        { startTime: 300, endTime: 350, value: 1000, id: 3, duration: 50,/* waitForValue: true*/ },
       ] },
     { name: 'TempSetter',
       ShortName: 'T',

@@ -18,7 +18,9 @@ module.exports = {
       loader: 'style!css?localIdentName=[path][name]--[local]!postcss-loader!sass',
     }],
   },
-
+  externals:[{
+      xmlhttprequest: '{XMLHttpRequest:XMLHttpRequest}'
+  }],
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
