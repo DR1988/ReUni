@@ -3,12 +3,19 @@ $waitShowWidthIncrease: 15px;
 .time-former {
   position: relative;
   .time{
-    border: 3px black solid;
+    // border: 2px rgba(176, 199, 202, 0.8) solid;
     text-align: center;
     span {
-      position: relative;
-      bottom: 3px;
-      color: red;
+      text-overflow:ellipsis;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: rgba(129, 172, 188, 1);
+    }
+    .time-container{
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center
     }
   }
   .waitShow {

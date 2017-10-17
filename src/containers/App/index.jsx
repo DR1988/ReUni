@@ -5,7 +5,7 @@ import NavLink from './../../components/NavLink'
 import Modal from './../Modals/modal.jsx'
 import './style.scss'
 
-const App = (props) => <div className="container">
+const App = (props) => <div className="container-app">
   <Modal />
   <nav className="navbar navbar-default">
     <ul className="nav nav-tabs">

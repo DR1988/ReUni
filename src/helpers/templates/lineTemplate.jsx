@@ -14,15 +14,17 @@ const ActiveTime = (props) =>{
       width: props.changes.duration * props.scale,
     }}
   >
-    {props.changes.value ?
-      <span>{props.changes.value}</span>
-      : <span>{props.changes.duration}</span>}
+    <div className="time-container">
+      {props.changes.value ?
+        <span>{props.changes.value}</span>
+        : <span>{props.changes.duration}</span>}
 
-    <input type="hidden" name="duration" defaultValue={props.changes.duration} />
-    <input type="hidden" name="value" defaultValue={props.changes.value} />
-    <input type="hidden" name="startTime" defaultValue={props.changes.startTime} />
-    <input type="hidden" name="endTime" defaultValue={props.changes.endTime} />
-    <input type="hidden" name="id" defaultValue={props.id} />
+      <input type="hidden" name="duration" defaultValue={props.changes.duration} />
+      <input type="hidden" name="value" defaultValue={props.changes.value} />
+      <input type="hidden" name="startTime" defaultValue={props.changes.startTime} />
+      <input type="hidden" name="endTime" defaultValue={props.changes.endTime} />
+      <input type="hidden" name="id" defaultValue={props.id} />
+    </div>
   </div>
   )
 }

@@ -1,4 +1,4 @@
-$timePresenterHeight: 475px;
+$timePresenterHeight: 675px;
 .time-line_wraper{
   position: relative;
   height: 45px;
@@ -37,7 +37,7 @@ $timePresenterHeight: 475px;
       position: relative;
       left: 46%;
       width: 2px;
-      height: 460px;
+      height: $timePresenterHeight - 15px;
       background-color: red;
     }
   & .arrow-up {

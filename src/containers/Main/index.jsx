@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 import FileSaver from 'file-saver'
 import io from 'socket.io-client'
 
+import FlatButton from 'material-ui/FlatButton'
+
 // import Loading from '../../components/Loading'
 import mainActions from '../../actions/mainAction.js'
 import MainForm from './../MainForm/MainForm.jsx'
@@ -147,52 +149,69 @@ class Main extends Component {
             <MainForm distance={this.distance} time={this.time} />
           </div>
           <div className="user-actions">
-            <div className="col-xs-6">
-              <div>
-                <input type="file" name="file" id="file" className="inputfile" onChange={this.loadFile} />
-                <label htmlFor="file">Choose a file</label>
-              </div>
-              <div>
-                <button
-                  onClick={this.save}
-                >SAVE</button>
-              </div>
+            <div>
+              <input type="file" name="file" id="file" className="inputfile" onChange={this.loadFile} />
+              <label htmlFor="file">Choose a file</label>
             </div>
-            <div className="col-xs-6">
-              <div className="proptocol-manipulation">
-                <div>
-                  <button
-                    onClick={this.clearForm}
-                  >CLEAR</button>
-                </div>
-               {/* <div>
-                  <input
-                    type="text"
-                    id="message"
-                    value={this.state.values}
-                    onChange={(e) => this.changeValues(e.target.value)}
-                  />
-                  <button
-                    onClick={this.check}
-                  >Check</button>
-                </div>*/}
-                <div>
-                  <button
-                    onClick={this.start}
-                    onTouchStart={this.start}
-                  >START</button>
-                </div>
-                <div>
-                  <button
-                    onClick={this.connect}
-                  >Connect</button>
-                </div>
-                <div>
-                  <button
-                    onClick={this.reset}
-                  >Reset</button>
-                </div>
-              </div>
+            <div>
+              <FlatButton
+                label="SAVE"
+                labelStyle={{ color: '#fff', fontWeight: '700' }}
+                style={{ backgroundColor: '#00BCD4', height: '50px', marginTop: '2rem' }}
+                className="login-container_button"
+                onClick={this.save}
+              />
+            </div>
+            <div>
+              <FlatButton
+                label="clear"
+                labelStyle={{ color: '#fff', fontWeight: '700' }}
+                style={{ backgroundColor: '#00BCD4', height: '50px', marginTop: '2rem' }}
+                className="login-container_button"
+                onClick={this.clearForm}
+                onTouchStart={this.clearForm}
+              />
+            </div>
+             {/* <div>
+                <input
+                  type="text"
+                  id="message"
+                  value={this.state.values}
+                  onChange={(e) => this.changeValues(e.target.value)}
+                />
+                <button
+                  onClick={this.check}
+                >Check</button>
+              </div>*/}
+            <div>
+              <FlatButton
+                label="Start"
+                labelStyle={{ color: '#fff', fontWeight: '700' }}
+                style={{ backgroundColor: '#00BCD4', height: '50px', marginTop: '2rem' }}
+                className="login-container_button"
+                onClick={this.start}
+                onTouchStart={this.start}
+                />
+            </div>
+            <div>
+              <FlatButton
+                label="Connect"
+                labelStyle={{ color: '#fff', fontWeight: '700' }}
+                style={{ backgroundColor: '#00BCD4', height: '50px', marginTop: '2rem' }}
+                className="login-container_button"
+                onClick={this.connect}
+                onTouchStart={this.connect}
+                />
+            </div>
+            <div>
+              <FlatButton
+                label="Reset"
+                labelStyle={{ color: '#fff', fontWeight: '700' }}
+                style={{ backgroundColor: '#00BCD4', height: '50px', marginTop: '2rem' }}
+                className="login-container_button"
+                onClick={this.reset}
+                onTouchStart={this.reset}
+                />
             </div>
           </div>
         </div>

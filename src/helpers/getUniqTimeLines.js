@@ -44,6 +44,7 @@
     return {
       resultchanges,
       elementId: elem.id,
+      ShortName: elem.ShortName,
       name: elem.name,
     }
   }
