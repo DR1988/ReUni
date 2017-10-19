@@ -2,7 +2,6 @@ import React from 'react'
 import './LineDescription.scss'
 
 const LineDecription = ({ valve }) => {
-  console.log('valve', valve);
   const descriotionShow = (valve) => {
     switch (valve) {
       case 'GV1':
@@ -18,9 +17,13 @@ const LineDecription = ({ valve }) => {
       case 'GV6':
         return 'Inert gas outlet from reaction camera'
       case 'HV1':
-        return 'Inert Gas Inlet'
+        return 'Reactive 1 Inlet'
       case 'HV2':
-        return 'Inert Gas Inlet'
+        return 'Reactive 2 Inlet'
+      case 'RPM':
+        return 'Stirrer'
+      case 'T°C':
+        return 'Temperature'
       default:
         return 'Inert Gas'
     }

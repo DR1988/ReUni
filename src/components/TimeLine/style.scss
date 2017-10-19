@@ -1,7 +1,7 @@
 $timePresenterHeight: 675px;
 .time-line_wraper{
   position: relative;
-  height: 45px;
+  height: 55px;
   & .time-line{
     height: 25px;
     border: thin solid red;
@@ -12,15 +12,20 @@ $timePresenterHeight: 675px;
       & .time-former{
         position: relative;
         & .divider{
-          width: 1px;
+          width: 2px;
           height: 100%;
           background-color: green;
         }
         .time-count{
+          font-weight: 700;
+          font-size: 2rem;
           position: absolute;
         }
       }
       & .time-former:last-child{
+        & .divider{
+          visibility: hidden;
+        }
         & .time-count{
           right: 100%;
         }

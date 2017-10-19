@@ -1,6 +1,7 @@
 import setLineFormer from './../helpers/setLineFormer.js'
 
 const resetState = {
+  notes: '',
   showEditModal: false,
   allTime: 0,
   lineFormer: [
@@ -48,6 +49,7 @@ const resetState = {
 }
 
 const initialstate = {
+  notes: 'zxczsacas',
   showEditModal: false,
   allTime: 400,
   lineFormer: [
@@ -146,6 +148,14 @@ export default function mainForm(state = initialstate, action) {
         ...state,
         ...action.values,
         showEditModal: false,
+      }
+
+    case 'SET_NOTES':
+      // console.log('state', state)
+      // console.log('action', action)
+      return {
+        ...state,
+        notes: action.notes,
       }
 
     case 'SET_SLIDER_WIDTH':

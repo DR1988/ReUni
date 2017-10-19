@@ -5,6 +5,7 @@ import FileSaver from 'file-saver'
 import io from 'socket.io-client'
 
 import FlatButton from 'material-ui/FlatButton'
+import TextField from 'material-ui/TextField';
 
 // import Loading from '../../components/Loading'
 import mainActions from '../../actions/mainAction.js'
@@ -55,17 +56,24 @@ class Main extends Component {
       reader.readAsBinaryString(file)
       reader.onloadend = (evt) => {
         if (evt.target.readyState === FileReader.DONE) { // DONE == 2
-          this.props.actions.setValues(JSON.parse(evt.target.result))
+          // console.log('evt.target.result', evt.target.result);
+          // console.log('JSON.parse(evt.target.result)', JSON.parse(evt.target.result));
+          this.props.actions.setValues(JSON.parse(evt.target.result).form)
+          this.props.actions.setNotes(JSON.parse(evt.target.result).notes)
         }
       }
     }
   }
 
   save = () => {
-    let fileToSave = {}
-    fileToSave.allTime = this.props.mainForm.allTime
-    fileToSave.lineFormer = this.props.mainForm.lineFormer
+    let fileToSave = {notes: '', form: {}}
+    console.log('this.props.mainForm', this.props.mainForm);
+    console.log(fileToSave);
+    fileToSave.notes = this.props.mainForm.notes
+    fileToSave.form.allTime = this.props.mainForm.allTime
+    fileToSave.form.lineFormer = this.props.mainForm.lineFormer
     fileToSave = JSON.stringify(fileToSave)
+    console.log('fileToSave', fileToSave);
     const blob = new Blob([fileToSave], { type: 'application/json;charset=utf-8' })
     FileSaver.saveAs(blob, 'saveAs.json')
   }
@@ -138,13 +146,35 @@ class Main extends Component {
       values: value,
     })
   }
+
   render() {
     // this.getSource()
     // console.log(this.props.mainForm)
+    console.log(this.props.mainForm);
     return (
       <div className="main-flex row">
         <div>{this.state.test}</div>
-        <div id="container" className="col-xs-12">
+        <div className="col-xs-12 col-sm-4">
+          <div className="note-box col-xs-12">
+            <span>Notes</span>
+            <section className='textField' >
+              <TextField 
+                value={this.props.mainForm.notes}
+                onChange={(e, newValue) => this.props.actions.setNotes(newValue)}
+                multiLine
+                rows={10}
+                rowsMax={10}
+                fullWidth
+                hintText="Input Note Here"
+                style={{backgroundColor: 'white'}}
+              />
+            </section>
+          </div>
+          <div className="picture-box col-xs-12">
+            <span>picture</span>
+          </div>
+        </div>
+        <div id="container" className="col-sm-8 col-xs-12">
           <div className="hide-scroll">
             <MainForm distance={this.distance} time={this.time} />
           </div>

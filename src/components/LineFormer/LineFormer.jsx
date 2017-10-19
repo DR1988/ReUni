@@ -8,30 +8,30 @@ import './style.scss'
 const LineFormer = props => {
   const template = []
   const elem = props.elem
-  if (elem.name === 'ValveLine') {
+  // if (elem.name === 'ValveLine') {
     template.push(
       <ValveLine
         key={elem.id}
         elem={elem}
         allTime={props.allTime}
       />)
-  }
-  if (elem.name === 'RPMSetter') {
-    template.push(
-      <RPMSetter
-        key={elem.id}
-        elem={elem}
-        allTime={props.allTime}
-      />)
-  }
-  if (elem.name === 'TempSetter') {
-    template.push(
-      <TempSetter
-        key={elem.id}
-        elem={elem}
-        allTime={props.allTime}
-      />)
-  }
+  // }
+  // if (elem.name === 'RPMSetter') {
+  //   template.push(
+  //     <RPMSetter
+  //       key={elem.id}
+  //       elem={elem}
+  //       allTime={props.allTime}
+  //     />)
+  // }
+  // if (elem.name === 'TempSetter') {
+  //   template.push(
+  //     <TempSetter
+  //       key={elem.id}
+  //       elem={elem}
+  //       allTime={props.allTime}
+  //     />)
+  // }
   return (<div className="rows" data-elemId={elem.id} onClick={() => props.handle(props.elem)}>
     {/* <input type="hidden" name={'lineId'} value={elem.id} /> */}
     <input type="hidden" name="name" defaultValue={elem.name} />
