@@ -1,7 +1,14 @@
 import React from 'react'
+import Snackbar from 'material-ui/Snackbar'
+
 import './LineDescription.scss'
 
-const LineDecription = ({ valve }) => {
+const LineDecription = ({
+  valve,
+  currentElem,
+  showDescription,
+  hideDescrioption,
+}) => {
   const descriotionShow = (valve) => {
     switch (valve) {
       case 'GV1':
@@ -28,12 +35,39 @@ const LineDecription = ({ valve }) => {
         return 'Inert Gas'
     }
   }
+  const open=currentElem ? currentElem.ShortName === valve && showDescription : false
   return (
-    <div className='lineDecription-container'>
-      <span>
-        {descriotionShow(valve)} 
-      </span>
-    </div>
+    <Snackbar
+      open={open}
+      style={{
+        position: 'absolute',
+        left: '50px',
+        display: 'flex',
+        bottom: 'auto',
+        zIndex: 2900,
+        visibility: 'visible',
+        transform: open ? 'translate(0, 0px)' : 'translate(1000%, 0px)',
+        transition: 'transform 0ms linear 0ms, visibility 400ms linear 0ms',
+        top: '0px',
+        boxShadow: '0px 0px 5px 3px rgba(0,0,0,0.3)',
+      }}
+      contentStyle={{
+        backgroundColor: '#fff',
+        color: '#a52323',
+        fontWeight: 'bold',
+      }}
+      bodyStyle={{
+        backgroundColor: '#fff',
+      }}
+      autoHideDuration={4000}
+      onRequestClose={hideDescrioption}
+      message={descriotionShow(valve)}
+    />
+    // <div className='lineDecription-container'>
+    //   <span>
+    //     {descriotionShow(valve)} 
+    //   </span>
+    // </div>
   )
 }
 

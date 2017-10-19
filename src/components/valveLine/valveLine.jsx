@@ -15,6 +15,7 @@ class ValveLine extends Component {
   }
 
   state = {
+    elem:null,
     showDescription: true,
   }
 
@@ -31,8 +32,9 @@ class ValveLine extends Component {
     this.linesTemplate = setLineTemplate(this.resultLines, nextProps.allTime)
   }
 
-  showDescription = () => {
+  showDescription = (elem) => {
     this.setState({
+      elem,
       showDescription:true
     }) 
   }
@@ -48,31 +50,30 @@ class ValveLine extends Component {
     return (<div className="line-wraper">
       <div className="line-definition">
         <span
-          onClick={this.showDescription}
+          onClick={() => this.showDescription(elem)}
           //onMouseEnter={this.showDescription}
-          onMouseLeave={this.hideDescrioption}
+          // onMouseLeave={this.hideDescrioption}
         >{elem.ShortName}</span>
-        {this.state.showDescription ? <LineDescription
-          valve = {elem.ShortName}
-          /> : null }
+        <LineDescription
+          valve={elem.ShortName}
+          currentElem={this.state.elem}
+          showDescription={this.state.showDescription}
+          hideDescrioption={this.hideDescrioption}
+        />
       </div>
       <div className="time-box_keeper" onClick={() => handle(elem)}>
         <div className="time-box">
           { this.linesTemplate }
         </div>
       </div>
-      <Snackbar 
-        open
-        //style={{backgroundColor: 'white', borderColor: 'black'}}
-        //contentStyle={{color: 'red', borderColor: 'black'}}
-       // bodyStyle={{backgroundColor: 'white', borderColor: 'black'}}
-        message="Nahui poshel!"
-      />
     </div>
     )
   }
 }
 
+        // {this.state.showDescription ? <LineDescription
+        //   valve = {elem.ShortName}
+        //   /> : null }
 ValveLine.propTypes = {
   id: React.PropTypes.number,
   handle: React.PropTypes.func,
