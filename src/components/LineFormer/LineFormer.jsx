@@ -11,6 +11,7 @@ const LineFormer = props => {
   // if (elem.name === 'ValveLine') {
     template.push(
       <ValveLine
+        handle={props.handle}
         key={elem.id}
         elem={elem}
         allTime={props.allTime}
@@ -32,7 +33,7 @@ const LineFormer = props => {
   //       allTime={props.allTime}
   //     />)
   // }
-  return (<div className="rows" data-elemId={elem.id} onClick={() => props.handle(props.elem)}>
+  return (<div className="rows" data-elemId={elem.id}>
     {/* <input type="hidden" name={'lineId'} value={elem.id} /> */}
     <input type="hidden" name="name" defaultValue={elem.name} />
     { template }

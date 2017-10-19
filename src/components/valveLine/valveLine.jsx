@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import Snackbar from 'material-ui/Snackbar'
+
 import './style.scss'
 
 import getUniqTimeLines from './../../helpers/getUniqTimeLines.js'
@@ -42,21 +44,30 @@ class ValveLine extends Component {
   }
 
   render() {
+    const { handle, elem } = this.props
     return (<div className="line-wraper">
       <div className="line-definition">
         <span
-          onMouseEnter={this.showDescription}
+          onClick={this.showDescription}
+          //onMouseEnter={this.showDescription}
           onMouseLeave={this.hideDescrioption}
-        >{this.props.elem.ShortName}</span>
+        >{elem.ShortName}</span>
         {this.state.showDescription ? <LineDescription
-          valve = {this.props.elem.ShortName}
+          valve = {elem.ShortName}
           /> : null }
       </div>
-      <div className="time-box_keeper">
+      <div className="time-box_keeper" onClick={() => handle(elem)}>
         <div className="time-box">
           { this.linesTemplate }
         </div>
       </div>
+      <Snackbar 
+        open
+        //style={{backgroundColor: 'white', borderColor: 'black'}}
+        //contentStyle={{color: 'red', borderColor: 'black'}}
+       // bodyStyle={{backgroundColor: 'white', borderColor: 'black'}}
+        message="Nahui poshel!"
+      />
     </div>
     )
   }

@@ -68,12 +68,10 @@ class Main extends Component {
   save = () => {
     let fileToSave = {notes: '', form: {}}
     console.log('this.props.mainForm', this.props.mainForm);
-    console.log(fileToSave);
     fileToSave.notes = this.props.mainForm.notes
     fileToSave.form.allTime = this.props.mainForm.allTime
     fileToSave.form.lineFormer = this.props.mainForm.lineFormer
     fileToSave = JSON.stringify(fileToSave)
-    console.log('fileToSave', fileToSave);
     const blob = new Blob([fileToSave], { type: 'application/json;charset=utf-8' })
     FileSaver.saveAs(blob, 'saveAs.json')
   }
@@ -106,7 +104,6 @@ class Main extends Component {
   }
 
   check = () => {
-    console.log(2222)
     const values = document.getElementById('message').value
 
     const protocol = {}
@@ -150,7 +147,6 @@ class Main extends Component {
   render() {
     // this.getSource()
     // console.log(this.props.mainForm)
-    console.log(this.props.mainForm);
     return (
       <div className="main-flex row">
         <div>{this.state.test}</div>
