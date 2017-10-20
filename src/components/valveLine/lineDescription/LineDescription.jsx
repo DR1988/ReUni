@@ -44,10 +44,10 @@ const LineDecription = ({
         left: '50px',
         display: 'flex',
         bottom: 'auto',
-        zIndex: 2900,
+        zIndex: 2,
         visibility: 'visible',
-        transform: open ? 'translate(0, 0px)' : 'translate(1000%, 0px)',
-        transition: 'transform 0ms linear 0ms, visibility 400ms linear 0ms',
+        transform: open ? 'translate(0, 0px)' : 'translate(-200%, 0px)',
+        transition: 'transform 700ms cubic-bezier(.62,-.73,.4,.4) 0ms',
         top: '0px',
         boxShadow: '0px 0px 5px 3px rgba(0,0,0,0.3)',
       }}

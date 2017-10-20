@@ -152,7 +152,7 @@ class Main extends Component {
         <div>{this.state.test}</div>
         <div className="col-xs-12 col-sm-4">
           <div className="note-box col-xs-12">
-            <span>Notes</span>
+            <span className='notes-header'>Notes</span>
             <section className='textField' >
               <TextField 
                 value={this.props.mainForm.notes}
@@ -183,7 +183,7 @@ class Main extends Component {
               <FlatButton
                 label="SAVE"
                 labelStyle={{ color: '#fff', fontWeight: '700' }}
-                style={{ backgroundColor: '#00BCD4', height: '50px', marginTop: '2rem' }}
+                style={{ backgroundColor: '#B6B4BF', height: '50px', marginTop: '2rem' }}
                 className="login-container_button"
                 onClick={this.save}
               />
@@ -192,7 +192,7 @@ class Main extends Component {
               <FlatButton
                 label="clear"
                 labelStyle={{ color: '#fff', fontWeight: '700' }}
-                style={{ backgroundColor: '#00BCD4', height: '50px', marginTop: '2rem' }}
+                style={{ backgroundColor: '#B6B4BF', height: '50px', marginTop: '2rem' }}
                 className="login-container_button"
                 onClick={this.clearForm}
                 onTouchStart={this.clearForm}
@@ -213,7 +213,7 @@ class Main extends Component {
               <FlatButton
                 label="Start"
                 labelStyle={{ color: '#fff', fontWeight: '700' }}
-                style={{ backgroundColor: '#00BCD4', height: '50px', marginTop: '2rem' }}
+                style={{ backgroundColor: '#B6B4BF', height: '50px', marginTop: '2rem' }}
                 className="login-container_button"
                 onClick={this.start}
                 onTouchStart={this.start}
@@ -223,7 +223,7 @@ class Main extends Component {
               <FlatButton
                 label="Connect"
                 labelStyle={{ color: '#fff', fontWeight: '700' }}
-                style={{ backgroundColor: '#00BCD4', height: '50px', marginTop: '2rem' }}
+                style={{ backgroundColor: '#B6B4BF', height: '50px', marginTop: '2rem' }}
                 className="login-container_button"
                 onClick={this.connect}
                 onTouchStart={this.connect}
@@ -233,7 +233,7 @@ class Main extends Component {
               <FlatButton
                 label="Reset"
                 labelStyle={{ color: '#fff', fontWeight: '700' }}
-                style={{ backgroundColor: '#00BCD4', height: '50px', marginTop: '2rem' }}
+                style={{ backgroundColor: '#B6B4BF', height: '50px', marginTop: '2rem' }}
                 className="login-container_button"
                 onClick={this.reset}
                 onTouchStart={this.reset}

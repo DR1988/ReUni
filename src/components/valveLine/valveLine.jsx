@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import Snackbar from 'material-ui/Snackbar'
 
 import './style.scss'
 

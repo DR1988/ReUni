@@ -1,7 +1,31 @@
-import React, { PropTypes } from 'react'
+import React, { Component,  PropTypes } from 'react'
+
 import './lineTemplate.scss'
 /* eslint-disable */
 
+
+class WaitShow extends Component {
+  state={
+    toolTip: true,
+  }
+  showTootip = (e) => {
+    e.stopPropagation()
+    console.log(1111);
+  }
+  render() {
+    const { display } = this.props
+    const { toolTip } = this.state
+    return (
+      <div
+        onClick={e => this.showTootip(e)}
+        className = "waitShow"
+        style = {{
+          display,
+        }}>
+    </div>
+    )
+  }
+}
 const ActiveTime = (props) =>{
   if (!props.changes.duration) {
     return null
@@ -45,12 +69,6 @@ GapTime.propTypes = {
   width: PropTypes.number,
 }
 
-const WaitShow = props => <div
-  className = "waitShow"
-  style = {{
-    display: props.display
-  }}>
-</div>
 
 const LineFormer = props => <div className="time-former">{props.children} </div>
 
