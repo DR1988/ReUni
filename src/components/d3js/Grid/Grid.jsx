@@ -12,7 +12,7 @@ const colors = [
 ]
 
 class Grid extends Component {
-  margin = { top: 50, right: 50, bottom: 50, left: 50 }
+  margin = { top: 50, right: 50, bottom: 25, left: 100 }
 
   childrenWithProps
   componentDidMount() {
@@ -20,6 +20,8 @@ class Grid extends Component {
       height,
       width,
       dataYMax,
+      dataY2Max,
+      domainValue,
    } = this.props
     this.childrenWithProps = React.Children.map(this.props.children,
       (child, idx) => React.cloneElement(child, {
@@ -27,64 +29,64 @@ class Grid extends Component {
         margin: this.margin,
         width,
         height,
-        dataYMax,
+        //dataYMax,
         color: colors[idx],
       }),
     )
-    // const dataY = [1, 2, 3, 4, 5]
-    // const dataYMax = dataY && dataY.length ? d3.max(dataY) : 5
     const xScale = d3.scaleLinear()
-    .domain([0, width])
-    .range([0, width])
+      .domain([0, domainValue])
+      .range([0, width])
 
     const yScale = d3.scaleLinear()
       .domain([0.0001, dataYMax])
       .range([height, 0])
 
+    const yScale2 = d3.scaleLinear()
+      .domain([0.0001, dataY2Max])
+      .range([height, 0])
+
     const xAxis = d3.axisBottom(xScale)
       .ticks(10)
       .tickSize(height)
-      // .tickSizeOuter([0])
 
     const yAxis = d3.axisLeft(yScale)
       .ticks(10)
-      .tickSize(-width)
+      // .tickSize(-width)
 
-    const yAxis2 = d3.axisRight(yScale)
-      .ticks(10)
-      .tickSize(width)
-      // .tickSizeOuter([0])
-
+    const yAxis2 = d3.axisRight(yScale2)
+      .ticks(5)
+      // .tickSize(width)
+    console.log('yAxis2', yAxis2);
     const gX = d3.select(this.node)
-    .append('g')
-    .attr('transform', 'translate(25, 25)')
-    // .attr('class', 'axis axis--x')
-    .call(xAxis)
+      .append('g')
+      .attr('transform', 'translate(50, 25)')
+      .call(xAxis)
 
-    const gY = d3.select(this.node)
-    .append('g')
-    // .attr('stroke', 'red')
-    // .attr('fill', 'red')
+    d3.select(this.node)
+      .append('g')
+      .attr('transform', 'translate(50, 25)')
+      .call(yAxis)
 
-    .attr('transform', 'translate(25, 25)')
-    .call(yAxis)
+    d3.select(this.node)
+      .append('g')
+      .attr('transform', 'translate(50, 25)')
+      .call(yAxis2)
 
-    // const gY2 = d3.select(this.node)
-    // .append('g')
-    // .attr('transform', 'translate(25, 25)')
-    // .call(yAxis2)
     this.forceUpdate()
   }
 
   render() {
-    const { height, width } = this.props
+    const { height, width, name } = this.props
     return (
-      <svg
-        ref={(node) => { this.node = node }}
-        width={width + this.margin.left} height={height + this.margin.top}
-      >
-        { this.childrenWithProps }
-      </svg>
+      <section>
+        <h3 className='graph-name'>{name}</h3>
+        <svg
+          ref={(node) => { this.node = node }}
+          width={width + this.margin.left} height={height + this.margin.top}
+        >
+          { this.childrenWithProps }
+        </svg>
+      </section>
     )
   }
 }
@@ -97,6 +99,7 @@ Grid.propTypes = {
 
 Grid.defaultProps = {
   dataYMax: 5,
+  name: 'Graph'
 }
 
 export default Grid

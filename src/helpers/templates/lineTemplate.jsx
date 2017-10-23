@@ -10,7 +10,6 @@ class WaitShow extends Component {
   }
   showTootip = (e) => {
     e.stopPropagation()
-    console.log(1111);
   }
   render() {
     const { display } = this.props

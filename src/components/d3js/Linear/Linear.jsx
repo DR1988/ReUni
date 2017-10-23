@@ -13,34 +13,33 @@ class Linear extends PureComponent {
       width,
       height,
       dataY,
-      dataX,
       dataYMax,
       color,
     } = this.props
     const yScale = d3.scaleLinear()
-    .domain([0, dataYMax])
-    .range([height, 0])
+      .domain([0, dataYMax])
+      .range([height, 0])
 
     const xScale = d3.scaleLinear()
-    .domain([0, dataY.length + 1]) // input
-    .range([0, width])
+      .domain([0, dataY.length + 1]) // input
+      .range([0, width])
 
-    // const dataset = d3.range(8).map(function(d) { return {"y": d3.randomUniform(100)() } })
     const line = d3.line()
-    .x((d, i) => xScale(i))
-    .y(d => yScale(d))
-    .curve(d3.curveLinear)
-    // console.log('valueline', line)
+      .x((d, i) => xScale(i))
+      .y(d => yScale(d))
+      .curve(d3.curveBasis)
+
     d3.select(node)
-    .append('path')
-    .datum(dataY)
-    .attr('fill', 'none')
-    .attr('transform', 'translate(25, 25)')
-    .attr('stroke', color)
-    .attr('stroke-linejoin', 'round')
-    .attr('stroke-linecap', 'round')
-    .attr('stroke-width', 1.5)
-    .attr('d', line)
+      .append('path')
+      .datum(dataY)
+      .attr('fill', 'none')
+      .attr('transform', 'translate(50, 25)')
+      .attr('stroke', color)
+      .attr('stroke-linejoin', 'round')
+      .attr('stroke-linecap', 'round')
+      .attr('stroke-width', 2.5)
+      .attr('d', line)
+    
   }
 
   render() {

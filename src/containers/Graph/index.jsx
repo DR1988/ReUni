@@ -33,24 +33,43 @@ class Graph extends Component {
     this.forceUpdate()
   }
 
+  generateVal = (value, dispertion) => {
+    if(Math.random() < 0.5) {
+      return Math.floor(value - Math.random() * dispertion)
+    }
+    return Math.floor(value + Math.random() * dispertion)
+  }
+  
+  generateArr = (quantity, value=2500, dispertion=50 ) => {
+    const arr = []
+    for (var index = 0; index < quantity; index++) {
+      arr.push(this.generateVal(value, dispertion))
+    }
+    return arr
+  }
+  
   render() {
-    const dataY = [350, 120, 80, 75, 96, 322, 250, 13]
-    const dataY2 = [120, 20, 80, 15, 196, 422, 150, 213]
+    const dataY = [0, 200, 800, 1400, 2200, 2300, ...this.generateArr(50, 2500, 50)]
+    const dataY2 = [20, 21, 22, 24, 27, 28, ...this.generateArr(50, 30.5, 1) ]
     return (
-      <div className="picture-cont">
-      <Grid
-        width={900}
-        height={400}
-        dataYMax={450}
-      >
-        <Linear
-          dataY={dataY}
-        />
-        <Linear
-          dataY={dataY2}
-        />
-      </Grid>
-      {/* asdasd*/}
+      <div className="graph-container">
+        <Grid
+          name='Stirer'
+          width={1400}
+          height={500}
+          dataYMax={Math.max(...dataY)*1.2}
+          dataY2Max={Math.max(...dataY2)*1.2}
+          domainValue={50}
+        >
+          <Linear
+            dataYMax={Math.max(...dataY)*1.2}
+            dataY={dataY}
+          />
+          <Linear
+            dataYMax={Math.max(...dataY2)*1.2}
+            dataY={dataY2}
+          />
+        </Grid>
       </div>
     )
   }

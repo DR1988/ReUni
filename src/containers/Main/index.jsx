@@ -11,6 +11,7 @@ import TextField from 'material-ui/TextField';
 import mainActions from '../../actions/mainAction.js'
 import MainForm from './../MainForm/MainForm.jsx'
 import NavLink from './../../components/NavLink/index.jsx'
+import Picture from './picture.jsx'
 
 import './style.scss'
 
@@ -168,6 +169,9 @@ class Main extends Component {
           </div>
           <div className="picture-box col-xs-12">
             <span>picture</span>
+            <div>
+              <Picture />
+            </div>
           </div>
         </div>
         <div id="container" className="col-sm-8 col-xs-12">
