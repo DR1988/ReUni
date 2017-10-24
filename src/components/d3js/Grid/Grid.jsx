@@ -12,7 +12,7 @@ const colors = [
 ]
 
 class Grid extends Component {
-  margin = { top: 50, right: 50, bottom: 25, left: 100 }
+  margin = { top: 50, right: 100, bottom: 25, left: 150 }
 
   childrenWithProps
   componentDidMount() {
@@ -38,48 +38,84 @@ class Grid extends Component {
       .range([0, width])
 
     const yScale = d3.scaleLinear()
-      .domain([0.0001, dataYMax])
       .range([height, 0])
+      .domain([0.0001, dataYMax])
 
     const yScale2 = d3.scaleLinear()
-      .domain([0.0001, dataY2Max])
       .range([height, 0])
+      .domain([0.0001, dataY2Max])
 
     const xAxis = d3.axisBottom(xScale)
       .ticks(10)
-      .tickSize(height)
+      .tickSize(-height)
 
-    const yAxis = d3.axisLeft(yScale)
-      .ticks(10)
+      const yAxis = d3.axisLeft(yScale)
+      .ticks(5)
       // .tickSize(-width)
 
     const yAxis2 = d3.axisRight(yScale2)
-      .ticks(5)
+      // .ticks(5)
       // .tickSize(width)
-    console.log('yAxis2', yAxis2);
+    
     const gX = d3.select(this.node)
       .append('g')
-      .attr('transform', 'translate(50, 25)')
+      .attr("class", "xAxis ")
+      .attr('transform', `translate(100, ${height+this.margin.bottom})`)
       .call(xAxis)
-
-    d3.select(this.node)
+      
+      d3.select(this.node)
       .append('g')
-      .attr('transform', 'translate(50, 25)')
+      // .attr('stroke', colors[0])
+      .attr("class", "axisRed")
+      .attr('transform', 'translate(100, 25)')
       .call(yAxis)
-
-    d3.select(this.node)
+      
+      d3.select(this.node)
       .append('g')
-      .attr('transform', 'translate(50, 25)')
+      .attr("class", "axisSteelBlue")
+      //.attr('transform', 'translate(50, 25)')
+      .attr("transform", `translate( ${width+this.margin.right}, 25 )`)
       .call(yAxis2)
 
+      // d3.select(this.node)
+      //   .append("text") 
+      //   .attr('class', 'axisText')
+      //   .attr("transform",
+      //       "translate(" + (width/2) + " ," + 
+      //                     (height + margin.top + 20) + ")")
+      //   .text("Time");
+
+      d3.select(this.node)
+        .append("text")
+        .attr('class', 'axisText')
+        .attr("transform", "rotate(-90)")
+        .attr("y", -10)
+        .attr("x",0 - (height / 2))
+        .attr("dy", "2em")
+        .text("RPM");
+
+      d3.select(this.node)
+        .append("text")
+        .attr('class', 'axisText')
+        .attr("transform", "rotate(-180)")
+        .attr("y", width)
+        .attr("x",0 - (height / 2))
+        .attr("dy", "2em")
+        .text("RPM"); 
+  
     this.forceUpdate()
   }
 
   render() {
-    const { height, width, name } = this.props
+    const { height, width, name, name2 } = this.props
     return (
       <section>
-        <h3 className='graph-name'>{name}</h3>
+        <div className='graph-legend'>
+          <p className='graph-name'>{name} </p> <div className='graph-name_strirer'></div>
+        </div>
+        <div className='graph-legend'>
+          <p className='graph-name'>{name2} </p> <div className='graph-name_temp'></div>
+        </div>
         <svg
           ref={(node) => { this.node = node }}
           width={width + this.margin.left} height={height + this.margin.top}

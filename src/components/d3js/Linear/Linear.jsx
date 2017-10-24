@@ -33,7 +33,7 @@ class Linear extends PureComponent {
       .append('path')
       .datum(dataY)
       .attr('fill', 'none')
-      .attr('transform', 'translate(50, 25)')
+      .attr('transform', 'translate(101, 25)')
       .attr('stroke', color)
       .attr('stroke-linejoin', 'round')
       .attr('stroke-linecap', 'round')

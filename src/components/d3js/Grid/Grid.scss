@@ -1,3 +1,70 @@
 .graph-name{
-    margin-left: 20px;
+    margin: 0 2rem 0 20px;
+    font-size: 2.5rem;
 }
+
+.graph-name_strirer{
+    width: 50px;
+    height: 3px;
+    background-color: red;
+}
+
+.graph-name_temp{
+    width: 50px;
+    height: 3px;
+    background-color: blue;
+}
+
+.graph-legend{
+    display: flex;
+    align-items: center;
+}
+
+.axisSteelBlue text{
+    font-size: 2rem;
+    font-weight: 700;
+  }
+
+ .axisSteelBlue line{
+    stroke-width: 2px;
+    stroke: blue;
+ }
+.axisSteelBlue path{
+    stroke-width: 2px;
+    stroke: blue;
+ }
+
+.axisRed text{
+    font-size: 2rem;
+    font-weight: 700;
+}
+.axisRed line{
+    stroke-width: 2px;
+    stroke: red;
+}
+  
+.axisRed path{
+    stroke-width: 2px;
+    stroke: red;
+}
+
+.xAxis text{
+    font-size: 2rem;
+    font-weight: 700;
+}
+.xAxis line{
+    stroke-width: 1px;
+    opacity: 0.7;
+    stroke: black;
+}
+  
+.xAxis path{
+    stroke-width: 2px;
+    stroke: black;
+}
+
+.axisText{
+    font-weight: 700;
+    font-size: 2rem;
+}
+

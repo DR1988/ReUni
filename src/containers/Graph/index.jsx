@@ -48,6 +48,7 @@ class Graph extends Component {
     return arr
   }
   
+  multi = 1.2
   render() {
     const dataY = [0, 200, 800, 1400, 2200, 2300, ...this.generateArr(50, 2500, 50)]
     const dataY2 = [20, 21, 22, 24, 27, 28, ...this.generateArr(50, 30.5, 1) ]
@@ -55,20 +56,22 @@ class Graph extends Component {
       <div className="graph-container">
         <Grid
           name='Stirer'
-          width={1400}
+          name2='Temperature'
+          width={1100}
           height={500}
-          dataYMax={Math.max(...dataY)*1.2}
-          dataY2Max={Math.max(...dataY2)*1.2}
+          dataYMax={Math.max(...dataY)*this.multi}
+          dataY2Max={Math.max(...dataY2)*this.multi}
           domainValue={50}
         >
           <Linear
-            dataYMax={Math.max(...dataY)*1.2}
+            dataYMax={Math.max(...dataY)*this.multi}
             dataY={dataY}
           />
           <Linear
-            dataYMax={Math.max(...dataY2)*1.2}
+            dataYMax={Math.max(...dataY2)*this.multi}
             dataY={dataY2}
           />
+          
         </Grid>
       </div>
     )
