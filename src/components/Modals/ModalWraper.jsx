@@ -1,5 +1,6 @@
 /*eslint-disable*/
 import React, { PropTypes } from 'react'
+import FlatButton from 'material-ui/RaisedButton';
 
 import './ModalWraper.scss'
 
@@ -19,12 +20,14 @@ const ModalWrapper = props => {
 
   const okButton = props.showOk
     ? (
-    <button className="ok-btn btn btn-success"
+    <FlatButton
+      label={props.okText}
       onClick={onOk}
       disabled={props.isAcceptable}
-    >
-      {props.okText}
-    </button>
+      style={{ margin: '10px' }}
+      labelStyle={{ color: '#fff', fontWeight: '700' }}
+      buttonStyle={{backgroundColor: '#B6B4BF'}}
+    />
     ) : null
 
   return (

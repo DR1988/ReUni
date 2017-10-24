@@ -1,4 +1,6 @@
 import React, { PropTypes, Component } from 'react'
+import Checkbox from 'material-ui/Checkbox';
+
 import './RPMandTempModal.scss'
 import ModalWrapper from './ModalWraper.jsx'
 /*eslint-disable*/
@@ -106,11 +108,11 @@ class RPMandTempModal extends Component  {
           />
         </div>
         <div className="ckeck-value"> 
-          <input
+          <Checkbox
             id="hold"
-            type="checkbox"
-            onChange={this.waitValue}
-          />          
+            onCheck={this.waitValue}
+            style={{width: 'auto'}}
+          />
           <label htmlFor="hold">Wait for that value before continue</label>
         </div>
       </ModalWrapper>

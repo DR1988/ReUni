@@ -8,6 +8,9 @@
     width: 45%;
     margin: 2%;
     margin-top: 5%;
+    height: 50px;
+    font-weight: 700;
+    font-size: 2.5rem;
   }
   & input:focus::-webkit-input-placeholder {
     color: transparent;    
@@ -24,10 +27,13 @@
   }
 }
 .ckeck-value{
-  border: 1px solid red;
   display: flex;
+  align-items: center;
   justify-content: space-around;
   padding: 5px;
+  label{
+    margin: 0;
+  }
 }
 .setter{
       display: block;
@@ -39,6 +45,9 @@
         width: 94%;
         margin: 2%;
         margin-top: 5%;
+        height: 50px;
+        font-weight: 700;
+        font-size: 2.5rem;
       }
     }
 
