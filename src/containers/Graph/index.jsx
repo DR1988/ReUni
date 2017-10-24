@@ -57,7 +57,7 @@ class Graph extends Component {
         <Grid
           name='Stirer'
           name2='Temperature'
-          width={1100}
+          width={1000}
           height={500}
           dataYMax={Math.max(...dataY)*this.multi}
           dataY2Max={Math.max(...dataY2)*this.multi}

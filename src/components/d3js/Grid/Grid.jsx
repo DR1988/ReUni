@@ -12,7 +12,7 @@ const colors = [
 ]
 
 class Grid extends Component {
-  margin = { top: 50, right: 100, bottom: 25, left: 150 }
+  margin = { top: 50, right: 100, bottom: 50, left: 100 }
 
   childrenWithProps
   componentDidMount() {
@@ -38,16 +38,16 @@ class Grid extends Component {
       .range([0, width])
 
     const yScale = d3.scaleLinear()
-      .range([height, 0])
+      .range([height + this.margin.bottom/2, 0])
       .domain([0.0001, dataYMax])
 
     const yScale2 = d3.scaleLinear()
-      .range([height, 0])
+      .range([height + this.margin.bottom/2, 0])
       .domain([0.0001, dataY2Max])
 
     const xAxis = d3.axisBottom(xScale)
-      .ticks(10)
-      .tickSize(-height)
+      .ticks(5)
+      .tickSize(-height - this.margin.bottom/2)
 
       const yAxis = d3.axisLeft(yScale)
       .ticks(5)
@@ -97,11 +97,20 @@ class Grid extends Component {
       d3.select(this.node)
         .append("text")
         .attr('class', 'axisText')
-        .attr("transform", "rotate(-180)")
-        .attr("y", width)
-        .attr("x",0 - (height / 2))
+        .attr("transform", "rotate(0)")
+        .attr("y", height + this.margin.bottom)
+        .attr("x", width/2 + this.margin.left)
         .attr("dy", "2em")
-        .text("RPM"); 
+        .text("Time, s");
+
+      d3.select(this.node)
+        .append("text")
+        .attr('class', 'axisText')
+        .attr("transform", "rotate(-90)")
+        .attr("y", width + this.margin.right + 20)
+        .attr("x",0 - (height/2))
+        .attr("dy", "2em")
+        .text("Temperature, °C"); 
   
     this.forceUpdate()
   }
@@ -118,7 +127,7 @@ class Grid extends Component {
         </div>
         <svg
           ref={(node) => { this.node = node }}
-          width={width + this.margin.left} height={height + this.margin.top}
+          width={width + this.margin.left + this.margin.right} height={height + this.margin.top + this.margin.bottom}
         >
           { this.childrenWithProps }
         </svg>
