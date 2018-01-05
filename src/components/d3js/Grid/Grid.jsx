@@ -38,11 +38,11 @@ class Grid extends Component {
       .range([0, width])
 
     const yScale = d3.scaleLinear()
-      .range([height + this.margin.bottom/2, 0])
+      .range([height, 0])
       .domain([0.0001, dataYMax])
 
     const yScale2 = d3.scaleLinear()
-      .range([height + this.margin.bottom/2, 0])
+      .range([height, 0])
       .domain([0.0001, dataY2Max])
 
     const xAxis = d3.axisBottom(xScale)
@@ -67,14 +67,14 @@ class Grid extends Component {
       .append('g')
       // .attr('stroke', colors[0])
       .attr("class", "axisRed")
-      .attr('transform', 'translate(100, 25)')
+      .attr('transform', 'translate(100, 50)')
       .call(yAxis)
       
       d3.select(this.node)
       .append('g')
       .attr("class", "axisSteelBlue")
       //.attr('transform', 'translate(50, 25)')
-      .attr("transform", `translate( ${width+this.margin.right}, 25 )`)
+      .attr("transform", `translate( ${width+this.margin.right}, 50 )`)
       .call(yAxis2)
 
       // d3.select(this.node)

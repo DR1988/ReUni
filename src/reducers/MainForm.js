@@ -49,7 +49,7 @@ const resetState = {
 }
 
 const initialstate = {
-  notes: 'zxczsacas',
+  notes: 'Notes can be added here',
   showEditModal: false,
   allTime: 400,
   lineFormer: [
@@ -67,7 +67,7 @@ const initialstate = {
       id: 2,
       ShortName: 'GV3',
       changes: [{ startTime: 0, endTime: 10, id: 0, duration: 10 },
-               { startTime: 120, endTime: 130, id: 1, duration: 10, waitForValue: true },
+               { startTime: 120, endTime: 130, id: 1, duration: 10 },
                { startTime: 320, endTime: 400, id: 2, duration: 80 }] },
     { name: 'ValveLine',
       id: 3,

@@ -168,7 +168,7 @@ class Main extends Component {
             </section>
           </div>
           <div className="picture-box col-xs-12">
-            <span>picture</span>
+            <span>Scheme</span>
             <div>
               <Picture />
             </div>
